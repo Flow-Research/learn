@@ -8,15 +8,10 @@ const config: Config = {
   tagline: 'Powering the next generation of African contributors',
   favicon: 'img/favicon.ico',
 
-  // GitHub Pages URL setup
-  url: 'https://creativebash.github.io', 
-  baseUrl: '/flow-learning/', 
-  organizationName: 'creativebash', 
-  projectName: 'flow-learning', 
-  // url: 'https://flow-research.github.io',
-  // baseUrl: '/learn/',
-  // organizationName: 'Flow-Research',
-  // projectName: 'learn',
+  url: 'https://flow-research.github.io',
+  baseUrl: '/learn/',
+  organizationName: 'Flow-Research',
+  projectName: 'learn',
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
