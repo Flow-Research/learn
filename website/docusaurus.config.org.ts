@@ -46,7 +46,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/flow_education_social_card.jpg',
     navbar: {
       title: 'Flow Education',
       logo: {
