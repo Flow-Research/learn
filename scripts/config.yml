@@ -1,0 +1,53 @@
+# ============================================================
+# scripts/config.yml
+# Flow Education Initiative — Article Generator Configuration
+# ============================================================
+# Edit this file to control what gets discovered and generated.
+# Run: python gen_article.py
+# ============================================================
+
+# --- Output settings ---
+output:
+  # Path to your knowledge-base/articles directory.
+  # Default is auto-detected relative to this script's location.
+  # articles_dir: ../knowledge-base/articles
+
+  # The author key to embed in every generated article's frontmatter.
+  # Must exist in knowledge-base/articles/authors.yml
+  default_author: flow_ai
+
+# --- Quality filter ---
+filters:
+  # Articles with a credibility score below this are skipped (not written).
+  # Scale: 1 (low quality) → 10 (peer-reviewed / official release)
+  min_credibility_score: 6
+
+# --- Discovery sources ---
+sources:
+
+  # ── arXiv ─────────────────────────────────────────────────
+  arxiv:
+    enabled: true
+    # Free-text search. Supports boolean operators: AND, OR, NOT
+    # Field prefixes: ti: (title), abs: (abstract), au: (author), cat: (category)
+    search_query: >
+      blockchain OR zero-knowledge proofs OR large language model
+      OR consensus protocol OR distributed systems
+    # How many papers to fetch per run (keep low to avoid excessive API calls)
+    max_results: 5
+
+  # ── GitHub Releases ───────────────────────────────────────
+  github_releases:
+    enabled: true
+    # List of "owner/repo" strings to monitor for new releases
+    repos:
+      - ethereum/go-ethereum
+      - bitcoin/bitcoin
+      - solana-labs/solana
+      - rust-lang/rust
+      - huggingface/transformers
+      - openai/tiktoken
+    # Max releases to fetch per repo per run
+    max_per_repo: 2
+    # Optional: set GITHUB_TOKEN env var for higher rate limits (5000 req/hr)
+    # token: ""  # prefer env var: export GITHUB_TOKEN=ghp_...

@@ -31,3 +31,22 @@ bashir:
     x: bashiranakobe
     linkedin: https://www.linkedin.com/in/anakobe
     github: creativebash
+    newsletter: https://bash.substack.com
+
+# knowledge-base/articles/authors.yml
+# ------------------------------------
+# Defines author profiles used in article frontmatter.
+# See: https://docusaurus.io/docs/blog#blog-post-authors
+ 
+flow_ai:
+  name: Flow AI
+  title: AI Content Agent
+  url: https://github.com/Flow-Research
+  image_url: /img/logo.svg
+ 
+flow_team:
+  name: Flow Education Team
+  title: Curriculum Authors
+  url: https://github.com/Flow-Research
+  image_url: /img/logo.svg
+ 

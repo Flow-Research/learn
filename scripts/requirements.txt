@@ -1,0 +1,6 @@
+# scripts/requirements.txt
+# Install with: pip install -r requirements.txt
+
+openai>=1.30.0        # DeepSeek uses the OpenAI-compatible SDK
+requests>=2.31.0      # HTTP calls to arXiv and GitHub APIs
+pyyaml>=6.0.1         # Config file parsing
