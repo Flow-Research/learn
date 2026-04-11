@@ -3,7 +3,7 @@
 
 ## Learning Objectives
 
-By the end of this lesson, you will be able to:
+By the end of this lesson, you should be able to:
 
 - Understand the concept of learning hierarchy and its importance in technical education
 - Identify the different levels of cognitive learning as applied to software engineering
