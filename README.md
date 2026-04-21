@@ -83,11 +83,6 @@ The `scripts/` directory is designed to:
 
 ---
 
-## 👥 The Team
-*   **Julian Duru:** Co-Founder (Fintech scaling, Operational Lead)
-*   **Florence Dairo:** Lead Product Designer (UX/UI & Design Systems)
-*   **Anakobe Muhammed Bashir:** Community Admin (Lead Software Engineer & Mentor)
-
 ---
 
 ## 📜 Contribution & Policy
