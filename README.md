@@ -1,4 +1,4 @@
-# Flow Education Initiative: Building Africa’s Decentralized AI Talent Pipeline
+# Flow Education Initiative: Building Talent Pipelines for Freedom Tech
 
 Welcome to the **flow-learning**, the central nervous system for the **Flow Initiative**. This repository is a unified monorepo containing our specialized curriculum, research knowledge base, hands-on labs, and the AI-driven engine that keeps our content synchronized with the bleeding edge of Web3 and AI protocols.
 
@@ -80,13 +80,6 @@ The `scripts/` directory is designed to:
 *   **Frontend:** Docusaurus (React-based SSG)
 *   **Automation:** Python (OpenAI/Anthropic APIs, BeautifulSoup for scraping)
 *   **Infrastructure:** GitHub Actions, GitHub Pages/Vercel
-
----
-
-## 👥 The Team
-*   **Julian Duru:** Co-Founder (Fintech scaling, Operational Lead)
-*   **Florence Dairo:** Lead Product Designer (UX/UI & Design Systems)
-*   **Anakobe Muhammed Bashir:** Community Admin (Lead Software Engineer & Mentor)
 
 ---
 
