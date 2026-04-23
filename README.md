@@ -83,6 +83,11 @@ The `scripts/` directory is designed to:
 
 ---
 
+<<<<<<< HEAD
+=======
+---
+
+>>>>>>> fc5827135f9a8c2f3e5abf68b3528ed5748435f6
 ## 📜 Contribution & Policy
 All lessons and research articles go through a **Human-in-the-Loop** review process. AI-generated content is staged in a Pull Request for review by the technical team. 
 
