@@ -3,7 +3,7 @@ id: data-pipelines-basics
 title: Data Pipelines Basics
 track: ai-ml
 level: beginner
-version: 1.0
+version: 1.1
 ---
 
 # Data Pipelines Basics
@@ -12,254 +12,17 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain what a **data pipeline** is and why it matters in ML systems.  
-- Identify the main stages: data ingestion, cleaning, transformation, feature engineering, and storage.  
-- Map these stages to real‑world flows you might see in Flow‑style projects.  
-- Use this mental model when designing or debugging ML‑backed services.
+- Explain what a data pipeline is and why it matters before model training begins.
+- Identify the core stages: ingestion, validation, cleaning, transformation, storage, and monitoring.
+- Sketch a pipeline for a Flow-style ML product.
+- Write small pandas checks that catch broken or suspicious data early.
 
-## Introduction
+## Watch First
 
-Machine learning does not start at the model. It starts at the **data pipeline** — the system that moves raw observations into clean, usable features.
-
-If the data is messy, biased, or inconsistent, even the best model will fail.  
-If the pipeline is fragile, the whole ML service becomes unreliable.
-
-In the Flow Initiative, you will use data pipelines to:
-
-- Collect real‑world signals (e.g., education interactions, user behavior, on‑chain events).  
-- Prepare them for training and inference.  
-- Integrate them into dashboards and analytics.
-
-This lesson treats data pipelines as **software infrastructure**, not one‑off scripts.
-
----
-
-## What Is a Data Pipeline?
-
-A **data pipeline** is a sequence of components that:
-
-- **Ingest** raw data from one or more sources.  
-- **Clean and validate** it.  
-- **Transform and enrich** it into features.  
-- **Store** it for use by models, services, or analysts.  
-- Optionally **monitor** quality and drift over time.
-
-From an engineer’s view, a pipeline is:
-
-- A **stream of data** passing through functions,  
-- Backed by **reliable storage and observability**.
-
-The goal is **reproducible, trustworthy** data, not just “getting a CSV into a model.”
-
----
-
-## Typical Stages of a Data Pipeline
-
-### 1. Ingestion
-
-**Ingestion** is where data enters the pipeline. Common sources include:
-
-- Databases and APIs.  
-- Log files and event streams (e.g., user clicks, on‑chain events).  
-- Sensors, IoT devices, or mobile apps.
-
-Ingestion responsibilities:
-
-- Read data in a **regular, automated** way.  
-- Handle schema changes and partial failures.  
-- Push data into a **central, versioned** store.
-
-Think of this as the **front‑door** of the data system.
-
-### 2. Cleaning and Validation
-
-Raw data is almost always messy:
-
-- Missing values,  
-- Typos,  
-- Outliers,  
-- Inconsistent formats.
-
-**Cleaning and validation** steps:
-
-- Fill or drop missing values.  
-- Standardize formats.  
-- Remove clearly invalid entries.  
-- Log and flag anomalies.
-
-From an engineer’s point of view, this is not guess‑work; it is **automated policy**: “if X, then do Y.”
-
-### 3. Transformation and Feature Engineering
-
-Once data is clean, it is transformed into **features**:
-
-- Compute derived measurements (e.g., “days since last login”).  
-- Encode categorical variables (e.g., “country” → numbers).  
-- Aggregate at useful levels (e.g., “daily user activity”).
-
-**Feature engineering** is often where most domain knowledge lives:  
-software engineers decide what ML engineers need, and ML engineers shape what to compute.
-
-### 4. Storage and Access
-
-The pipeline must store data in a way that:
-
-- Is **efficient** for training and inference.  
-- Is **versioned** (so you can reproduce results).  
-- Is **secure** and accessible to the right systems.
-
-Common patterns:
-
-- Batch storage (e.g., parquet files, data lakes).  
-- Streaming topics (e.g., Kafka‑style streams).  
-- Feature stores or online serving layers.
-
-### 5. Monitoring and Observability
-
-Good data pipelines are **observable**:
-
-- Track pipeline failures and latency.  
-- Monitor data quality (e.g., missing values, unexpected ranges).  
-- Detect **data drift**: when the data distribution changes over time, which can break models.
-
-Without observability, a pipeline can silently produce bad data and corrupt your models.
-
----
-
-## Why Data Pipelines Matter for ML
-
-Data pipelines are the **bridge** between the real world and the model.
-
-If the pipeline is:
-
-- Slow or fragile → the ML system feels brittle.  
-- Biased or inconsistent → the model learns bad patterns.  
-- Unobservable → debugging becomes guesswork.
-
-For Flow engineers, this is especially critical because:
-
-- Real‑world education, governance, or blockchain‑flavored data is messy and evolving.  
-- African‑centric contexts often have fragmented or incomplete data.  
-- **Good data infrastructure** is often more valuable than a fancy model.
-
----
-
-## Simple Example: A Flow‑Style Pipeline
-
-Imagine a Flow course platform that:
-
-- Logs user actions (lesson views, quiz attempts, time spent).  
-- Uses ML to recommend next lessons.
-
-A simple pipeline:
-
-1. **Ingestion**: Collect logs from the web app and mobile apps.  
-2. **Cleaning**: Remove bot‑like sessions, fix malformed timestamps.  
-3. **Transformation**:  
-   - Count quiz attempts per user.  
-   - Compute “average time per lesson.”  
-   - Flag “high‑engagement” patterns.  
-4. **Storage**:  
-   - Store cleaned user‑level features in a feature store.  
-5. **Serving**:  
-   - Use features to train a recommendation model and serve predictions.
-
-You can extend this to include **on‑chain** or **off‑chain** signals as well.
-
----
-
-## Common Anti‑Patterns
-
-### 1. “One‑off Scripts”
-
-- Data is processed with a one‑off Python script.  
-- The script runs only once, and there is no history.
-
-**Problem**:  
-If you ever need to reproduce or debug, you are stuck.
-
-**Solution**:  
-Turn scripts into **reproducible, versioned jobs**.
-
-### 2. No Schema or Validation
-
-- The pipeline assumes data is clean.  
-- It does not validate or log schema changes.
-
-**Problem**:  
-One CSV change can silently break the model.
-
-**Solution**:  
-Add **schema checks** and **automatic alerts**.
-
-### 3. Hidden Dependencies
-
-- Pipelines depend on manual trigger or fragile scripts.  
-- No one knows who owns them.
-
-**Problem**:  
-The system breaks when someone is offline.
-
-**Solution**:  
-Document and **it‑owns** each pipeline.
-
----
-
-## Practical Exercises
-
-### Exercise 1: Sketch a Tiny Pipeline
-
-Pick a small Flow‑style use case (e.g., tracking quiz results or on‑chain reward events):
-
-- Draw a simple pipeline with 3–5 boxes:  
-  - Source.  
-  - Cleaning.  
-  - Transformation.  
-  - Storage.  
-- Write a short note under each box describing what happens.
-
-This is a **mental model** of the pipeline.
-
-### Exercise 2: Label a Real‑World Flow
-
-Take a real‑world data‑heavy system you know (e.g., a web app, learning platform, or blockchain dashboard):
-
-- Identify where ingestion, cleaning, transformation, and storage happen.  
-- Write a short note describing one place where data quality might be weak.
-
-### Exercise 3: Relate to a Flow Lab
-
-Look at an AI‑ML lab from the Flow curriculum that uses a dataset:
-
-- Write down one assumption the dataset makes (e.g., “no missing values,” “uniform timestamps”).  
-- Write one sentence describing how that assumption could break in the real world.  
-- Sketch one small change to the pipeline that would make it more robust.
-
----
-
-## Self‑Assessment
-
-Rate yourself from 1 to 5:
-
-- I can explain what a data pipeline is.  
-- I can name the main stages (ingestion, cleaning, transformation, storage, monitoring).  
-- I can see where data pipelines appear in Flow‑style systems.  
-- I can avoid the “one‑off script” anti‑pattern.
-
-Action item: write a short note in your lab repo describing one data pipeline you would like to build for a Flow‑style AI/ML system.
-
-## Next Steps
-
-- Read `03-evaluation-metrics.md` next to learn how to measure model performance **and** pipeline health.  
-- Use this pipeline‑thinking mindset when you design any ML‑backed service.  
-- Treat data pipelines as **first‑class ML infrastructure**, not an afterthought.
-
-## Video
-
-<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%'}}>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
   <iframe
-    src="https://www.youtube.com/embed/9QBSkiYqPxs"
-    title="Data Pipelines Basics for Machine Learning"
+    src="https://www.youtube.com/embed/6kEGUCrBEU0"
+    title="Data Pipelines Explained"
     style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     referrerPolicy="strict-origin-when-cross-origin"
@@ -267,6 +30,228 @@ Action item: write a short note in your lab repo describing one data pipeline yo
   />
 </div>
 
----
+## Pipeline Map
 
-*This lesson equips Flow Initiative trainees with an engineer‑style understanding of data pipelines in ML systems, focusing on ingestion, cleaning, transformation, storage, and monitoring as core infrastructure for reliable, production‑ready ML.*
+```mermaid
+flowchart LR
+  Source["Sources<br/>apps, APIs, logs, on-chain events"] --> Ingest["Ingest"]
+  Ingest --> Validate["Validate schema<br/>and ranges"]
+  Validate --> Clean["Clean missing<br/>or invalid values"]
+  Clean --> Transform["Transform into<br/>features"]
+  Transform --> Store["Store versioned<br/>datasets/features"]
+  Store --> Train["Train or serve<br/>models"]
+  Train --> Monitor["Monitor quality,<br/>drift, latency"]
+  Monitor --> Validate
+```
+
+Machine learning starts long before `model.fit()`. It starts with the system that moves raw observations into data a model can safely learn from.
+
+A data pipeline is that system. It is not just a script that loads a CSV once. It is the repeatable path from the real world to a training set, dashboard, feature store, or model API.
+
+:::info The Launch Rule
+If the data path is not reproducible, the model is not launch-ready. You may still have a notebook, but you do not yet have an ML system.
+:::
+
+## What a Pipeline Does
+
+A good ML pipeline should:
+
+- collect data from known sources,
+- validate that the data matches expected structure,
+- clean obvious data quality problems,
+- transform raw fields into useful features,
+- store outputs in a versioned and accessible way,
+- monitor changes after deployment.
+
+In Flow projects, sources might include:
+
+- learner activity from a web app,
+- quiz attempts from a mobile client,
+- protocol or on-chain events,
+- mentor feedback,
+- community contribution history.
+
+The model only sees the final features. The pipeline decides whether those features are trustworthy.
+
+## Stage 1: Ingestion
+
+Ingestion is the entry point. Data might arrive from:
+
+- CSV exports,
+- application databases,
+- REST APIs,
+- event streams,
+- blockchain indexers,
+- manual forms.
+
+At this stage, the engineering questions are practical:
+
+- Did the job run?
+- Did every expected source respond?
+- Did the schema change?
+- Can we retry safely if one source fails?
+
+## Stage 2: Validation
+
+Validation checks whether the data is shaped the way the system expects.
+
+For example, a learner activity table might require:
+
+- `learner_id` is present,
+- `quiz_score` is between 0 and 100,
+- `lesson_completed` is true or false,
+- `event_time` can be parsed as a timestamp.
+
+```python
+import pandas as pd
+
+events = pd.DataFrame({
+    "learner_id": ["a1", "b2", "c3"],
+    "quiz_score": [72, 105, 64],
+    "lesson_completed": [True, False, True],
+})
+
+invalid_scores = events.loc[
+    (events["quiz_score"] < 0) | (events["quiz_score"] > 100)
+]
+
+print(invalid_scores)
+```
+
+This tiny check catches a score of `105`, which may be a data entry issue, a grading bug, or a changed scoring policy.
+
+## Stage 3: Cleaning
+
+Cleaning turns raw data into usable data. Common steps include:
+
+- handling missing values,
+- standardizing date formats,
+- removing duplicate events,
+- filtering bot-like activity,
+- correcting known invalid categories.
+
+Cleaning should be documented as policy, not hidden as notebook improvisation. Future contributors need to know why a row was dropped or changed.
+
+## Stage 4: Transformation and Features
+
+Transformation turns clean records into model-ready features.
+
+Examples:
+
+- `days_since_last_login`,
+- `quiz_attempts_last_30_days`,
+- `average_score_by_module`,
+- `completed_foundations_track`,
+- `wallet_activity_count`.
+
+Feature engineering is where domain knowledge enters the system. A public-good education model should not only optimize clicks. It should include signals that match the learning outcome you care about.
+
+```python
+events["passed_quiz"] = events["quiz_score"] >= 60
+pass_rate = events["passed_quiz"].mean()
+
+print(f"pass rate: {pass_rate:.2%}")
+```
+
+## Stage 5: Storage
+
+Storage gives the pipeline memory. Useful outputs include:
+
+- raw snapshots,
+- cleaned datasets,
+- feature tables,
+- model training splits,
+- metadata about schema and date ranges.
+
+Versioning matters because you need to answer: Which data produced this model?
+
+Without that answer, debugging becomes guesswork.
+
+## Stage 6: Monitoring
+
+Monitoring asks whether the pipeline is still healthy after launch.
+
+Track:
+
+- missing values,
+- unexpected categories,
+- row counts,
+- freshness,
+- latency,
+- feature distribution drift.
+
+For example, if most traffic suddenly comes from a new region, language, or device type, the model may see data that differs from training. That does not automatically mean the system is broken, but it does mean engineers should investigate.
+
+```math
+\text{drift} = \text{current distribution} - \text{training distribution}
+```
+
+## Common Anti-Patterns
+
+### One-Off Scripts
+
+A script that only one person can run is not a pipeline. Turn it into a repeatable job with clear inputs, outputs, and logs.
+
+### No Validation
+
+If you trust incoming data blindly, one changed column name can break training silently.
+
+### No Ownership
+
+Every launch-ready pipeline needs an owner. Someone must know where failures appear, how to retry, and when to alert the team.
+
+## Flow-Style Example
+
+Imagine a learning platform that recommends the next lesson.
+
+The pipeline could be:
+
+1. Ingest lesson events from web and mobile apps.
+2. Validate required columns and timestamp formats.
+3. Remove duplicate events and impossible quiz scores.
+4. Build learner-level features such as average score and recent activity.
+5. Store features by date and version.
+6. Train a recommender.
+7. Monitor feature drift and recommendation quality.
+
+This is not glamorous work, but it is the work that lets ML survive contact with real users.
+
+## Practical Exercises
+
+### Exercise 1: Sketch a Pipeline
+
+Choose one Flow-style use case:
+
+- next lesson recommendation,
+- quiz risk detection,
+- mentor matching,
+- on-chain activity classification.
+
+Draw a 5-stage pipeline from data source to model output.
+
+### Exercise 2: Add Validation
+
+Create a pandas DataFrame with at least one invalid value. Write a validation check that catches it.
+
+### Exercise 3: Define Monitoring
+
+For your pipeline, list three metrics you would monitor after launch.
+
+## Self-Assessment
+
+Rate yourself from 1 to 5:
+
+- I can explain why pipelines matter before modeling.
+- I can identify ingestion, validation, cleaning, transformation, storage, and monitoring.
+- I can write a small data quality check in pandas.
+- I can sketch a launch-ready data path for a beginner ML project.
+
+## Further Reading
+
+- [pandas getting started](https://pandas.pydata.org/docs/getting_started/index.html)
+- [pandas user guide](https://pandas.pydata.org/docs/user_guide/index.html)
+- [TensorFlow TFX pipelines guide](https://www.tensorflow.org/tfx/guide/understanding_tfx_pipelines)
+
+## Next Steps
+
+Next, study the model lifecycle. A pipeline prepares the data; the lifecycle explains how the model moves from idea to production and maintenance.

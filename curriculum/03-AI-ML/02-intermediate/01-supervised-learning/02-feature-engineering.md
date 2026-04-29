@@ -3,7 +3,7 @@ id: feature-engineering
 title: Feature Engineering
 track: ai-ml
 level: intermediate
-version: 1.0
+version: 1.1
 ---
 
 # Feature Engineering
@@ -12,312 +12,347 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain what feature engineering is and why it matters more than tuning algorithms.  
-- Apply common techniques like scaling, encoding, interaction features, and time‑based features.  
-- Spot places in a Flow‑style lab where feature engineering can improve performance.  
-- Treat features as a first‑class design concern, not “just data cleaning.”
+- Explain feature engineering as the design of model inputs, not just data cleaning.
+- Apply scaling, encoding, time features, aggregations, interactions, and binning.
+- Build a reusable scikit-learn preprocessing pipeline.
+- Detect feature leakage before it produces misleading evaluation results.
 
-## Introduction
+## Watch First
 
-In supervised learning, your model only sees **features**, not raw reality.  
-**Feature engineering** is the process of:
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
+  <iframe
+    src="https://www.youtube.com/embed/3gfhbXt9TcQ"
+    title="Discussing All The Types Of Feature Transformation In Machine Learning"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
 
-- choosing which information to represent,  
-- how to represent it, and  
-- how to transform it so that the model can learn more effectively.
+## Feature Design Loop
 
-In practice, **good features often matter more than a fancy algorithm**.  
-Your goal in this lesson is to move from “just using raw columns” to **intentionally shaping features** for regression and classification.
-
----
-
-## What Is Feature Engineering?
-
-**Feature engineering** is the design of:
-
-- which **inputs** (features) the model receives,  
-- how those inputs are **encoded**, and  
-- how they are **combined** or **transformed**.
-
-It sits between:
-
-- the **data pipeline** (previous lessons) and  
-- the **model** (regression/classification, trees, etc.).
-
-For Flow‑style engineers, think of features as the **bridge** between messy real‑world signals and clean numeric inputs the model can train on.
-
----
-
-## Why Feature Engineering Matters
-
-Model quality is limited by:
-
-- how informative the features are,  
-- how well they match the model’s assumptions.
-
-If you:
-
-- encode a categorical variable as a single number even when order doesn’t matter,  
-- give the model raw timestamps instead of engineered time‑based features,  
-- or omit meaningful interactions between variables,
-
-then even the best model will struggle.
-
-Conversely, well‑engineered features:
-
-- reduce noise,  
-- expose structure, and  
-- make it easier for the model to learn.
-
----
-
-## Common Feature Engineering Tasks
-
-### 1. Scaling and Normalization
-
-Many algorithms (e.g., linear models, gradient‑based optimizers) expect features on a **similar scale**.
-
-Common patterns:
-
-- **StandardScaler**:  
-  converts each feature to `z‑score`,  
-  with mean `0` and unit variance.
-
-  ```python
-  from sklearn.preprocessing import StandardScaler
-
-  scaler = StandardScaler()
-  X_scaled = scaler.fit_transform(X)
-  ```
-
-- **MinMaxScaler**:  
-  scales each feature to `[0, 1]`.
-
-  ```python
-  from sklearn.preprocessing import MinMaxScaler
-
-  scaler = MinMaxScaler()
-  X_scaled = scaler.fit_transform(X)
-  ```
-
-In Flow‑style labs, use scaling when:
-
-- combining features with very different units (e.g., age vs. clicks).  
-- using algorithms sensitive to scale (e.g., linear models, clustering).
-
-### 2. Encoding Categorical Variables
-
-Categorical variables (e.g., country, course, role) must be mapped to numbers.
-
-- **One‑hot encoding**:  
-  creates a binary column for each category.
-
-  ```python
-  X_encoded = pd.get_dummies(X, columns=["country"])
-  ```
-
-- **Label encoding / target encoding**:  
-  numeric encoding used when the variable has ordinal meaning or when you want compactness.
-
-In Flow‑style contexts, be careful:
-
-- **Avoid treating one‑hot encoded features as ordered**; use them only as indicators.  
-- For high‑cardinality categories (e.g., ID‑like strings), consider bucketing or target encoding.
-
-### 3. Interaction and Polynomial Features
-
-Sometimes the relationship is **multiplicative** or **non‑linear**.
-
-You can create:
-
-- **Interaction terms**:  
-  `x1 * x2`  
-  to capture synergy between features.
-
-- **Polynomial features**:  
-  `x`, `x**2`, `x**3`  
-  for curve‑like behavior.
-
-```python
-from sklearn.preprocessing import PolynomialFeatures
-
-poly = PolynomialFeatures(degree=2, include_bias=False)
-X_poly = poly.fit_transform(X)
+```mermaid
+flowchart LR
+  Raw["Raw events<br/>tables, logs, forms"] --> Validate["Validate schema<br/>and ranges"]
+  Validate --> Transform["Transform columns"]
+  Transform --> Aggregate["Aggregate over<br/>users or time"]
+  Aggregate --> Select["Select features"]
+  Select --> Train["Train model"]
+  Train --> Evaluate["Evaluate lift<br/>and leakage"]
+  Evaluate --> Registry["Document feature spec"]
+  Evaluate --> Transform
 ```
 
-Use this when:
+Models do not see reality. They see features.
 
-- you suspect non‑linear relationships in your Flow‑style task (e.g., diminishing returns).  
-- you want to push a simple model’s performance without changing the algorithm.
+Feature engineering is the process of choosing, transforming, and combining data so a model can learn useful patterns. In practice, strong features often matter more than a more complicated algorithm.
 
-### 4. Time‑Based Features
+:::tip Launch Rule
+A feature is launch-ready when it is reproducible, available at prediction time, documented, and tested for leakage.
+:::
 
-For time‑series‑like or session‑based data:
+## What Counts as a Feature?
 
-- **Day‑of‑week, hour‑of‑day, weekend flag**.  
-- **Time since last event** (e.g., days since last quiz).  
-- **Rolling statistics**: moving average, rolling sum.
+A feature is any input column or derived value the model receives.
 
-Example:
+For a learning platform, raw data might include:
+
+- quiz attempts,
+- lesson views,
+- timestamps,
+- selected track,
+- mentor notes,
+- contribution events.
+
+Engineered features might include:
+
+- average quiz score in the last 14 days,
+- days since last lesson,
+- number of completed modules,
+- weekend activity ratio,
+- selected track encoded as indicator columns,
+- interaction between study time and quiz attempts.
+
+## Scaling Numeric Features
+
+Some models are sensitive to feature scale. Linear models, distance-based methods, and gradient-based methods often behave better when numeric features have comparable ranges.
+
+Standardization converts a value into a z-score:
+
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+
+where `mu` is the feature mean and `sigma` is the standard deviation.
+
+Min-max scaling maps values into a fixed range:
+
+$$
+x_{scaled} = \frac{x - x_{min}}{x_{max} - x_{min}}
+$$
 
 ```python
-data["day_of_week"] = data["timestamp"].dt.dayofweek
-data["is_weekend"] = data["day_of_week"].isin().astype(int)[1][2]
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
+data = pd.DataFrame({
+    "hours_studied": [1.5, 2.0, 3.5, 6.0],
+    "quiz_score": [45, 55, 72, 88],
+})
+
+standard = StandardScaler()
+standardized = standard.fit_transform(data)
+
+minmax = MinMaxScaler()
+scaled_0_1 = minmax.fit_transform(data)
+
+print(standardized)
+print(scaled_0_1)
 ```
 
-These features can significantly improve models for:
+## Encoding Categorical Features
 
-- user engagement prediction,  
-- churn or dropout risk,  
-- or governance‑activity forecasting.
+Models need numbers, but many useful signals are categories.
 
-### 5. Aggregation Features
-
-Aggregating event‑level data into person‑ or period‑level summaries is often the most powerful engineering.
-
-For example:
-
-- **Per‑user features**:  
-  - average time spent per lesson,  
-  - total number of quizzes completed,  
-  - average score over the last 7 days.
-
-- **Per‑period features**:  
-  - weekly active users,  
-  - transactions per day.
+Use one-hot encoding for unordered categories:
 
 ```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "track": ["ai-ml", "blockchain", "ai-ml", "protocol"],
+    "role": ["learner", "mentor", "learner", "builder"],
+})
+
+encoded = pd.get_dummies(data, columns=["track", "role"])
+print(encoded)
+```
+
+Use ordinal encoding only when the order is real. For example, `low < medium < high` can be ordinal. Country, track, or user role should not be treated as ordered numbers.
+
+## Time-Based Features
+
+Raw timestamps are rarely model-ready. Turn them into features that express behavior.
+
+```python
+import pandas as pd
+
+events = pd.DataFrame({
+    "learner_id": ["a1", "a1", "b2", "c3"],
+    "timestamp": pd.to_datetime([
+        "2026-04-01 09:00",
+        "2026-04-04 18:30",
+        "2026-04-05 10:00",
+        "2026-04-07 21:15",
+    ]),
+})
+
+events["day_of_week"] = events["timestamp"].dt.dayofweek
+events["hour"] = events["timestamp"].dt.hour
+events["is_weekend"] = events["day_of_week"].isin([5, 6]).astype(int)
+
+print(events)
+```
+
+Useful time features include:
+
+- hour of day,
+- day of week,
+- weekend flag,
+- days since last activity,
+- count of actions in the last 7 or 30 days,
+- rolling average score.
+
+## Aggregation Features
+
+Many ML products start with event-level data but need user-level predictions. Aggregation turns many rows into one row per entity.
+
+```python
+events = pd.DataFrame({
+    "learner_id": ["a1", "a1", "b2", "b2", "b2"],
+    "quiz_score": [70, 82, 55, 60, 68],
+    "lesson_id": ["l1", "l2", "l1", "l2", "l3"],
+    "minutes_spent": [25, 32, 15, 18, 21],
+})
+
 user_features = (
-    data
-    .groupby("user_id")
+    events
+    .groupby("learner_id")
     .agg(
-        avg_score=("score", "mean"),
-        n_quizzes=("quiz_id", "count"),
-        last_activity=("timestamp", "max"),
+        avg_score=("quiz_score", "mean"),
+        lessons_attempted=("lesson_id", "nunique"),
+        total_minutes=("minutes_spent", "sum"),
     )
     .reset_index()
 )
+
+print(user_features)
 ```
 
-These aggregates often carry more signal than raw event logs.
+These features are often more predictive than raw event rows because they describe behavior over a useful window.
 
-### 6. Binning and Discretization
+## Interaction and Polynomial Features
 
-Sometimes it is better to **discretize** a continuous variable into bins:
+Sometimes the signal lives in a relationship between columns.
 
-- **quantiles** (e.g., low/medium/high),  
-- **fixed thresholds** (e.g., < 50 points → “low”).
+For example:
+
+$$
+\text{study_efficiency} = \frac{\text{quiz_score}}{\text{hours_studied}}
+$$
+
+or:
+
+$$
+x_{interaction} = x_1 \times x_2
+$$
 
 ```python
-bins =[3][4][5]
-labels = ["low", "medium", "high"]
-data["score_band"] = pd.cut(data["score"], bins=bins, labels=labels)
+data = pd.DataFrame({
+    "hours_studied": [2, 4, 5],
+    "quiz_score": [60, 78, 81],
+    "mentor_sessions": [0, 1, 2],
+})
+
+data["score_per_hour"] = data["quiz_score"] / data["hours_studied"]
+data["study_x_mentor"] = data["hours_studied"] * data["mentor_sessions"]
+
+print(data)
 ```
 
-This is useful when:
+Use interactions when a domain hypothesis supports them. Creating hundreds of random interactions can overfit.
 
-- you want interpretable buckets for stakeholders.  
-- the relationship is piecewise rather than smooth.
+## Binning and Bucketing
 
----
+Binning converts continuous values into categories.
 
-## Feature Engineering as a Design Process
+```python
+data = pd.DataFrame({"score": [38, 55, 72, 91]})
 
-At the intermediate level, feature engineering is not “just preprocessing.” It is a **design loop**:
+bins = [0, 50, 75, 100]
+labels = ["needs_support", "on_track", "advanced"]
 
-1. **Hypothesize**:  
-   - What relationships matter?  
-   - What features might expose them?
+data["score_band"] = pd.cut(
+    data["score"],
+    bins=bins,
+    labels=labels,
+    include_lowest=True,
+)
 
-2. **Build**:  
-   - Add the feature to the data pipeline.  
-   - Persist it for reuse.
+print(data)
+```
 
-3. **Evaluate**:  
-   - Compare model performance with and without the feature.  
-   - Check for overfitting and leakage.
+Use bins when:
 
-4. **Iterate**:  
-   - Drop noisy or redundant features.  
-   - Tune the encoding or granularity.
+- stakeholders need readable groups,
+- the relationship is not smooth,
+- a policy threshold already exists.
 
-For Flow‑style engineers, this means:
+## Reusable Preprocessing Pipeline
 
-- documenting your features as clearly as you document code.  
-- versioning feature definitions alongside models.
+For launch-ready work, avoid one-off notebook transformations. Put feature logic into a reusable pipeline.
 
----
+```python
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-## Pitfalls and Best Practices
+data = pd.DataFrame({
+    "hours_studied": [2, 4, 1, 6, 5],
+    "quiz_score": [60, 78, 45, 88, 74],
+    "track": ["ai-ml", "ai-ml", "blockchain", "protocol", "ai-ml"],
+    "completed": [0, 1, 0, 1, 1],
+})
 
-### Common Pitfalls
+X = data[["hours_studied", "quiz_score", "track"]]
+y = data["completed"]
 
-- **Data leakage**:  
-  using future or target‑dependent information as a feature (e.g., event after the target time).  
-  This creates unrealistic performance.
+numeric_features = ["hours_studied", "quiz_score"]
+categorical_features = ["track"]
 
-- **Over‑fitting via too many features**:  
-  creating many highly granular, id‑specific features that work only on the training set.
+preprocess = ColumnTransformer(
+    transformers=[
+        ("num", StandardScaler(), numeric_features),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features),
+    ]
+)
 
-- **Ignoring domain context**:  
-  choosing features that are mathematically clever but meaningless to stakeholders.
+model = Pipeline(
+    steps=[
+        ("preprocess", preprocess),
+        ("classifier", LogisticRegression()),
+    ]
+)
 
-### Best Practices
+model.fit(X, y)
+print(model.predict(X))
+```
 
-- **Make features reproducible and versioned** (part of the data pipeline).  
-- **Log transformations and decisions** so others can audit them.  
-- **Keep features interpretable** when possible (e.g., “days since last login” vs. an opaque embedding).  
-- **Check for leakage** by asking: “Could the model see this at prediction time?”
+The pipeline keeps transformations and model training together, which reduces training-serving skew.
 
----
+## Leakage Check
 
-## Practical Exercises (Intermediate‑Level)
+Feature leakage happens when the model receives information that would not be available at prediction time.
 
-### Exercise 1: Enrich a Flow‑Style Dataset
+```mermaid
+flowchart LR
+  PredictTime["Prediction time<br/>Monday"] --> Allowed["Allowed features<br/>events before Monday"]
+  Future["Future information<br/>Tuesday onward"] --> Leakage["Leakage"]
+  Target["Target outcome<br/>completed by Friday"] --> Leakage
+  Leakage --> Inflated["Inflated validation score"]
+```
 
-Pick a Flow‑style dataset with user or course‑interaction events:
+Examples of leakage:
 
-- Add at least three engineered features (e.g., time‑based, aggregations, interactions).  
-- Train a simple model (e.g., `RandomForestClassifier` or `LinearRegression`) before and after.  
-- Measure and compare performance.
+- using "final course score" to predict course completion,
+- using events after the prediction timestamp,
+- computing global aggregates using the test set,
+- encoding a target-like status into a feature.
 
-### Exercise 2: Spot Leakage
+Ask this question for every feature:
 
-Take a dataset and a target you care about (e.g., “will dropout next week”):
+> Could the system know this value at the moment it makes the prediction?
 
-- Write down all candidate features.  
-- Identify which ones might leak future information.  
-- Rewrite them to avoid leakage.
+If the answer is no, remove or rewrite the feature.
 
-### Exercise 3: Design a Feature Set
+## Practical Exercises
 
-For a Flow‑style supervised problem of your choice (e.g., “predict course completion”):
+### Exercise 1: Build a Feature Spec
 
-- Write a short feature spec:  
-  - 5–10 features,  
-  - their sources in the data pipeline,  
-  - and how they relate to the business question.  
-- Turn this into a repeatable transformation function (e.g., a `compute_features(...)` function).
+Choose a learner-support or protocol-health model. Write a feature spec with:
 
----
+- feature name,
+- source table,
+- transformation,
+- prediction-time availability,
+- reason it may help.
 
-## Self‑Assessment
+### Exercise 2: Add Aggregations
+
+Create event-level sample data and produce one row per learner or contributor with at least three aggregate features.
+
+### Exercise 3: Leakage Review
+
+List ten candidate features for a model. Mark each as safe, risky, or leaking. Rewrite the risky ones.
+
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I can explain what feature engineering is.  
-- I can apply at least three common techniques (scaling, encoding, aggregations).  
-- I can recognize feature leakage and avoid it.  
-- I can design a feature set for a Flow‑style supervised problem.
+- I can explain why feature engineering matters.
+- I can apply scaling, encoding, time, aggregation, interaction, and binning features.
+- I can create a scikit-learn preprocessing pipeline.
+- I can identify feature leakage.
 
-Action item: write a short note in your lab repo describing one engineered feature you added and how it changed model performance.
+## Further Reading
+
+- [scikit-learn preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html)
+- [scikit-learn ColumnTransformer](https://scikit-learn.org/stable/modules/compose.html#column-transformer)
+- [pandas groupby user guide](https://pandas.pydata.org/docs/user_guide/groupby.html)
 
 ## Next Steps
 
-- Read `03-evaluation-and-bias.md` next to learn how to evaluate models and features more deeply.  
-- Use feature engineering as a **core design activity** in every supervised learning lab.  
-- Treat features as **first‑class artifacts** in your Flow‑style data‑ML pipeline.
-
----
-
-*This lesson gives Flow Initiative trainees an intermediate‑level understanding of feature engineering in supervised ML systems, focusing on scaling, encoding, time‑based and aggregation features, and how to design features that improve model performance without leakage or over‑fitting.*
+Next, study hyperparameter tuning. Feature engineering shapes what the model sees; tuning controls how the model learns from those features.

@@ -1,9 +1,6 @@
-<svg width="100%" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
-  <rect x="290" y="40" width="100" height="100" rx="14" fill="#22c55e" style="fill:rgb(34, 197, 94);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <!-- top bar - longest -->
-  <rect x="305" y="55" width="70" height="12" rx="6" fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <!-- middle bar - medium -->
-  <rect x="305" y="76" width="50" height="12" rx="6" fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <!-- bottom bar - shortest -->
-  <rect x="305" y="97" width="30" height="12" rx="6" fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow Education logo">
+  <rect x="0" y="0" width="100" height="100" rx="14" fill="#22c55e"/>
+  <rect x="15" y="15" width="70" height="12" rx="6" fill="#ffffff"/>
+  <rect x="15" y="36" width="50" height="12" rx="6" fill="#ffffff"/>
+  <rect x="15" y="57" width="30" height="12" rx="6" fill="#ffffff"/>
 </svg>

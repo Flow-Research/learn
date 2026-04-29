@@ -3,7 +3,7 @@ id: ci-cd-for-models
 title: CI/CD for Models
 track: ai-ml
 level: intermediate
-version: 1.0
+version: 1.1
 ---
 
 # CI/CD for Models
@@ -12,266 +12,351 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain what **CI/CD** means in the context of ML models (not just apps).  
-- Describe the core stages: code linting, data and feature tests, model training, evaluation, and deployment gates.  
-- Sketch a minimal CI/CD pipeline for a Flow‑style model (e.g., a classification or regression model).  
-- Identify when a CI/CD setup is over‑engineered for a given lab.
+- Explain how CI/CD changes when the artifact is a model, not only application code.
+- Identify model pipeline stages: code checks, data validation, training, evaluation, registry, and deployment gates.
+- Write a local model-quality gate that can fail a build.
+- Sketch a lightweight CI/CD workflow for a Flow-style ML service.
+
+## Watch First
+
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
+  <iframe
+    src="https://www.youtube.com/embed/6X8BqtmXoVo"
+    title="Introduction to CI/CD in MLOps"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
+
+## Model Delivery Pipeline
+
+```mermaid
+flowchart LR
+  PR["Code or config change"] --> Checks["Code checks<br/>tests, lint, types"]
+  Checks --> Data["Data checks<br/>schema, ranges, freshness"]
+  Data --> Train["Train or smoke-train"]
+  Train --> Eval["Evaluate against gates"]
+  Eval --> Registry["Register artifact<br/>model, metrics, metadata"]
+  Registry --> Stage["Deploy to staging"]
+  Stage --> Promote["Promote or reject"]
+  Promote --> Monitor["Monitor production"]
+  Monitor --> Data
+```
+
+Traditional CI/CD answers: "Can this software change be built, tested, and released safely?"
+
+CI/CD for models adds another question: "Can this trained artifact be trusted enough to serve real decisions?"
+
+That means ML delivery must track:
+
+- code,
+- data,
+- feature definitions,
+- training configuration,
+- model artifact,
+- evaluation metrics,
+- deployment state.
+
+:::tip Launch Rule
+A model is not release-ready just because training completed. It needs reproducible inputs, recorded metadata, evaluation gates, and a rollback path.
+:::
+
+## CI, CD, and CT
+
+| Practice | Meaning in ML |
+| --- | --- |
+| Continuous Integration | Validate code, data contracts, feature logic, and training scripts on each change |
+| Continuous Delivery | Package and stage a model artifact after checks pass |
+| Continuous Deployment | Automatically serve a passing model without manual approval |
+| Continuous Training | Trigger retraining when data, schedule, or drift rules say it is needed |
+
+Many learning projects do not need full continuous deployment. A small team can still use the discipline:
+
+- run repeatable checks,
+- record what produced the model,
+- promote models intentionally,
+- keep previous versions available.
+
+## What Makes ML CI/CD Different?
+
+Software tests usually check deterministic behavior. ML checks often evaluate statistical behavior.
+
+```mermaid
+flowchart TD
+  Code["Application code"] --> Deterministic["Expected exact behavior"]
+  Model["ML model"] --> Statistical["Expected metric range"]
+  Data["Production data"] --> Changing["Distribution changes over time"]
+  Statistical --> Gates["Metric gates<br/>and drift checks"]
+  Changing --> Gates
+```
+
+An ML pipeline must account for:
+
+- data schema changes,
+- missing or delayed labels,
+- random training variation,
+- metric tradeoffs,
+- model versioning,
+- training-serving skew,
+- silent failure after deployment.
 
-## Introduction
+## Minimal Artifact Set
 
-In software engineering, **CI/CD** (Continuous Integration / Continuous Delivery) is the practice of:
+Every promoted model should carry enough metadata to answer "what is this?"
 
-- automatically building, testing, and (optionally) deploying code on every change.  
+| Artifact | Example |
+| --- | --- |
+| Model file | `model_2026_04_29.joblib` |
+| Training commit | Git SHA |
+| Dataset version | Snapshot date, query ID, data hash |
+| Feature spec | Feature names and transformations |
+| Hyperparameters | JSON config |
+| Metrics | F1, recall, MAE, latency |
+| Evaluation split | Train/validation/test policy |
+| Owner notes | Why this model was promoted |
 
-For ML, **CI/CD for models** extends this idea: you automate **data checks, training, evaluation, and deployment decisions** so that models are treated as **reproducible artifacts**, not one‑off scripts.
+This is the lightweight version of a model registry.
 
-In Flow‑style labs, you will not always need a GitHub Actions–style CI/CD monster.  
-But you *will* benefit from understanding the **pattern**:
+## Data and Feature Checks
 
-- push a change → run tests → train/evaluate → optionally deploy.
+Before training, validate the data.
 
-This lesson focuses on the **mental model and light‑weight practices**, not vendor‑specific YAML files.
+```python
+import pandas as pd
 
----
+REQUIRED_COLUMNS = {
+    "learner_id",
+    "hours_studied",
+    "quiz_score",
+    "completed",
+}
 
-## What CI/CD for Models Means
+def validate_training_data(data: pd.DataFrame) -> None:
+    missing_columns = REQUIRED_COLUMNS - set(data.columns)
+    if missing_columns:
+        raise ValueError(f"Missing columns: {sorted(missing_columns)}")
 
-### Continuous Integration (CI)
+    if data["learner_id"].isna().any():
+        raise ValueError("learner_id contains nulls")
 
-**CI** for ML usually means:
+    if not data["quiz_score"].between(0, 100).all():
+        raise ValueError("quiz_score must be between 0 and 100")
 
-- Every time you push code or data changes, the system:
+    if not set(data["completed"].unique()).issubset({0, 1}):
+        raise ValueError("completed must be binary: 0 or 1")
 
-  1. **Lints and checks** your code (style, tests, import safety).  
-  2. **Validates** datasets or features (schema, nulls, expected ranges).  
-  3. Optionally **trains and evaluates** the model on a small or sampled dataset.
 
-The goal is early feedback: you want to know fast if a change breaks:
+sample = pd.DataFrame({
+    "learner_id": ["a1", "b2", "c3"],
+    "hours_studied": [2.0, 4.5, 1.0],
+    "quiz_score": [60, 82, 49],
+    "completed": [0, 1, 0],
+})
 
-- the data pipeline,  
-- feature logic, or  
-- basic model behavior.
+validate_training_data(sample)
+print("data checks passed")
+```
 
-### Continuous Delivery (CD)
+These checks are small, but they catch problems before they become mysterious model failures.
 
-**CD** is the idea that:
+## Evaluation Gates
 
-- Once the CI checks pass, the system can **deliver** the model (or artifacts) to a staging or production environment, subject to extra gates.
+After training, use a gate. A gate is a rule that determines whether a model is allowed to move forward.
 
-Delivery can be:
+For a classifier:
 
-- **Automatic** (e.g., if metrics pass).  
-- **Manual approval** (human‑in‑the‑loop).
+$$
+promote =
+\begin{cases}
+true & \text{if } F1 \geq 0.75 \text{ and recall } \geq 0.70 \\
+false & \text{otherwise}
+\end{cases}
+$$
 
-For ML, “delivery” often means:
+For a regression model, you might require:
 
-- registering a new model version in a registry,  
-- updating a model server or API endpoint, or  
-- flipping a feature flag that routes traffic to the new model.
+$$
+MAE_{new} \leq MAE_{current} + \epsilon
+$$
 
-The key idea: **you push the change; the pipeline decides what to do with it.**
+That allows a small tolerance while preventing major regressions.
 
----
+```python
+from sklearn.metrics import f1_score, recall_score
 
-## Typical Stages in a CI/CD Pipeline for Models
+def check_classifier_gate(y_true, y_pred) -> None:
+    f1 = f1_score(y_true, y_pred)
+    recall = recall_score(y_true, y_pred)
 
-Here is a minimal flow you can adapt to Flow‑style labs:
+    print({"f1": f1, "recall": recall})
 
-### 1. Code and Data Validation
+    if f1 < 0.75 or recall < 0.70:
+        raise SystemExit("model gate failed")
 
-When code is pushed:
+    print("model gate passed")
+```
 
-- Run linters (`flake8`, `ruff`, `black`‑style checks) and unit tests.  
-- Validate that:
+In CI, a non-zero exit code fails the job.
 
-  - importable modules exist,  
-  - config files are valid,  
-  - environment variables or paths are present.
+## Local CI Script Pattern
 
-- Validate data/features:
+You can start without a cloud platform. A local script can still behave like CI.
 
-  - schema didn’t change unexpectedly.  
-  - no new columns or removed columns.  
-  - no large spikes in missing values.
+```python
+# ci_model.py
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score, recall_score
+from sklearn.model_selection import train_test_split
 
-These checks are fast and rely on small samples or metadata.
+REQUIRED_COLUMNS = {
+    "learner_id",
+    "hours_studied",
+    "quiz_score",
+    "completed",
+}
 
-### 2. Model Training (Optional, On Demand)
+def validate_training_data(data: pd.DataFrame) -> None:
+    missing_columns = REQUIRED_COLUMNS - set(data.columns)
+    if missing_columns:
+        raise ValueError(f"Missing columns: {sorted(missing_columns)}")
 
-In many real‑world setups:
+    if not data["quiz_score"].between(0, 100).all():
+        raise ValueError("quiz_score must be between 0 and 100")
 
-- CI trains a model **on every push or PR**, but on a small or sampled dataset to keep latency low.  
-- Full training on large data is triggered separately or overnight.
+data = pd.read_csv("training_data.csv")
+validate_training_data(data)
 
-In a Flow‑style context, you can:
+X = data[["hours_studied", "quiz_score"]]
+y = data["completed"]
 
-- run a **quick training run** to ensure the training script still works,  
-- without waiting for a full epoch‑heavy train.
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y,
+)
 
-### 3. Evaluation and Validation
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
 
-After training (or on a test‑only run), evaluate with:
+y_pred = model.predict(X_test)
+f1 = f1_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
 
-- **metrics**: accuracy, precision, recall, F1, MSE, etc.  
-- **bounds**: ensure performance doesn’t drop below a threshold.  
-- **consistency checks**: features + model → stable predictions.
+print({"f1": f1, "recall": recall})
 
-You can encode:
+if f1 < 0.75 or recall < 0.70:
+    raise SystemExit("model quality gate failed")
+```
 
-- “model cannot be promoted if F1 drops below 0.7.”  
-- “data cannot be merged if nulls exceed 5%.”
+Run it locally:
 
-This turns evaluation into **automation‑driven gates**.
+```bash
+python ci_model.py
+```
 
-### 4. Model Registration and Artifact Storage
+The same script can later run in GitHub Actions, GitLab CI, Jenkins, or another CI system.
 
-If the model passes:
+## Example CI Workflow
 
-- Save the trained model (e.g., `pickle`, `joblib`, or a standard format) to a **versioned store**.  
-- Register metadata:
+This is a minimal GitHub Actions shape. Adapt paths to your own project.
 
-  - commit hash,  
-  - dataset version,  
-  - hyperparameters,  
-  - metrics on the test set.
+```yaml
+name: model-ci
 
-This is your **model registry pattern** in simple form.
+on:
+  pull_request:
+  push:
+    branches: [main]
 
-### 5. Deployment Gates
+jobs:
+  model-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest
+      - run: python ci_model.py
+```
 
-Finally, decide what to do with the model:
+Keep CI fast. Full retraining can run on a schedule or after manual approval if the dataset is large.
 
-- **Staging**  
-  - Deploy to a staging endpoint and run canary or A/B tests.  
-- **Production**  
-  - Only promote if the model beats the current one or meets safety checks.
+## Promotion and Rollback
 
-In practice you might:
+A good promotion flow is explicit.
 
-- swap a symbolic link to the latest model file,  
-- update a config file used by a Flask/FastAPI model service, or  
-- update a feature flag that routes traffic.
+```mermaid
+sequenceDiagram
+  participant Dev as Engineer
+  participant CI as CI Pipeline
+  participant Reg as Model Registry
+  participant Stage as Staging
+  participant Prod as Production
 
----
+  Dev->>CI: Push change
+  CI->>CI: Run checks and evaluation
+  CI->>Reg: Save passing model + metadata
+  Reg->>Stage: Deploy candidate
+  Stage->>Prod: Promote after approval
+  Prod->>Reg: Roll back to previous version if needed
+```
 
-## Why This Matters for Flow Engineers
+Rollback is easier when the previous model is still registered and deployable.
 
-For ML‑backed services in the Flow Initiative, CI/CD for models:
+## Common Anti-Patterns
 
-- Turns **models into reproducible artifacts** (not fragile notebooks).  
-- Reduces risk of breaking production with a bad train or data change.  
-- Makes it easier to **roll back** to a previous model when something breaks.  
-- Builds trust with stakeholders who need to see **repeatable processes**.
+### No-Op CI
 
-In African‑centric and public‑goods contexts, this is particularly important when:
+A green job that only prints "OK" is not protecting the project.
 
-- Models influence **governance**, **education**, or **reward‑based systems**.  
-- Errors are more than theoretical; they can affect people’s outcomes.  
-- You want transparent, verifiable processes for updates.
+### Full Training on Every Pull Request
 
----
+Expensive training in every PR slows the team. Use smoke training in CI and full training on schedule or after approval.
 
-## What You Can Do in a Flow‑Style Lab
+### Overwriting `model.pkl`
 
-Even without a full CI/CD platform, you can adopt **CI/CD‑style disciplines**:
+If every model has the same filename and no metadata, you cannot reproduce or roll back safely.
 
-- **Version control everything** (code, data pointers, configs).  
-- **Wrap training in a script** (e.g., `train.py`) that outputs a model artifact.  
-- **Add a `run_evaluation.py`** script that:
+### Promoting on One Metric Alone
 
-  - loads the model,  
-  - runs it on a test set,  
-  - prints metrics, and  
-  - exits with a non‑zero code if metrics are too low.
-
-Then, in a more “real” setting, you would:
-
-- wire this script into GitHub Actions / GitLab CI / Jenkins,  
-- and gate model deployment on its exit status.
-
-For learning, that local‑style discipline is the core.
-
----
-
-## Common Anti‑Patterns
-
-### 1. “No‑op” CI
-
-- Having a CI job that only runs `echo "OK"` or a trivial test.  
-- It gives an illusion of automation but provides no guardrails.
-
-### 2. Training Everything in CI
-
-- Letting CI run full training on full‑size data for every PR.  
-- This makes the pipeline **slow** and frustrating.
-
-### 3. No Model Versioning
-
-- Overwriting a single `model.pkl` file.  
-- You cannot reproduce or roll back old models.
-
-### 4. No Clear Deployment Gates
-
-- Nobody knows what triggers a “production update.”  
-- People update models manually, inconsistently.
-
----
+One metric rarely captures the full product risk. Combine performance, data quality, latency, and fairness checks where relevant.
 
 ## Practical Exercises
 
-### Exercise 1: Sketch a Minimal CI/CD Flow
+### Exercise 1: Sketch a Pipeline
 
-Pick a small Flow‑style supervised learning lab:
+Choose a model project and draw its CI/CD stages from pull request to production.
 
-- Sketch a CI/CD pipeline as a list:
+### Exercise 2: Add a Data Gate
 
-  - code/data validation,  
-  - quick training,  
-  - evaluation,  
-  - model storage,  
-  - deployment gate.
+Write a validation function that checks required columns, missing values, and target range.
 
-Write this as a markdown note, not as YAML.
+### Exercise 3: Add a Model Gate
 
-### Exercise 2: Write a Local “CI” Script
+Write a script that trains a small model and exits with failure if the metric is below a threshold.
 
-Create a simple script (e.g., `ci_model.py`):
-
-- It lints your code,  
-- runs a small test‑only evaluation of the model on a held‑out set,  
-- and prints metrics plus a pass/fail message.
-
-Think of this as a “stand‑in” for a real CI job.
-
-### Exercise 3: Design a Model Versioning Scheme
-
-For the same lab:
-
-- Decide how to version models (e.g., `model_v1.pkl`, `model_v2.pkl`, or `model_{timestamp}_{hash}.pkl`).  
-- Write down:
-
-  - how you would store metadata along with each model,  
-  - how you would choose which version to serve in production.
-
----
-
-## Self‑Assessment
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I can explain what CI/CD for models means.  
-- I can sketch a pipeline that includes data, training, evaluation, and deployment gates.  
-- I can see how to turn a local training script into a CI‑style automation.  
-- I can avoid typical anti‑patterns like opaque or over‑heavy CI jobs.
+- I can explain CI/CD for models.
+- I can identify ML-specific checks beyond normal software tests.
+- I can write a simple data or metric gate.
+- I can describe how model registration and rollback work.
 
-Action item: write a short note in your lab repo describing a simple CI/CD‑style setup you would like to apply to your next Flow‑style ML project.
+## Further Reading
+
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [scikit-learn model persistence](https://scikit-learn.org/stable/model_persistence.html)
 
 ## Next Steps
 
-- Read `02-monitoring-model-performance.md` next to learn how to track models in production and feed that back into CI/CD.  
-- Use this CI/CD‑thinking habit whenever you design a model‑backed service.  
-- Treat **model CI/CD** as a **first‑class engineering practice**, not a side‑product of ML.
-
----
-
-*This lesson gives Flow Initiative trainees an intermediate‑level understanding of CI/CD for ML models, focusing on how to treat models as versioned artifacts, automate training and evaluation, and gate deployment decisions in a disciplined way.*
+Next, study monitoring and drift. CI/CD helps you ship a model; monitoring tells you whether it keeps working after launch.

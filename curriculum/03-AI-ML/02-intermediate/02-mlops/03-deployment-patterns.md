@@ -3,7 +3,7 @@ id: deployment-patterns
 title: Deployment Patterns
 track: ai-ml
 level: intermediate
-version: 1.0
+version: 1.1
 ---
 
 # Deployment Patterns
@@ -12,273 +12,314 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Recognize common **model deployment patterns** (batch, online API, embedded, ensemble).  
-- Choose the right pattern for a given Flow‑style problem (e.g., batch analytics vs real‑time recommendation).  
-- Connect model deployment back to CI/CD and monitoring (registry, rollbacks, A/B).  
-- Sketch a simple deployment setup for a Flow‑style service.
+- Compare batch scoring, online APIs, streaming inference, embedded models, and staged rollout patterns.
+- Choose a deployment pattern based on latency, cost, freshness, privacy, and operational complexity.
+- Sketch a model-serving architecture that connects to CI/CD and monitoring.
+- Implement minimal batch and FastAPI-style serving examples.
 
-## Introduction
+## Watch First
 
-Training a model is only one piece of the puzzle.  
-Even the best model is useless if it cannot be **invoked** when and where it is needed.
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
+  <iframe
+    src="https://www.youtube.com/embed/x57vAQdBohQ"
+    title="Deploy Machine Learning Models with FastAPI and Docker"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
 
-**Deployment patterns** answer questions like:
+## Deployment Decision Map
 
-- Is the model used in **batch** or **real‑time**?  
-- Who calls it (backend services, front‑end, cron jobs)?  
-- How are versions and rollbacks handled?
-
-In the Flow Initiative, these patterns help you turn notebooks into **services** that feed into education, governance, and analytics dashboards.
-
----
-
-## Batch Scoring
-
-### What it is
-
-In **batch scoring**, you run the model periodically on a large dataset and store the results:
-
-- `inputs → model → outputs` in a big batch.  
-- Then push results into a database, data lake, or dashboard.
-
-Typical patterns:
-
-- nightly or weekly reports,  
-- batch recommendations or rankings,  
-- data‑transformation jobs that enrich a dataset with predictions.
-
-### When to use it
-
-Use batch deployment when:
-
-- Latency is not critical (you can wait minutes or hours).  
-- You process many records at once.  
-- You feed an analytics or admin dashboard, not a live user interface.
-
-In Flow‑style systems, this is common for:
-
-- cohort reports,  
-- intervention‑risk lists for mentors,  
-- aggregated governance‑health summaries.
-
-### Simple example
-
-```python
-# train or load model (offline)
-model = load_model("model_latest.pkl")
-
-# load data in batch
-data = pd.read_csv("users_to_score.csv")
-X = data[["feature_1", "feature_2"]]
-
-# score
-y_pred = model.predict(X)
-data["risk_score"] = y_pred
-
-# write back
-data.to_csv("scored_users.csv", index=False)
+```mermaid
+flowchart TD
+  Need["When is the prediction needed?"] --> Later["Minutes or hours later"]
+  Need --> Now["Immediately"]
+  Need --> Event["As events arrive"]
+  Need --> Device["Without reliable network"]
+  Later --> Batch["Batch scoring"]
+  Now --> Online["Online API serving"]
+  Event --> Stream["Streaming inference"]
+  Device --> Embedded["Embedded or on-device model"]
+  Online --> Rollout["Canary, A/B, or shadow rollout"]
+  Batch --> Monitor["Monitor data, outputs, and freshness"]
+  Stream --> Monitor
+  Embedded --> Monitor
+  Rollout --> Monitor
 ```
 
-You can then import `scored_users.csv` into a dashboard or database.
+Training produces a model artifact. Deployment makes that artifact useful.
 
----
+The best deployment pattern depends on the product constraint:
 
-## Online / API Serving
+- How fresh must predictions be?
+- How much latency can users tolerate?
+- Where does the data live?
+- How often does the model change?
+- Can the system fall back if the model is unavailable?
 
-### What it is
+:::tip Launch Rule
+Choose the simplest deployment pattern that satisfies the product need. Real-time serving is powerful, but it is not automatically better than batch scoring.
+:::
 
-In **online serving**, you expose the model as an **API endpoint** that:
+## Pattern 1: Batch Scoring
 
-- receives a request,  
-- runs a prediction,  
-- returns a response in near real‑time.
+Batch scoring runs predictions on many records at once and stores the results.
 
-Typical stack:
+Use batch when:
 
-- a web framework (e.g., Flask, FastAPI, Express)  
-- that loads the model once and reuses it for many requests.
+- latency is not urgent,
+- predictions feed dashboards or scheduled workflows,
+- cost matters more than real-time freshness,
+- you want simpler operations.
 
-### When to use it
+Examples:
 
-Use online deployment when:
+- nightly learner-risk list for mentors,
+- weekly protocol-health report,
+- daily recommendation refresh,
+- monthly contribution scoring.
 
-- you need low latency (sub‑second to a few seconds).  
-- each request is small but frequent.  
-- the model is part of a live user‑facing product.
+```python
+import joblib
+import pandas as pd
 
-In Flow‑style systems, this is common for:
+model = joblib.load("model_latest.joblib")
 
-- real‑time recommendations (e.g., “next lesson to attempt”),  
-- risk‑or‑intervention alerts,  
-- governance or proposal‑scoring APIs.
+data = pd.read_csv("learners_to_score.csv")
+X = data[["hours_studied", "quiz_score"]]
 
-### Minimal structure
+data["risk_score"] = model.predict_proba(X)[:, 1]
+data.to_csv("scored_learners.csv", index=False)
+```
+
+Batch deployments still need monitoring:
+
+- Did the job run?
+- Were all records scored?
+- Did the input schema match?
+- Did the prediction distribution shift?
+
+## Pattern 2: Online API Serving
+
+Online serving exposes the model through an API.
+
+Use online serving when:
+
+- a product needs a prediction during a user request,
+- each request is small,
+- prediction freshness matters,
+- latency requirements are clear.
+
+Architecture:
+
+```mermaid
+sequenceDiagram
+  participant App as Product App
+  participant API as Model API
+  participant Model as Loaded Model
+  participant Log as Monitoring Logs
+
+  App->>API: POST /predict
+  API->>Model: Transform features and predict
+  Model-->>API: Prediction + score
+  API->>Log: Log input summary, output, latency
+  API-->>App: Response
+```
+
+Minimal FastAPI example:
 
 ```python
 # app.py
-from fastapi import FastAPI
-from pydantic import BaseModel
 import joblib
 import numpy as np
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
+model = joblib.load("model_latest.joblib")
 
-# load model at startup
-model = joblib.load("model_latest.pkl")
-
-class Features(BaseModel):
+class LearnerFeatures(BaseModel):
     hours_studied: float
     quiz_score: float
 
 @app.post("/predict")
-def predict(feature_inputs: Features):
-    X = np.array([[feature_inputs.hours_studied, feature_inputs.quiz_score]])
-    y_pred = model.predict(X)
-    proba = model.predict_proba(X) if hasattr(model, "predict_proba") else None
-
+def predict(features: LearnerFeatures):
+    X = np.array([[features.hours_studied, features.quiz_score]])
+    score = model.predict_proba(X)[0, 1]
     return {
-        "prediction": int(y_pred),
-        "confidence": proba.tolist() if proba is not None else None,
+        "risk_score": float(score),
+        "needs_support": bool(score >= 0.7),
     }
 ```
 
-You then run this server and call it from a front‑end or other backend service.
+Run locally:
 
-### Connection to CI/CD and monitoring
+```bash
+uvicorn app:app --reload
+```
 
-- **Model registry** → the `model_latest.pkl` is the **newest version** from CI/CD.  
-- **Monitoring** → you log latency, error rate, and input/output distributions for this endpoint.  
-- **Rollbacks** → if the new model is bad, point the service to an older `model_v1.pkl` file or environment‑specific symlink.
+Online serving adds operational concerns:
 
----
+- request validation,
+- authentication,
+- rate limiting,
+- logging,
+- latency,
+- rollback,
+- dependency management.
 
-## Embedded / On‑Device Models
+## Pattern 3: Streaming Inference
 
-### What it is
+Streaming inference scores events as they arrive.
 
-In **embedded** deployment, models run:
+Use streaming when:
 
-- in a mobile‑app,  
-- in a browser, or  
-- in a desktop or IoT device.
+- event freshness is important,
+- actions depend on near-real-time signals,
+- records arrive continuously.
 
-Typical patterns:
+Examples:
 
-- lightweight models (e.g., tree‑based or small neural nets).  
-- models compiled to efficient formats (e.g., ONNX, TensorFlow Lite, Core ML).
+- suspicious protocol event detection,
+- live recommendation updates,
+- real-time learner intervention triggers.
 
-### When to use it
+```mermaid
+flowchart LR
+  Events["Event stream"] --> Features["Feature builder"]
+  Features --> Model["Model inference"]
+  Model --> Actions["Alert, route,<br/>or store result"]
+  Model --> Logs["Monitoring logs"]
+```
+
+Streaming is more complex than batch. Start here only when the product really needs it.
+
+## Pattern 4: Embedded or On-Device Models
+
+Embedded models run inside a mobile app, browser, desktop app, or edge device.
 
 Use embedded deployment when:
 
-- network latency or connectivity is unreliable.  
-- privacy is important (data must stay on‑device).  
-- responses must be extremely fast (e.g., UI feedback).
+- connectivity is unreliable,
+- data should stay on-device,
+- latency must be very low,
+- the model is small enough to ship with the app.
 
-In Flow‑style systems, this is relevant for:
+Tradeoffs:
 
-- mobile learning apps that recommend next actions offline,  
-- field‑based governance or capacity‑building tools.
+| Benefit | Cost |
+| --- | --- |
+| Works offline | Harder to update |
+| Low latency | Harder to monitor |
+| Better privacy | Model size constraints |
+| Fewer server calls | Version fragmentation |
 
-### Trade‑offs
+Examples:
 
-- **Pros**: low latency, privacy, offline use.  
-- **Cons**: harder to update, version control, and monitoring.
+- offline learner recommendations in a mobile app,
+- local content quality checks,
+- lightweight ranking in a browser.
 
----
+## Pattern 5: Canary, A/B, and Shadow Deployment
 
-## Ensemble / A/B and Canary Deployments
+Staged rollouts reduce risk when replacing a model.
 
-### Ensemble deployment
+```mermaid
+flowchart LR
+  Traffic["Incoming traffic"] --> Router["Router"]
+  Router --> Old["Model A<br/>current"]
+  Router --> New["Model B<br/>candidate"]
+  Old --> Metrics["Compare metrics"]
+  New --> Metrics
+  Metrics --> Decision["Promote, pause,<br/>or roll back"]
+```
 
-You can deploy **multiple models at once** and:
+| Pattern | How it works | Use when |
+| --- | --- | --- |
+| Canary | Send a small percentage to the new model | You want a cautious rollout |
+| A/B test | Split users into variants and compare outcomes | You need product-level evidence |
+| Shadow | Run the new model silently without affecting users | You want safety checks before exposure |
 
-- average or blend their predictions,  
-- or use them as independent “voters.”
+Shadow deployment is especially useful when mistakes could affect people. The new model sees real traffic, but its predictions are logged, not acted on.
 
-This is common to:
+## Choosing a Pattern
 
-- improve robustness,  
-- hedge against one model’s weaknesses.
+| Requirement | Strong candidate |
+| --- | --- |
+| Dashboard updated daily | Batch |
+| User waits for prediction in product flow | Online API |
+| Event must be handled immediately | Streaming |
+| Offline or privacy-sensitive app | Embedded |
+| Replacing a risky model | Canary, A/B, or shadow |
 
-Example blend:
+Latency targets should be written as service-level objectives.
 
-`y_blend = 0.7 * y_model1 + 0.3 * y_model2`
+For example:
 
-#### A/B and canary patterns
+$$
+P(\text{latency} \leq 200ms) \geq 0.95
+$$
 
-In **A/B or canary deployment**:
+That means at least 95% of predictions should return within 200 milliseconds.
 
-- you route a fraction of traffic to a **new model** (B),  
-- the rest stays on the **old model** (A).  
+## Connecting Deployment to CI/CD and Monitoring
 
-You observe:
+A launch-ready deployment connects three systems.
 
-- metrics for A vs B,  
-- and decide whether to promote B to 100%.
+```mermaid
+flowchart TD
+  CICD["CI/CD<br/>build, test, register"] --> Deploy["Deployment<br/>batch, API, stream, device"]
+  Deploy --> Monitor["Monitoring<br/>quality, drift, latency"]
+  Monitor --> Retrain["Retrain or rollback decision"]
+  Retrain --> CICD
+```
 
-In Flow‑style contexts, this is useful when:
+Before launch, document:
 
-- you want to test a new curriculum‑recommendation engine on a small cohort,  
-- or roll out a governance‑risk‑model without exposing all users.
-
-You can implement this in:
-
-- the front‑end (random assignment),  
-- or the backend (e.g., `model_A` vs `model_B` based on a rollout flag).
-
----
+- model version,
+- deployment pattern,
+- input contract,
+- output contract,
+- fallback behavior,
+- monitoring metrics,
+- rollback procedure,
+- owner.
 
 ## Practical Exercises
 
 ### Exercise 1: Choose a Pattern
 
-Pick a Flow‑style problem (e.g., “predict whether a learner will drop out”):
+Pick one model idea and choose a deployment pattern. Explain why not the other patterns.
 
-- Decide whether the solution is **batch**, **online‑API**, or **embedded**‑style.  
-- Sketch:
+### Exercise 2: Build Batch Scoring
 
-  - who calls the model,  
-  - when it runs,  
-  - and how results are stored or used.
+Train a small classifier, save it with `joblib`, then write a batch script that scores a CSV.
 
-### Exercise 2: Design a Minimal API
+### Exercise 3: Build a Minimal API
 
-Using a small model from a Flow‑style lab:
+Wrap the same model in FastAPI. Return both a probability and a decision threshold.
 
-- Wrap it in a FastAPI or Flask service that exposes a `POST /predict` endpoint.  
-- Write a short client script that calls this endpoint with sample data.
+### Exercise 4: Design a Rollout
 
-This gives you a concrete deployment‑style habit.
+Write a canary or shadow deployment plan for a model that influences learner support.
 
-### Exercise 3: Sketch an A/B Plan
-
-For the same lab:
-
-- Write an A/B plan:  
-  - which version is A, which is B,  
-  - what metric you will track,  
-  - and how you will decide when to promote B.
-
----
-
-## Self‑Assessment
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I can name the main deployment patterns (batch, online‑API, embedded, ensemble‑style).  
-- I can choose the right pattern for a Flow‑style problem.  
-- I can connect deployment to CI/CD and monitoring (versioning, rollbacks, A/B).  
-- I can sketch a simple deployment setup for a model.
+- I can compare batch, online, streaming, embedded, and staged rollout patterns.
+- I can choose a deployment pattern based on product constraints.
+- I can sketch a model-serving architecture.
+- I can connect deployment to CI/CD, monitoring, and rollback.
 
-Action item: write a short note in your lab repo describing one deployment pattern you plan to use for your next Flow‑style ML project and why.
+## Further Reading
+
+- [FastAPI first steps](https://fastapi.tiangolo.com/tutorial/first-steps/)
+- [scikit-learn model persistence](https://scikit-learn.org/stable/model_persistence.html)
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 
 ## Next Steps
 
-- Read `04-evaluation-and-bias.md` next to learn how deployment and monitoring influence how you evaluate and revise models.  
-- Use these deployment patterns as a **first‑class design step** for every ML‑backed service in the Flow curriculum.  
-- Treat **model deployment** as the **bridge** between experiments and impact.
-
----
-
-*This lesson gives Flow Initiative trainees an intermediate‑level understanding of model deployment patterns in ML systems, focusing on batch scoring, online/API serving, embedded deployment, and A/B‑style setups, and how to connect them to CI/CD and monitoring in Flow‑style systems.*
+Next, combine the intermediate ideas: frame the problem, engineer features, tune the model, ship it through CI/CD, monitor it, and deploy it using the simplest pattern that serves the product well.

@@ -3,7 +3,7 @@ id: regression-classification
 title: Regression and Classification
 track: ai-ml
 level: intermediate
-version: 1.0
+version: 1.1
 ---
 
 # Regression and Classification
@@ -12,235 +12,317 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Clearly distinguish between **regression** and **classification** problems and their canonical use cases.  
-- Choose the right problem type and metric for a given Flow‑style task.  
-- Train and evaluate simple regression and classification models with scikit‑learn.  
-- Connect these models to the broader ML workflow (data pipelines, evaluation, deployment).
+- Distinguish regression, binary classification, and multiclass classification problems.
+- Choose metrics that match the product decision a model will support.
+- Train and evaluate baseline regression and classification models with scikit-learn.
+- Explain probability thresholds, error tradeoffs, and when the same product question can be framed more than one way.
 
-## Introduction
+## Watch First
 
-At the intermediate level, “regression” and “classification” are not just labels; they are **modeling choices** that shape how you:
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
+  <iframe
+    src="https://www.youtube.com/embed/yIYKR4sgzI8"
+    title="StatQuest: Logistic Regression"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
 
-- define the target,  
-- choose metrics, and  
-- interpret results.
+## Problem Framing Map
 
-In practice:
-
-- **Regression** is for predicting **continuous numeric** outputs (e.g., price, score, latency).  
-- **Classification** is for predicting **discrete labels or classes** (e.g., pass/fail, spam/ham, low/medium/high).
-
-Your job is to recognize which pattern fits the Flow‑style problem you are solving and wire it correctly into the full ML stack.
-
----
-
-## Regression: Predicting Continuous Values
-
-### When to use regression
-
-Use regression when:
-
-- The target is numeric and **continuous** (or at least interval‑scale).  
-- You care about **how far off** predictions are, not just the sign.
-
-Common examples:
-
-- predicting exam scores over the full range `0–100`,  
-- predicting user engagement time,  
-- predicting token‑health scores or reward amounts.
-
-### Core idea
-
-A regression model tries to fit a function like:
-
-`y = wx + b`
-
-or a more complex nonlinear mapping, so that predictions `y_pred` are as close as possible to true `y` in some numeric sense (e.g., squared error).
-
-### Typical models and workflows
-
-- **Linear regression**, **Ridge**, **Lasso** → start‑here for simple numeric targets.  
-- **Tree‑based** (e.g., `RandomForestRegressor`) → when you want non‑linear relationships without heavy feature engineering.
-
-A minimal pattern in a Flow lab:
-
-```python
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-
-# 1. Prepare data
-X = data[["feature_1", "feature_2"]]
-y = data["score"]
-
-# 2. Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# 3. Train
-regressor = LinearRegression()
-regressor.fit(X_train, y_train)
-
-# 4. Predict
-y_pred = regressor.predict(X_test)
-
-# 5. Evaluate
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-print("MSE:", mse, "R²:", r2)
+```mermaid
+flowchart TD
+  Question["What decision will the product make?"] --> Target["What is the target?"]
+  Target --> Numeric["Continuous number<br/>score, time, amount"]
+  Target --> Binary["Two labels<br/>yes/no, pass/fail"]
+  Target --> Multi["More than two labels<br/>low/medium/high"]
+  Numeric --> Regression["Regression"]
+  Binary --> BinaryCls["Binary classification"]
+  Multi --> MultiCls["Multiclass classification"]
+  Regression --> RegMetrics["MAE, RMSE, R2"]
+  BinaryCls --> ClsMetrics["Precision, recall, F1, ROC-AUC"]
+  MultiCls --> MultiMetrics["Accuracy, macro F1, confusion matrix"]
 ```
 
-### Typical metrics
+Regression and classification are not just algorithm categories. They are ways of translating a real product question into a target a model can learn.
 
-- **Mean Squared Error (MSE)** / **RMSE** for raw error magnitude.  
-- **R²** for how much of the variance the model explains.  
-- **Mean Absolute Error (MAE)** when you care about human‑readable “average error” in the same units as `y`.
+In a Flow-style AI product, you might ask:
 
----
+- Which learners may need mentor support?
+- What completion score should we expect next week?
+- Which governance proposals need extra review?
+- Which protocol events look unusual?
 
-## Classification: Predicting Discrete Labels
+The modeling decision starts with the target:
 
-### When to use classification
+| Target shape | ML framing | Example |
+| --- | --- | --- |
+| Continuous number | Regression | Predict a learner's next quiz score |
+| Yes/no label | Binary classification | Predict whether a learner may drop out |
+| Multiple labels | Multiclass classification | Predict low, medium, or high engagement |
+| Ranked probability | Classification with scores | Rank learners by intervention priority |
 
-Use classification when:
+:::tip Launch Rule
+Start with the decision the model supports, then choose the target and metric. Do not choose a model type first and force the product problem to fit it.
+:::
 
-- The target is **categorical** (e.g., binary: 0/1, or multi‑class).  
-- You care about **correct class assignment**, not a numeric value.
+## Regression
 
-Common examples:
+Regression predicts a numeric value.
 
-- predicting whether a student will pass or fail.  
-- classifying user behavior into low/medium/high risk.  
-- labeling records into governance categories.
+Examples:
 
-### Core idea
+- expected quiz score,
+- estimated study time,
+- monthly active contributors,
+- projected protocol transaction volume,
+- expected reward amount.
 
-A classification model maps inputs `x` to:
+The simplest regression model learns a function:
 
-- a **class label** (e.g., `"pass"`, `"fail"`), or  
-- a **probability** over classes (e.g., `P(pass) = 0.9`).
+$$
+\hat{y} = f(x)
+$$
 
-A common starting point:
+For linear regression:
 
-`p = sigmoid(wx + b)`
+$$
+\hat{y} = w_1x_1 + w_2x_2 + \dots + w_nx_n + b
+$$
 
-then threshold `p` at 0.5 to get `0/1` labels.
+The model learns weights that minimize prediction error. A common loss is mean squared error:
 
-### Typical models and workflows
+$$
+MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2
+$$
 
-- **Logistic Regression** → interpretability and linearity.  
-- **RandomForestClassifier**, **GradientBoostingClassifier** → stronger performance without heavy tuning.
+### Baseline Regression Example
 
-A minimal pattern:
+This example trains a small regression model on synthetic learner-style data.
 
 ```python
-from sklearn.linear_model import LogisticRegression
+import numpy as np
+from sklearn.datasets import make_regression
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
 
-# 1. Prepare data (assume binary target)
-X = data[["feature_1", "feature_2"]]
-y = data["passed"]  # 0 or 1
+X, y = make_regression(
+    n_samples=300,
+    n_features=3,
+    noise=12,
+    random_state=42,
+)
 
-# 2. Split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+)
 
-# 3. Train
-classifier = LogisticRegression()
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
+print("MAE:", mean_absolute_error(y_test, y_pred))
+print("RMSE:", rmse)
+print("R2:", r2_score(y_test, y_pred))
+```
+
+### Regression Metrics
+
+Use metrics that match how people will use the prediction.
+
+| Metric | Meaning | Use when |
+| --- | --- | --- |
+| MAE | Average absolute error in target units | Stakeholders need a readable error |
+| RMSE | Squared-error penalty, then square root | Large mistakes are especially costly |
+| R2 | Share of variance explained | You want a high-level fit measure |
+
+For example, "average score error is 4.8 points" is easier for a mentor to understand than "MSE is 23.04".
+
+## Classification
+
+Classification predicts labels. A binary classifier often returns a probability:
+
+$$
+p(y=1 \mid x) = \sigma(w^Tx + b)
+$$
+
+where the sigmoid function is:
+
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+
+The model can convert that probability into a label using a threshold:
+
+$$
+\hat{y} =
+\begin{cases}
+1 & \text{if } p \geq t \\
+0 & \text{if } p < t
+\end{cases}
+$$
+
+The threshold `t` is a product decision, not only a math detail.
+
+### Baseline Classification Example
+
+```python
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.model_selection import train_test_split
+
+X, y = make_classification(
+    n_samples=300,
+    n_features=4,
+    n_informative=3,
+    n_redundant=0,
+    class_sep=1.2,
+    random_state=42,
+)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y,
+)
+
+classifier = LogisticRegression(max_iter=1000)
 classifier.fit(X_train, y_train)
 
-# 4. Predict
 y_pred = classifier.predict(X_test)
 
-# 5. Evaluate
-acc = accuracy_score(y_test, y_pred)
-prec = precision_score(y_test, y_pred)
-rec = recall_score(y_test, y_pred)
-
-print("Accuracy:", acc)
-print("Precision:", prec)
-print("Recall:", rec)
-print("\nDetailed report:")
+print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 ```
 
-### Typical metrics
+### Classification Error Map
 
-- **Accuracy**: for balanced problems.  
-- **Precision / Recall / F1**: when you care about false positives vs false negatives.  
-- **AUC‑ROC**: for ranking quality when the model outputs probabilities.
+```mermaid
+flowchart LR
+  Prediction["Model prediction"] --> Positive["Predicted positive"]
+  Prediction --> Negative["Predicted negative"]
+  Positive --> TP["True positive<br/>correct alert"]
+  Positive --> FP["False positive<br/>unneeded alert"]
+  Negative --> TN["True negative<br/>correct no-alert"]
+  Negative --> FN["False negative<br/>missed case"]
+```
 
----
+In a learner-support model:
 
-## When to Choose Regression vs. Classification
+- A false positive may waste mentor time.
+- A false negative may miss a learner who needed help.
 
-### Mapping to real‑world problems
+That tradeoff decides whether precision, recall, or F1 matters most.
 
-| Flow‑style problem idea                     | Likely type        | Why                                   |
-|--------------------------------------------|--------------------|---------------------------------------|
-| Predict exam score `0–100`                 | Regression         | numeric continuous target             |
-| Predict pass/fail (binary)                 | Binary classification | discrete label                        |
-| Predict low/medium/high engagement         | Multi‑class classification | categorical, ordered or not           |
-| Predict reward amount in tokens            | Regression         | numeric value                         |
-| Predict whether a governance proposal passes | Binary classification | boolean outcome                         |
+| Metric | Question it answers |
+| --- | --- |
+| Accuracy | How often is the model correct overall? |
+| Precision | When the model raises an alert, how often is it right? |
+| Recall | Of all real cases, how many did the model catch? |
+| F1 | What is the balance between precision and recall? |
+| ROC-AUC | How well does the model rank positives above negatives? |
 
-Sometimes you can **frame the same idea as either**:
+## Same Problem, Different Framing
 
-- **classification** (e.g., “high‑risk” vs “not‑high‑risk”), or  
-- **regression** (e.g., “risk score” from 0 to 100).
+The same product idea can often be framed multiple ways.
 
-The choice affects:
+| Product question | Regression framing | Classification framing |
+| --- | --- | --- |
+| Learner support | Predict dropout risk score from 0 to 100 | Predict support-needed yes/no |
+| Governance quality | Predict proposal health score | Predict review-needed yes/no |
+| Course progress | Predict next score | Predict low/medium/high progress |
 
-- which **metrics** matter,  
-- how you **communicate results**, and  
-- what kind of **model bias** you accept.
+Choose regression when:
 
----
+- the numeric value itself matters,
+- stakeholders can act on magnitude,
+- ranking or forecasting is the core use case.
 
-## Practical Exercises (Intermediate‑Style)
+Choose classification when:
 
-### Exercise 1: Frame a Problem
+- the product needs a discrete decision,
+- actions are label-based,
+- precision/recall tradeoffs matter.
 
-Pick a Flow‑style idea (e.g., “predict which learners will dropout”):
+## Threshold Tuning
 
-- Frame it as **regression** (e.g., predict a risk score).  
-- Then reframe it as **classification** (e.g., predict dropout‑yes/no).  
-- For each framing, write one metric you would monitor.
+The default threshold for binary classification is often `0.5`, but that is not always best.
 
-### Exercise 2: Train a Flow‑Flavored Model
+```python
+from sklearn.metrics import precision_score, recall_score
 
-Use a dataset from a Flow‑style lab:
+probabilities = classifier.predict_proba(X_test)[:, 1]
 
-- Choose whether the problem is regression or classification.  
-- Train a `LinearRegression` or `LogisticRegression` model.  
-- Log the performance metrics and write a short note on what they imply for the product.
+for threshold in [0.3, 0.5, 0.7]:
+    custom_pred = (probabilities >= threshold).astype(int)
+    precision = precision_score(y_test, custom_pred)
+    recall = recall_score(y_test, custom_pred)
+    print(threshold, "precision:", precision, "recall:", recall)
+```
 
-### Exercise 3: Trade‑off Note
+Lowering the threshold usually catches more positives but creates more false alarms. Raising it usually reduces false alarms but misses more positives.
 
-Write a one‑page note:
+For public-good ML systems, threshold choice should be documented because it encodes a policy preference.
 
-- When you would prefer **regression** over classification in a Flow context.  
-- When you would prefer **classification**.  
-- How each choice affects stakeholders’ understanding and trust.
+## Common Mistakes
 
----
+### Optimizing the Wrong Metric
 
-## Self‑Assessment
+Accuracy can look good when the positive class is rare. If only 5% of learners drop out, a model that predicts "no dropout" for everyone is 95% accurate and still useless.
+
+### Treating Probabilities as Certainty
+
+A probability of `0.72` is not a fact. It is a model estimate and should be used with uncertainty in mind.
+
+### Hiding the Product Tradeoff
+
+False positives and false negatives have different costs. Make the tradeoff explicit with stakeholders before launch.
+
+## Practical Exercises
+
+### Exercise 1: Frame the Same Problem Twice
+
+Choose a Flow-style problem and write:
+
+- one regression framing,
+- one classification framing,
+- one metric for each.
+
+### Exercise 2: Train Both Baselines
+
+Use the two code examples above. Change the dataset sizes, noise, and class separation. Observe how the metrics change.
+
+### Exercise 3: Tune a Threshold
+
+Train a classifier, compute probabilities, and compare precision and recall at thresholds `0.2`, `0.5`, and `0.8`.
+
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I can clearly distinguish regression and classification.  
-- I can choose the right type for a Flow‑style problem.  
-- I can train and evaluate a simple model of each type.  
-- I can map these to metrics and stakeholder needs.
+- I can identify whether a target is regression or classification.
+- I can choose a metric based on product consequences.
+- I can train baseline scikit-learn models for both problem types.
+- I can explain why threshold choice matters.
 
-Action item: write a short note in your lab repo describing which type (regression or classification) you would use for your **next** Flow‑style AI project and why.
+## Further Reading
+
+- [scikit-learn supervised learning](https://scikit-learn.org/stable/supervised_learning.html)
+- [scikit-learn model evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
+- [IBM: Classification vs. regression](https://www.ibm.com/think/topics/classification-vs-regression)
+- [StatQuest: Linear Regression, Clearly Explained](https://www.youtube.com/watch?v=7ArmBVF2dCs)
 
 ## Next Steps
 
-- Read `02-tree-based-models.md` next to go deeper into decision trees and forests.  
-- Use regression and classification as your **go‑to building blocks** for Flow‑style prediction tasks.  
-- Treat the choice between them as a **modeling design decision**, not an afterthought.
-
----
-
-*This lesson gives Flow Initiative trainees an intermediate‑level understanding of regression and classification in ML systems, focusing on how to map Flow‑style problems to the right model type, choose metrics, and train/evaluate with scikit‑learn.*
+Next, study feature engineering. Better targets and metrics help you frame the problem; better features help the model learn the signal.

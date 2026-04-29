@@ -3,7 +3,7 @@ id: monitoring-and-drift
 title: Monitoring and Drift
 track: ai-ml
 level: intermediate
-version: 1.0
+version: 1.1
 ---
 
 # Monitoring and Drift
@@ -12,234 +12,280 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain why **monitoring** models in production is as important as training them.  
-- Recognize common types of **data drift** and **concept drift**.  
-- Implement basic monitoring ideas for predictions, data, and performance.  
-- Decide when a model needs to be retrained or improved after deployment.
+- Explain why deployed models need monitoring after release.
+- Distinguish data drift, label drift, and concept drift.
+- Track input, prediction, performance, and system metrics.
+- Implement a simple drift check and decide when to investigate, retrain, roll back, or add a fallback.
 
-## Introduction
+## Watch First
 
-Once a model is deployed, its environment keeps changing.  
-Data sources shift, user behavior evolves, and system conditions vary.  
-If you treat the model as “set and forget,” it will slowly degrade into **silent failure**.
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
+  <iframe
+    src="https://www.youtube.com/embed/QJTRNxUxmuc"
+    title="Machine Learning Model Drift - Concept Drift and Data Drift"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
 
-**Monitoring** is the practice of:
+## Monitoring Loop
 
-- observing model inputs, outputs, and performance over time, and  
-- alerting or reacting when something goes out of bounds.
+```mermaid
+flowchart LR
+  Serve["Serve predictions"] --> Log["Log inputs,<br/>outputs, latency"]
+  Log --> Metrics["Compute monitoring metrics"]
+  Metrics --> Alert["Alert on threshold breach"]
+  Alert --> Triage["Triage: data, model,<br/>or system issue"]
+  Triage --> Action["Retrain, roll back,<br/>fix data, or fallback"]
+  Action --> Serve
+```
 
-**Drift** is the term used when the underlying data or relationships start to change so the model’s behavior deteriorates.
+A model can pass every offline test and still fail after launch. Production data changes, labels arrive late, user behavior shifts, and systems break.
 
-In this lesson you will learn how to treat models as **live services**, not one‑off experiments.
+Monitoring is how you notice before users or stakeholders notice for you.
 
----
-
-## Why Monitoring Matters
-
-In production:
-
-- Training data represents the **past**, deployment data is the **present**.  
-- If the present differs from the past, the model’s predictions may be worse, biased, or just plain wrong.
-
-Monitoring helps you:
-
-- Detect **performance degradation** early.  
-- Find **data‑quality issues** (e.g., missing features, corrupted values).  
-- Catch **unintended side effects** (e.g., a model starting to favor certain groups).  
-
-For Flow‑style systems, where models may influence education, governance, or rewards, this is not optional; it is a **responsibility**.
-
----
+:::warning Launch Rule
+Do not launch a model without knowing what you will monitor, who receives alerts, and what action happens when an alert fires.
+:::
 
 ## What to Monitor
 
-### 1. Data Distribution
+Monitor four layers.
 
-Track the **inputs** the model receives:
+| Layer | Examples | Why it matters |
+| --- | --- | --- |
+| Data inputs | missing values, ranges, schema, feature distributions | The model depends on feature quality |
+| Predictions | score distribution, class balance, confidence, outliers | Silent behavior changes often show up here first |
+| Performance | accuracy, recall, F1, MAE, calibration | Confirms whether predictions still match reality |
+| System health | latency, errors, throughput, timeouts | A correct model is still useless if the service fails |
 
-- feature distributions (e.g., histograms of `hours_studied` over time).  
-- missing‑value rates.  
-- schema changes (new or missing columns).
+For public-good ML systems, add group-level monitoring where relevant. A model can look healthy overall while becoming worse for a subgroup.
 
-If the shape of the data changes significantly since training, that is a **data‑drift** warning.
-
-### 2. Prediction Distribution
-
-Track the **outputs**:
-
-- distribution of predicted scores or probabilities.  
-- rate of extreme predictions (e.g., very high or very low risk).  
-- prediction‑stability over time.
-
-Sudden jumps in the average prediction or in the mix of classes are red flags.
-
-### 3. Performance Over Time
-
-If you can observe ground‑truth labels in production, track:
-
-- accuracy, precision, recall, F1, MSE, etc., over time.  
-- compare current performance to a **baseline** (e.g., training‑time metrics or a previous model).
-
-If performance drops below a threshold, you may need to retrain or investigate.
-
-### 4. System Metrics
-
-Monitor the **infrastructure layer**:
-
-- latency of the model service.  
-- error rates and retries.  
-- throughput (requests per second).
-
-Poor performance at the system level can corrupt user experience even if the model is technically “fine.”
-
----
-
-## What Is Drift?
+## Drift Types
 
 ### Data Drift
 
-**Data drift** occurs when the **distribution of input features** changes over time.
+Data drift means the input distribution changes.
 
-Examples:
+$$
+P_{train}(X) \neq P_{prod}(X)
+$$
 
-- After a curriculum redesign, students spend more time on videos and less on reading.  
-- After a network outage, some logging fields are empty that used to always be filled.
+Example: a learning platform redesign changes how learners navigate lessons, so `time_on_page` and `video_watch_rate` shift.
 
-Indicators:
+### Label Drift
 
-- feature ranges shift (`mean`, `std`, `min`, `max`).  
-- new or missing features.  
+Label drift means the target distribution changes.
 
-For Flow‑style engineers, this means the **features** your model learned on are no longer representative.
+$$
+P_{train}(Y) \neq P_{prod}(Y)
+$$
+
+Example: a new mentorship program reduces dropout rate, so the positive class becomes rarer.
 
 ### Concept Drift
 
-**Concept drift** occurs when the **relationship between inputs and outputs** changes.
+Concept drift means the relationship between inputs and target changes.
 
-Examples:
+$$
+P_{train}(Y \mid X) \neq P_{prod}(Y \mid X)
+$$
 
-- A “high‑engagement learner” used to reliably complete courses, but now engagement is noisy and completion rates drop.  
-- A governance‑proposal‑success pattern shifts after a structural reform.
+Example: high activity used to predict completion, but after a curriculum change, many learners browse widely without completing modules. The same input behavior no longer means the same outcome.
 
-Indicators:
+## Drift Illustration
 
-- model performance drops even though feature distributions look similar.  
-- in‑practice calibration is wrong (e.g., predicted probabilities no longer match observed outcomes).
+```mermaid
+flowchart TD
+  Train["Training period"] --> TrainDist["hours_studied mostly<br/>between 1 and 6"]
+  Prod["Production period"] --> ProdDist["hours_studied mostly<br/>between 5 and 14"]
+  TrainDist --> Model["Model learned old range"]
+  ProdDist --> Risk["Predictions may degrade"]
+  Model --> Risk
+```
 
-Concept drift is usually harder to detect than data drift because it shows up in **performance** or **calibration**, not just raw data.
+Drift is not automatically bad. It is a signal that the model may be seeing a different world than the one it learned from.
 
----
+## Simple Drift Check With PSI
 
-## How to Detect Drift
+Population Stability Index (PSI) compares two distributions. It is common in risk and monitoring workflows.
 
-You do not need to build a full‑blown platform to start.
+For bins `i`:
 
-### 1. Statistical Comparisons
+$$
+PSI = \sum_i (p_i - q_i)\ln\left(\frac{p_i}{q_i}\right)
+$$
 
-Compare current data to a reference (e.g., training data or a recent window):
+where `p` is the reference distribution and `q` is the current distribution.
 
-- For numeric features:  
-  - compare distributions via Kolmogorov‑Smirnov or simple distance on quantiles.  
-- For categorical features:  
-  - compare frequency distributions.
+```python
+import numpy as np
 
-You can also:
+def population_stability_index(reference, current, bins=10):
+    reference = np.asarray(reference)
+    current = np.asarray(current)
 
-- monitor **summary statistics** over time and alert if they move far from a baseline.
+    edges = np.percentile(reference, np.linspace(0, 100, bins + 1))
+    edges = np.unique(edges)
 
-### 2. Prediction‑Based Monitoring
+    ref_counts, _ = np.histogram(reference, bins=edges)
+    cur_counts, _ = np.histogram(current, bins=edges)
 
-Track:
+    ref_pct = ref_counts / max(ref_counts.sum(), 1)
+    cur_pct = cur_counts / max(cur_counts.sum(), 1)
 
-- average prediction per day/week.  
-- fraction of users assigned to high‑risk bucket.  
-- dispensation‑like patterns (e.g., “why did this group suddenly get low scores?”).
+    eps = 1e-6
+    ref_pct = np.clip(ref_pct, eps, None)
+    cur_pct = np.clip(cur_pct, eps, None)
 
-Large shifts in these aggregates suggest something changed in the model’s view of the world.
+    return np.sum((ref_pct - cur_pct) * np.log(ref_pct / cur_pct))
 
-### 3. Performance Monitoring
 
-If you have labels in production:
+rng = np.random.default_rng(42)
+training_hours = rng.normal(loc=4, scale=1.0, size=500)
+production_hours = rng.normal(loc=6, scale=1.4, size=500)
 
-- Compute metrics on a rolling window.  
-- Plot them over time and flag if they cross thresholds.
+psi = population_stability_index(training_hours, production_hours)
+print("PSI:", round(psi, 3))
 
-Example:
+if psi > 0.2:
+    print("Investigate drift")
+```
 
-- an alert if accuracy drops below `0.75` for three consecutive days.
+Do not treat PSI thresholds as universal truth. Use them as alert triggers that start investigation.
 
----
+## Prediction Monitoring
 
-## What to Do When Drift Appears
+Sometimes labels arrive late, so you cannot immediately measure accuracy. You can still track prediction behavior.
 
-When you detect drift, you have several options:
+```python
+import pandas as pd
 
-1. **Investigate**:  
-   - Check data quality, logging, and feature pipelines.  
-   - Look for upstream changes (UI redesigns, curriculum changes).
+predictions = pd.DataFrame({
+    "date": pd.to_datetime([
+        "2026-04-01", "2026-04-01", "2026-04-02", "2026-04-02",
+        "2026-04-03", "2026-04-03",
+    ]),
+    "risk_score": [0.22, 0.31, 0.28, 0.35, 0.71, 0.76],
+})
 
-2. **Retrain**:  
-   - Collect recent labeled data.  
-   - Retrain the model with fresher data and redeploy.
+daily = (
+    predictions
+    .groupby("date")
+    .agg(
+        avg_risk=("risk_score", "mean"),
+        high_risk_rate=("risk_score", lambda s: (s >= 0.7).mean()),
+    )
+)
 
-3. **Update Features**:  
-   - If the world changed, old features may no longer be predictive.  
-   - Add or remove features to reflect new behavior.
+print(daily)
+```
 
-4. **Roll Back**:  
-   - If the latest model is clearly worse, switch back to a previous version.
+A sudden jump in high-risk predictions may indicate:
 
-5. **Introduce Fallbacks**:  
-   - For critical systems, have a “safeguard” behavior (e.g., human‑in‑the‑loop, default rules) when the model’s reliability is in question.
+- a real behavior change,
+- a broken feature pipeline,
+- a model-serving bug,
+- a changed upstream product flow.
 
----
+## Monitoring With Delayed Labels
+
+Many ML systems receive ground truth days or weeks later.
+
+```mermaid
+sequenceDiagram
+  participant M as Model
+  participant U as User
+  participant L as Label Store
+  participant Mon as Monitoring Job
+
+  M->>U: Prediction today
+  U->>L: Outcome arrives later
+  Mon->>L: Join prediction with outcome
+  Mon->>Mon: Compute rolling metrics
+```
+
+When labels arrive, compute rolling performance:
+
+- daily or weekly recall,
+- precision by cohort,
+- calibration by score band,
+- regression MAE by segment.
+
+## Alert Design
+
+Good alerts are specific and actionable.
+
+| Signal | Example alert | Likely first action |
+| --- | --- | --- |
+| Missing values | `quiz_score_missing_rate > 5%` | Check upstream logging |
+| Data drift | `hours_studied_psi > 0.2` | Compare product or pipeline changes |
+| Prediction shift | `high_risk_rate doubled in one day` | Inspect recent feature values |
+| Performance drop | `weekly_recall < 0.70` | Review labels, retrain, or adjust threshold |
+| Latency | `p95_latency > 300ms` | Inspect service and infrastructure |
+
+Avoid vague alerts like "model bad". A useful alert says what changed, by how much, and where to look first.
+
+## Response Playbook
+
+```mermaid
+flowchart TD
+  Alert["Alert fires"] --> DataCheck{"Data pipeline issue?"}
+  DataCheck -->|Yes| FixData["Fix source or feature job"]
+  DataCheck -->|No| PerfCheck{"Performance degraded?"}
+  PerfCheck -->|No| Watch["Keep watching<br/>adjust alert if noisy"]
+  PerfCheck -->|Yes| Severity{"User impact high?"}
+  Severity -->|Yes| Rollback["Roll back or use fallback"]
+  Severity -->|No| Retrain["Retrain or tune threshold"]
+```
+
+Possible actions:
+
+- investigate upstream data,
+- retrain on recent labels,
+- update features,
+- change threshold,
+- roll back to previous model,
+- disable the model and use a rule-based fallback.
 
 ## Practical Exercises
 
-### Exercise 1: Sketch a Monitoring Plan
+### Exercise 1: Monitoring Plan
 
-Pick a Flow‑style model you have deployed or are about to deploy:
+Pick a model and list:
 
-- List 3–5 things to monitor (e.g., data features, prediction distribution, performance metric).  
-- For each, write how you would compute it (e.g., log a metric every day).  
-- Choose a simple threshold that would trigger an alert.
+- three input metrics,
+- two prediction metrics,
+- one performance metric,
+- one system metric.
+
+For each metric, write an alert threshold and first response.
 
 ### Exercise 2: Simulate Drift
 
-Using a small dataset and model:
+Use the PSI function above. Generate a training distribution and a shifted production distribution. Change the shift until the alert fires.
 
-- Train a model on a subset of the data.  
-- Introduce artificial drift (e.g., shift a feature’s mean or drop a feature).  
-- Predict on the drifted data and observe how performance degrades.  
-- Record what you would do in a real‑world setting.
+### Exercise 3: Delayed Labels
 
-### Exercise 3: Update a Model Post‑Drift
+Create a table of predictions and a later table of labels. Join them and compute weekly recall.
 
-After simulating drift:
-
-- Retrain the model on a newer, drifted dataset.  
-- Compare performance before and after on a held‑out test set.  
-- Write a short note assessing whether the retrained model effectively adapts to the new data.
-
----
-
-## Self‑Assessment
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I can explain why monitoring models in production is important.  
-- I can distinguish data drift from concept drift.  
-- I can design a simple monitoring plan for a Flow‑style model.  
-- I can decide whether to retrain or roll back a model after observing drift.
+- I can explain why models fail silently.
+- I can distinguish data, label, and concept drift.
+- I can write a simple drift check.
+- I can describe when to retrain, roll back, or fallback.
 
-Action item: write a short note in your lab repo describing one monitoring metric and one drift detection rule you would apply to your next Flow‑style ML project.
+## Further Reading
+
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
+- [Evidently: ML monitoring concepts](https://docs.evidentlyai.com/)
+- [scikit-learn model evaluation](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
 ## Next Steps
 
-- Read `03-model-registry-and-rollback.md` next to learn how to version and manage model rollbacks.  
-- Use monitoring and drift‑detection as **core practices** for every model you deploy.  
-- Treat every deployed model as a **live service** that must be watched and maintained.
-
----
-
-*This lesson gives Flow Initiative trainees an intermediate‑level understanding of model monitoring and drift in ML systems, focusing on how to track data, predictions, and performance over time, detect when a model is degrading, and decide when to retrain or roll back.*
+Next, study deployment patterns. Monitoring tells you whether a served model remains healthy; deployment patterns decide how that model is served in the first place.

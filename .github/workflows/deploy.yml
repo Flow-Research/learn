@@ -22,16 +22,16 @@ jobs:
           cache: npm
           cache-dependency-path: website/package-lock.json
 
-      - name: Install & Build
+      - name: Install and build
         run: |
           cd website
           npm ci
-          npm run build:org # ← use the org-specific build command
+          npm run build
 
-      - name: Upload Pages Artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./website/build   # ← points to your Docusaurus build output
+          path: ./website/build
 
   deploy:
     needs: build

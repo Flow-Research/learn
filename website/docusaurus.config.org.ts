@@ -1,5 +1,7 @@
 // docusaurus.config.ts
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
@@ -15,7 +17,22 @@ const config: Config = {
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+
+  markdown: {
+    mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css',
+      type: 'text/css',
+    },
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -30,13 +47,17 @@ const config: Config = {
           path: '../curriculum', 
           routeBasePath: 'curriculum',
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/creativebash/flow-learning/tree/main/',
+          editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         blog: {
           path: '../knowledge-base/articles',
           routeBasePath: 'blog',
           showReadingTime: true,
-          editUrl: 'https://github.com/creativebash/flow-learning/tree/main/',
+          editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -62,7 +83,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Articles', position: 'left'},
         {
-          href: 'https://github.com/creativebash/flow-learning',
+          href: 'https://github.com/Flow-Research/learn',
           label: 'GitHub',
           position: 'right',
         },
@@ -74,14 +95,14 @@ const config: Config = {
         {
           title: 'Learning',
           items: [
-            {label: 'Curriculum', to: '/curriculum'},
+            {label: 'Curriculum', to: '/curriculum/curriculum-intro'},
           ],
         },
         {
           title: 'More',
           items: [
             {label: 'Articles', to: '/blog'},
-            {label: 'GitHub', href: 'https://github.com/creativebash/flow-learning'},
+            {label: 'GitHub', href: 'https://github.com/Flow-Research/learn'},
           ],
         },
       ],
@@ -90,6 +111,10 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash', 'json', 'python', 'powershell', 'yaml'],
+    },
+    mermaid: {
+      theme: {light: 'neutral', dark: 'dark'},
     },
   } satisfies Preset.ThemeConfig,
 };

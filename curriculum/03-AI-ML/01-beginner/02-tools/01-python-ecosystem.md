@@ -3,7 +3,7 @@ id: python-ecosystem
 title: The Python Ecosystem
 track: ai-ml
 level: beginner
-version: 1.0
+version: 1.1
 ---
 
 # The Python Ecosystem
@@ -12,205 +12,234 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain why Python is the dominant language for ML and data science.  
-- Identify key components of the Python ML ecosystem: NumPy, pandas, scikit‑learn, Jupyter, and package managers.  
-- Use this ecosystem overview as a map for later ML, deep learning, and evaluation lessons.  
-- Install and organize Python tools in a way that fits Flow‑style labs.
+- Explain why Python is the default language for beginner and production ML workflows.
+- Identify the roles of NumPy, pandas, scikit-learn, Matplotlib, Jupyter, and environment tools.
+- Set up a project environment that can be reproduced by another engineer.
+- Run a small end-to-end Python ML sanity check.
 
-## Introduction
+## Ecosystem Map
 
-Machine learning is not just math and code; it is a **software ecosystem**.  
-In ML, **Python** is the de facto standard language because of its:
+```mermaid
+flowchart BT
+  Env["Project environment<br/>venv, pip, requirements.txt"] --> Python["Python runtime"]
+  Python --> NumPy["NumPy<br/>arrays and math"]
+  NumPy --> Pandas["pandas<br/>tables and cleaning"]
+  Pandas --> Sklearn["scikit-learn<br/>models and metrics"]
+  Pandas --> Viz["Matplotlib/Seaborn<br/>plots"]
+  Sklearn --> Notebook["Jupyter<br/>experiments and reports"]
+  Viz --> Notebook
+```
 
-- rich collection of libraries,  
-- friendly syntax,  
-- strong community, and  
-- integration with data tools and cloud services.
+Python became the default ML language because it lets engineers move smoothly between data, math, experimentation, and deployment. The language is readable, the ecosystem is mature, and most ML libraries speak the same basic data structures.
 
-In the Flow Initiative, you will use Python to:
+For Flow learners, the goal is not to memorize every library. The goal is to understand what each layer is responsible for, so you can choose the right tool without feeling lost.
 
-- load and clean data,  
-- train models,  
-- evaluate performance, and  
-- build dashboards and services.
+:::tip Practical Rule
+Treat every ML project as a small software project: isolate dependencies, document how to run it, and keep notebooks reproducible.
+:::
 
-This lesson gives you a **big‑picture overview** of the Python ecosystem, so you can see where each tool fits and how to use them together.
+## The Base: Python and Environments
 
----
+Python is the runtime. Your environment is the controlled space where project dependencies live.
 
-## Why Python Is the Default for ML
+Use a virtual environment so one project does not break another.
 
-Python is popular in ML because:
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install numpy pandas scikit-learn matplotlib seaborn jupyterlab
+pip freeze > requirements.txt
+```
 
-- It has **many libraries** for data and models (e.g., NumPy, pandas, scikit‑learn, PyTorch, TensorFlow).  
-- It is **easy to learn and read**, even if you are not a Python native.  
-- It integrates well with **Jupyter notebooks**, which are the standard for ML experimentation.  
-- It runs on **many platforms**, including cloud services and local machines.
+On macOS or Linux:
 
-For Flow engineers, this means:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install numpy pandas scikit-learn matplotlib seaborn jupyterlab
+pip freeze > requirements.txt
+```
 
-- You can **move quickly** between math, data, and code.  
-- You can **share** notebooks and scripts with other engineers.  
-- You can **deploy** models in production using Python tools.
+The important launch habit is that another contributor can recreate your environment.
 
----
+## NumPy: Arrays and Fast Math
 
-## Core Components of the Python ML Ecosystem
+NumPy provides arrays: efficient containers for numerical data.
 
-### 1. NumPy
+In ML, a dataset often has shape:
 
-NumPy is the **foundation** for numerical computing in Python.  
-It provides:
+```math
+X \in \mathbb{R}^{n \times d}
+```
 
-- **Arrays** for numeric data (vectors, matrices, tensors).  
-- **Fast operations** for mathematical computations.
-
-NumPy is used by almost every ML library.  
-If you understand arrays and basic operations, you can work with ML data structures.
-
-### 2. pandas
-
-pandas is the **standard library** for data analysis and manipulation.  
-It provides:
-
-- **DataFrames** for tabular data (like spreadsheets).  
-- **Series** for single columns.  
-- Tools for cleaning, filtering, and aggregating data.
-
-For Flow‑style labs, pandas is often the **first tool** you use to load and explore a dataset.
-
-### 3. scikit‑learn
-
-scikit‑learn is the **workhorse** for classical ML in Python.  
-It provides:
-
-- **Algorithms** for classification, regression, clustering, and more.  
-- **Tools** for model evaluation, cross‑validation, and hyperparameter tuning.
-
-scikit‑learn is where you will start if you are learning ML, because it is **simple and powerful**.
-
-### 4. Jupyter Notebooks
-
-Jupyter Notebooks are **interactive documents** that combine code, text, and visualizations.  
-They are the **standard way** to experiment with ML models.
-
-In Flow‑style labs, you will use Jupyter to:
-
-- Load data,  
-- Train models,  
-- Visualize results, and  
-- Share your work with others.
-
-### 5. Package Managers
-
-Python uses **pip** and **conda** to manage packages:
-
-- **pip** is the default package manager for Python libraries.  
-- **conda** is a popular alternative that manages environments and dependencies.
-
-These tools help you install and update ML libraries without conflicts.
-
----
-
-## How the Ecosystem Fits Together
-
-The Python ML ecosystem is **layered**:
-
-- **NumPy** sits at the bottom, providing arrays and math.  
-- **pandas** builds on top of NumPy for data analysis.  
-- **scikit‑learn** uses NumPy and pandas for ML.  
-- **Jupyter** lets you interact with these tools in a notebook.
-
-This is the **stack** you will use in Flow‑style labs.
-
----
-
-## Why This Matters for Flow Engineers
-
-Flow‑style engineers will:
-
-- Use Python to **build and experiment** with ML models.  
-- Work in **Jupyter notebooks** and **scripts**.  
-- Need to **install, manage, and version** Python tools.
-
-Understanding the Python ecosystem helps you:
-
-- See the **big picture** of ML tools.  
-- Choose the right library for each task.  
-- **Avoid** fragmentation and confusion.
-
-In African‑centric contexts, this is especially important when:
-
-- You are **building or sharing** ML tools with others.  
-- You need to **deploy** models in production.  
-- You must **keep** dependencies manageable and **secure**.
-
----
-
-## Practical Exercises
-
-### Exercise 1: Install and Test
-
-Install Python and the following tools:
-
-- **NumPy**  
-- **pandas**  
-- **scikit‑learn**  
-- **Jupyter**
-
-Then, run a simple test in Jupyter:
+Read this as: `X` is a matrix with `n` examples and `d` features.
 
 ```python
 import numpy as np
+
+X = np.array([
+    [4.5, 72.0, 8.0],
+    [2.0, 55.0, 3.0],
+    [6.0, 88.0, 11.0],
+])
+
+print(X.shape)  # (3, 3)
+print(X.mean(axis=0))
+```
+
+NumPy is the foundation under many other scientific Python libraries.
+
+## pandas: Tables and Data Cleaning
+
+pandas gives you DataFrames, which are ideal for tabular data from CSV files, spreadsheets, SQL exports, and APIs.
+
+```python
+import pandas as pd
+
+learners = pd.DataFrame({
+    "learner_id": ["a1", "b2", "c3"],
+    "hours": [4.5, 2.0, 6.0],
+    "score": [72, 55, 88],
+})
+
+learners["passed"] = learners["score"] >= 60
+print(learners)
+```
+
+Use pandas when you need to:
+
+- inspect rows and columns,
+- filter records,
+- handle missing values,
+- group or aggregate data,
+- export cleaned datasets.
+
+## scikit-learn: Classical ML
+
+scikit-learn is the best beginner library for classical ML. It gives you a consistent pattern:
+
+1. create the model,
+2. call `fit`,
+3. call `predict`,
+4. evaluate.
+
+```python
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-# Example: load a small dataset
-data = pd.DataFrame({'x':, 'y': })[1][2][3][4][5][6]
+data = pd.DataFrame({
+    "hours": [1, 2, 3, 4, 5],
+    "score": [45, 50, 60, 70, 75],
+})
+
 model = LinearRegression()
-model.fit(data[['x']], data['y'])
-print(model.coef_)
+model.fit(data[["hours"]], data["score"])
+
+prediction = model.predict([[6]])
+print(prediction)
 ```
 
-This is a **minimal test** of the ecosystem.
+That pattern repeats across many algorithms.
 
-### Exercise 2: Sketch a Stack
+## Matplotlib and Seaborn: Visual Understanding
 
-Draw a simple diagram showing the Python ML stack:
+Visualization helps you notice structure and errors that are hard to see in tables.
 
-- NumPy at the bottom.  
-- pandas above it.  
-- scikit‑learn above that.  
-- Jupyter at the top.
+```python
+import matplotlib.pyplot as plt
 
-Label each layer with a short description.
+plt.scatter(data["hours"], data["score"])
+plt.xlabel("Hours studied")
+plt.ylabel("Quiz score")
+plt.title("Study time vs quiz score")
+plt.show()
+```
 
-### Exercise 3: Relate to a Flow Lab
+Use plots to answer:
 
-Look at a Flow‑style AI‑ML lab that uses Python:
+- Are values clustered?
+- Are there outliers?
+- Does a relationship look linear?
+- Are train and test distributions similar?
 
-- Write down which tools it uses (e.g., NumPy, pandas, scikit‑learn, Jupyter).  
-- Describe one place where the lab could use a different tool (e.g., more pandas for cleaning, or a different model from scikit‑learn).
+## Jupyter: Experiments and Narratives
 
----
+Jupyter notebooks combine:
 
-## Self‑Assessment
+- live code,
+- Markdown explanation,
+- equations,
+- plots,
+- outputs.
+
+This makes notebooks excellent for exploration and teaching. They are less ideal as the only production artifact. When work matures, move reusable logic into scripts or packages.
+
+## A Minimal Project Shape
+
+For a beginner Flow ML lab, a clean structure could look like this:
+
+```text
+ai-ml-lab/
+  data/
+    raw/
+    processed/
+  notebooks/
+    exploration.ipynb
+  src/
+    train.py
+    features.py
+  requirements.txt
+  README.md
+```
+
+That structure separates exploration from reusable code and makes your work easier to review.
+
+## Common Mistakes
+
+### Installing Packages Globally
+
+This makes projects conflict with each other. Use a virtual environment.
+
+### Keeping All Logic in a Notebook
+
+Notebooks are great for exploration. Shared pipelines and training logic should eventually move into scripts.
+
+### Ignoring Versions
+
+If a project worked on your machine but fails for everyone else, the environment is part of the bug.
+
+## Practical Exercises
+
+### Exercise 1: Create an Environment
+
+Create a `.venv`, install the beginner ML stack, and generate `requirements.txt`.
+
+### Exercise 2: Run a Sanity Check
+
+Run the `LinearRegression` example above and change the input from `6` to `8`.
+
+### Exercise 3: Sketch the Stack
+
+Draw the Python ecosystem map from memory and write one sentence explaining each layer.
+
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I understand why Python is the default for ML.  
-- I can name the core tools (NumPy, pandas, scikit‑learn, Jupyter).  
-- I can see how they fit together.  
-- I can install and use them in a Flow‑style lab.
+- I can explain the role of NumPy, pandas, scikit-learn, Matplotlib, and Jupyter.
+- I can create a virtual environment.
+- I can run a small ML example.
+- I can organize a beginner ML project for review.
 
-Action item: write a short note in your lab repo describing one Python tool you would like to explore more deeply.
+## Further Reading
+
+- [Python Packaging User Guide: virtual environments](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/)
+- [NumPy absolute beginners guide](https://numpy.org/doc/stable/user/absolute_beginners.html)
+- [pandas getting started](https://pandas.pydata.org/docs/getting_started/index.html)
+- [scikit-learn user guide](https://scikit-learn.org/stable/user_guide.html)
 
 ## Next Steps
 
-- Read `02-jupyter-basics.md` next to learn how to use Jupyter notebooks.  
-- Use this ecosystem overview as a reference when you encounter new ML libraries.  
-- Treat the Python ecosystem as the **practical environment** for ML.
-
----
-
-*This lesson equips Flow Initiative trainees with an overview of the Python ML ecosystem, focusing on NumPy, pandas, scikit‑learn, Jupyter, and package managers as the core tools for ML work.*
+Next, use notebooks and visualization to turn this ecosystem into an interactive workflow.

@@ -3,7 +3,7 @@ id: ml-libraries
 title: ML Libraries
 track: ai-ml
 level: beginner
-version: 1.0
+version: 1.1
 ---
 
 # ML Libraries
@@ -12,221 +12,268 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain the main Python libraries used in ML (NumPy, pandas, scikit‑learn, and plotting).  
-- Use these libraries to load, transform, and train simple models.  
-- Choose the right library for each task in a Flow‑style lab.  
-- Integrate basic model training into your Jupyter notebooks.
+- Choose the right beginner ML library for arrays, tables, models, metrics, and plots.
+- Use NumPy, pandas, scikit-learn, and Matplotlib together in one workflow.
+- Train and evaluate a small model with working Python code.
+- Explain how library choices affect reproducibility and launch readiness.
 
-## Introduction
+## Library Selection Map
 
-Machine learning in Python is powered by **libraries** — reusable code that implements algorithms and tools.  
-You do not need to write everything from scratch.  
-Instead, you:
+```mermaid
+flowchart TD
+  Task["What are you doing?"] --> Math["Numerical arrays<br/>and vector math"]
+  Task --> Tables["Tabular data<br/>cleaning and grouping"]
+  Task --> Models["Classical ML<br/>training and metrics"]
+  Task --> Plots["Charts and<br/>visual debugging"]
+  Math --> NumPy["Use NumPy"]
+  Tables --> Pandas["Use pandas"]
+  Models --> Sklearn["Use scikit-learn"]
+  Plots --> Matplotlib["Use Matplotlib/Seaborn"]
+```
 
-- **Choose** the right library,  
-- **Import** it, and  
-- **Call functions** that do the hard work.
+ML libraries are reusable engineering tools. They save you from writing every algorithm, metric, and data structure from scratch.
 
-In this lesson, you will learn how to use the core **ML stack**:
+The beginner stack is intentionally simple:
 
-- `numpy` for arrays,  
-- `pandas` for data,  
-- `scikit-learn` for models,  
-- and visualization libraries (`matplotlib`/`seaborn`).
+- NumPy for arrays and numerical operations,
+- pandas for tabular data,
+- scikit-learn for classical models and metrics,
+- Matplotlib or Seaborn for visualization.
 
-This is the **practical toolkit** you will reuse in Flow‑style labs.
+:::info Beginner Promise
+You can learn a lot of real ML with this stack before touching deep learning frameworks.
+:::
 
----
+## Install the Stack
 
-## Setting Up Your Environment
-
-To use these libraries, make sure they are installed:
+Use a virtual environment first, then install:
 
 ```bash
 pip install numpy pandas scikit-learn matplotlib seaborn
 ```
 
-Then, import them in your notebook:
+In Python, import the libraries with common aliases:
 
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
 ```
 
-This gives you everything you need for:
+These aliases are community conventions. Following them makes your code easier for other ML engineers to read.
 
-- data handling,  
-- model training, and  
-- evaluation.
+## NumPy: Arrays
 
----
-
-## NumPy
-
-NumPy is the **foundation** for numerical computing in Python.  
-It provides:
-
-- **arrays** for numeric data,  
-- **functions** for mathematical operations.
-
-Example:
+Use NumPy when you need efficient numeric operations.
 
 ```python
-# Create a 1D array
-x = np.array()[1][2][3][4]
+import numpy as np
 
-# Compute mean
-print(np.mean(x))
+scores = np.array([45, 50, 60, 70, 75])
+
+print(scores.mean())
+print(scores.std())
+print(scores + 5)
 ```
 
-NumPy is used by almost every ML library.  
-If you understand arrays and basic operations, you can work with ML data structures.
+In ML terms, vectors and matrices often become NumPy arrays:
 
----
+```math
+X =
+\begin{bmatrix}
+1 & 45 \\
+2 & 50 \\
+3 & 60
+\end{bmatrix}
+```
 
-## pandas
+## pandas: Tables
 
-pandas is the **standard library** for data analysis and manipulation.  
-It provides:
-
-- **DataFrames** for tabular data (like spreadsheets),  
-- **Series** for single columns.
-
-Example:
+Use pandas when the data has rows and columns.
 
 ```python
-# Create a DataFrame
+import pandas as pd
+
 data = pd.DataFrame({
-    "x":,[2][3][4][1]
-    "y":[4][5][6][2]
+    "hours": [1, 2, 3, 4, 5],
+    "score": [45, 50, 60, 70, 75],
 })
 
-# View first few rows
+data["passed"] = data["score"] >= 60
 print(data.head())
 ```
 
-pandas is often the **first tool** you use to load and explore a dataset.
+pandas helps you:
 
----
+- read files,
+- select columns,
+- filter rows,
+- handle missing values,
+- compute summary statistics,
+- create derived columns.
 
-## scikit‑learn
+## scikit-learn: Models and Metrics
 
-scikit‑learn is the **workhorse** for classical ML in Python.  
-It provides:
+scikit-learn gives you a consistent interface for many models.
 
-- **algorithms** for classification, regression, clustering, and more,  
-- **tools** for model evaluation, cross‑validation, and hyperparameter tuning.
-
-Example: training a simple linear regression model:
+Most estimators follow:
 
 ```python
-# Prepare data
-X = data[["x"]]
-y = data["y"]
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+```
 
-# Split into train and test
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+Here is a complete example:
 
-# Train the model
+```python
+import pandas as pd
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.model_selection import train_test_split
+
+data = pd.DataFrame({
+    "hours": [1, 2, 3, 4, 5, 6, 7, 8],
+    "practice_quizzes": [1, 1, 2, 2, 3, 3, 4, 4],
+    "score": [45, 50, 58, 63, 70, 75, 82, 88],
+})
+
+X = data[["hours", "practice_quizzes"]]
+y = data["score"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.25,
+    random_state=42,
+)
+
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Make predictions
 y_pred = model.predict(X_test)
 
-# Evaluate
+mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
+
+print("MAE:", mae)
 print("MSE:", mse)
 ```
 
-scikit‑learn is where you will start if you are learning ML, because it is **simple and powerful**.
+Two common regression metrics are:
 
----
+```math
+\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|
+```
 
-## Visualization Libraries
+```math
+\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2
+```
 
-Visualization is essential for understanding data and models.  
-Common libraries include:
+MAE is easier to explain to stakeholders. MSE punishes large errors more strongly.
 
-- **matplotlib** for simple, low‑level plots.  
-- **seaborn** for higher‑level, statistical plots.
+## Matplotlib and Seaborn: Visual Checks
 
-You already saw examples of histograms, bar plots, scatter plots, and line plots.  
-These libraries let you visualize everything from data distributions to model performance.
+Use plots to inspect data and model behavior.
 
----
+```python
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual score")
+plt.ylabel("Predicted score")
+plt.title("Actual vs predicted scores")
+plt.show()
+```
 
-## Why This Matters for Flow Engineers
+If predictions are close to actual values, points should roughly follow an upward diagonal pattern.
 
-Flow‑style engineers will:
+Seaborn builds on Matplotlib and can make statistical plots faster:
 
-- Use these libraries to **build and experiment** with ML models.  
-- Work in **Jupyter notebooks** and **scripts**.  
-- Need to **install, manage, and version** these libraries.
+```python
+import seaborn as sns
 
-Understanding these libraries helps you:
+sns.regplot(data=data, x="hours", y="score")
+plt.title("Hours studied vs score")
+plt.show()
+```
 
-- see the **big picture** of ML tools,  
-- choose the right library for each task,  
-- and avoid fragmentation and confusion.
+## How the Libraries Work Together
 
-In African‑centric contexts, this is especially important when:
+```mermaid
+sequenceDiagram
+  participant CSV as CSV/API
+  participant PD as pandas
+  participant NP as NumPy arrays
+  participant SK as scikit-learn
+  participant PLT as plots
+  CSV->>PD: read and clean table
+  PD->>NP: select numeric features
+  NP->>SK: train model
+  SK->>PD: return predictions
+  PD->>PLT: visualize results
+```
 
-- You are **building or sharing** ML tools with others.  
-- You need to **deploy** models in production.  
-- You must **keep** dependencies manageable and **secure**.
+This is the beginner workflow you will repeat many times.
 
----
+## Choosing the Right Tool
+
+| Need | Use | Why |
+| --- | --- | --- |
+| Fast numeric arrays | NumPy | Efficient vector and matrix operations |
+| CSV or spreadsheet-like data | pandas | Easy row and column manipulation |
+| Classical ML model | scikit-learn | Consistent `fit` and `predict` interface |
+| Basic charts | Matplotlib | Flexible plotting foundation |
+| Statistical plots | Seaborn | Faster high-level visualizations |
+
+## Launch-Readiness Habits
+
+Use libraries in a way another engineer can reproduce:
+
+- pin dependencies in `requirements.txt`,
+- keep data transformations visible,
+- split train and test data,
+- log model metrics,
+- save plots or reports that explain results,
+- move repeated logic out of notebooks.
 
 ## Practical Exercises
 
-### Exercise 1: Train a Model
+### Exercise 1: Rebuild the Example
 
-Use a dataset from a Flow‑style lab:
+Run the complete regression example. Change `test_size` from `0.25` to `0.5` and observe the metric changes.
 
-- Load it into a notebook.  
-- Train a simple model (e.g., linear regression, decision tree).  
-- Evaluate its performance using scikit‑learn metrics.
+### Exercise 2: Add a Feature
 
-### Exercise 2: Visualize the Results
+Add a new column called `attendance_rate` and include it in `X`. Compare the new MAE to the old MAE.
 
-After training the model:
+### Exercise 3: Explain the Stack
 
-- Plot the predictions vs. the true values.  
-- Plot the loss or error over time.  
-- Write a short Markdown cell describing the results.
+For each library, write:
 
-### Exercise 3: Compare Libraries
+- one sentence describing its job,
+- one example of when you would use it,
+- one mistake beginners should avoid.
 
-Compare NumPy, pandas, and scikit‑learn:
-
-- For each library, write one sentence describing its purpose.  
-- For each library, write one sentence describing when you would use it.
-
----
-
-## Self‑Assessment
+## Self-Assessment
 
 Rate yourself from 1 to 5:
 
-- I understand the main Python libraries for ML.  
-- I can import and use them in a notebook.  
-- I can train a simple model using scikit‑learn.  
-- I can visualize the results using matplotlib/seaborn.
+- I can choose the right beginner ML library for a task.
+- I can train and evaluate a simple scikit-learn model.
+- I can explain MAE and MSE.
+- I can create a basic plot to inspect model predictions.
 
-Action item: write a short note in your lab repo describing which library you used most in a Flow‑style lab and why.
+## Further Reading
+
+- [NumPy absolute beginners guide](https://numpy.org/doc/stable/user/absolute_beginners.html)
+- [pandas getting started](https://pandas.pydata.org/docs/getting_started/index.html)
+- [scikit-learn user guide](https://scikit-learn.org/stable/user_guide.html)
+- [Matplotlib pyplot tutorial](https://matplotlib.org/stable/tutorials/pyplot.html)
+- [Seaborn tutorial](https://seaborn.pydata.org/tutorial.html)
 
 ## Next Steps
 
-- Read `04-linear-models.md` next to learn how to use linear models for supervised learning.  
-- Use these libraries as your **core toolkit** for ML work.  
-- Treat them as the **practical environment** for ML.
-
----
-
-*This lesson gives Flow Initiative trainees an overview of the core ML libraries in Python, focusing on NumPy, pandas, scikit‑learn, and visualization tools as the building blocks for ML work.*
+You now have the beginner toolkit: math, data pipelines, lifecycle thinking, Python, notebooks, and ML libraries. The next step is applying these tools to supervised learning.

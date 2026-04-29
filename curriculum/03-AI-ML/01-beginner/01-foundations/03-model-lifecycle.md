@@ -3,7 +3,7 @@ id: model-lifecycle
 title: Model Lifecycle
 track: ai-ml
 level: beginner
-version: 1.0
+version: 1.1
 ---
 
 # Model Lifecycle
@@ -12,260 +12,17 @@ version: 1.0
 
 By the end of this lesson, you will be able to:
 
-- Explain the stages of the ML model lifecycle: problem definition, data preparation, model training, evaluation, deployment, monitoring, and retirement.  
-- Map each stage onto concrete Flow‑style tasks (e.g., logging, experiments, dashboards).  
-- Identify common failure points and how to avoid them.  
-- Use this mental model when designing or debugging ML‑backed systems.
+- Explain the stages of the ML model lifecycle from problem definition to retirement.
+- Connect lifecycle stages to concrete engineering artifacts: datasets, experiments, model files, APIs, dashboards, and alerts.
+- Identify common lifecycle failure points before launch.
+- Use evaluation and monitoring as ongoing product responsibilities, not one-time notebook tasks.
 
-## Introduction
+## Watch First
 
-Training a machine learning model is just one step.  
-In practice, models live in a **lifecycle** that spans:
-
-- defining the problem,  
-- preparing data,  
-- training,  
-- evaluating,  
-- deploying,  
-- monitoring in production, and  
-- retiring when they decay or are replaced.
-
-For Flow engineers, the “model lifecycle” is like a **software release lifecycle**, but with ML‑specific concerns:
-
-- Feature drift,  
-- Concept drift,  
-- Evaluator‑style testing,  
-- Versioned artifacts, and  
-- Model‑serving infrastructure.
-
-This lesson frames the model lifecycle as an **engineering workflow**, not a one‑off experiment.
-
----
-
-## The Model Lifecycle Stages
-
-### 1. Problem Definition
-
-Before any code, you must define:
-
-- What you want to predict or rank.  
-- Who will use the model (e.g., learners, instructors, governance members).  
-- What success looks like (e.g., “improve course completion rate by X%”).
-
-Key questions:
-
-- What is the **business or user problem**?  
-- How will the model be **integrated** into a product or dashboard?  
-- What **metrics** matter (accuracy, latency, fairness, uplift in a real‑world KPI)?
-
-In Flow‑style contexts, this is especially important when:
-
-- You are designing **public‑good systems** (e.g., education, governance, capacity‑building).  
-- The model must align with **community values and constraints**.
-
----
-
-### 2. Data Preparation and Pipeline Setup
-
-Once the problem is defined, you:
-
-- Set up or adapt the **data pipeline** (from previous lessons).  
-- Decide what signals to use as features.  
-- Decide how to split data into training, validation, and test sets.
-
-Data preparation is often the **longest and most important** stage, because:
-
-- Garbage‑in‑garbage‑out applies even more in ML.  
-- Biases in the data become biases in the model.  
-- Missing or noisy data causes silent failures.
-
-From an engineer’s viewpoint, you:
-
-- Version the data splits.  
-- Log schema and statistics.  
-- Make sure the pipeline reproduces in different environments.
-
----
-
-### 3. Model Training
-
-In **training**, you:
-
-- Choose an algorithm or architecture (e.g., linear regression, decision tree, neural network).  
-- Fit the model to the training data.  
-- Tune hyperparameters using a validation set.
-
-Key things you do:
-
-- **Track experiments** (parameters, data, metrics) so you can compare runs.  
-- **Checkpoint** training so you can resume if it fails.  
-- **Log metrics** to a dashboard or store (e.g., loss, accuracy per epoch).
-
-In Flow‑style labs, you might start with simple algorithms and later move to neural networks, but the **process** is the same.
-
----
-
-### 4. Evaluation and Validation
-
-After training, you **evaluate** on data the model has not seen:
-
-- Compute metrics like accuracy, precision, recall, RMSE, or AUC.  
-- Check for **data drift**: has the distribution changed since training?  
-- Look for **concept drift**: has the relationship between inputs and outputs changed?
-
-Evaluation is not just “is the number good.” It is:
-
-- **Diagnosis**: Why is the model failing on some groups?  
-- **Risk‑aware testing**: How will it behave under real‑world noise or edge cases?
-
-In African‑centric and public‑goods contexts, you must also evaluate for:
-
-- Fairness across groups.  
-- Guardrails against adverse incentives.
-
----
-
-### 5. Deployment and Serving
-
-Once a model is validated, it is **deployed** into a service:
-
-- Build a **model server** or integrate it into an existing app.  
-- Expose it via APIs or internal calls.  
-- Ensure latency and reliability meet expectations.
-
-In Flow‑style systems, you might:
-
-- Serve a **recommendation model** to a learning platform.  
-- Serve a **risk‑or‑intervention model** to a dashboard.  
-- Serve a **token‑health or governance‑readiness model** to a protocol.
-
-Deployment best practices include:
-
-- Versioning models (e.g., v1, v2).  
-- Canary or A/B tests to compare new models against old ones.  
-- Graceful fallbacks if the model is down or slow.
-
----
-
-### 6. Monitoring and Maintenance
-
-A deployed model is not “set and forget.” You must **monitor**:
-
-- Input data quality and distribution.  
-- Output quality (e.g., prediction drift).  
-- System metrics (latency, error rate).
-
-If you see:
-
-- A drop in performance,  
-- Or a shift in data distribution,  
-
-you may need to **retrain** or **re‑design** the model.
-
-This is where **data‑pipeline monitoring** (from earlier lessons) ties directly into model health.
-
----
-
-### 7. Iteration and Retirement
-
-The lifecycle closes with **iteration**:
-
-- Improve the data, features, or algorithm.  
-- Retrain and redeploy.  
-- Compare new versions to old ones.
-
-Eventually, a model may be **retired** when:
-
-- It is no longer useful.  
-- Its data no longer reflects reality.  
-- A better model replaces it.
-
-Retirement is an explicit step: you stop using the model, archive the artifacts, and **update documentation**.
-
----
-
-## Why This Matters for Flow Engineers
-
-Flow‑style engineers will:
-
-- Build or maintain models that influence real‑world outcomes.  
-- Work in environments with **noisy or fragmented data**.  
-- Need to explain ML behavior to non‑technical stakeholders.
-
-Understanding the model lifecycle helps you:
-
-- Design systems that are **robust, observable, and maintainable**.  
-- Avoid “Jupyter‑only” models that never make it to production.  
-- Build **repeatable, versioned, logged** workflows instead of one‑off scripts.
-
-In African‑centric contexts, this is especially important when:
-
-- Models are used in **education, governance, or capacity‑building**.  
-- Communities must trust that models are **transparent, fair, and accountable**.  
-- Infrastructure is resource‑constrained and must be **lean and maintainable**.
-
----
-
-## Practical Exercises
-
-### Exercise 1: Map a Tiny Lifecycle
-
-Pick a small Flow‑style use case (e.g., a quiz‑based recommendation or a simple on‑chain anomaly detector):
-
-- Sketch a model lifecycle for it:  
-  - Problem.  
-  - Data.  
-  - Training.  
-  - Evaluation.  
-  - Deployment.  
-  - Monitoring.  
-- Under each stage, write 1–2 tasks you would do.
-
-This is a **mental‑model sketch**.
-
-### Exercise 2: Sketch a Failure Mode
-
-For the same use case:
-
-- Choose one stage (e.g., deployment) and describe:  
-  - One failure mode (e.g., slow latency, bad drift, concept shift).  
-  - One monitoring signal you would track.  
-  - One action you would take if that signal went bad.
-
-### Exercise 3: Relate to a Flow Lab
-
-Look at an AI‑ML lab from the Flow curriculum that trains a model:
-
-- Write a short note describing:  
-  - Which lifecycle stages the lab covers.  
-  - Which stages it ignores.  
-- Suggest one small improvement (e.g., add a test set, log metrics, or version the model).
-
----
-
-## Self‑Assessment
-
-Rate yourself from 1 to 5:
-
-- I can explain the main stages of the model lifecycle.  
-- I can see which stages are “engineering‑heavy” (pipelines, deployment, monitoring) and which are “ML‑heavy” (training, evaluation).  
-- I can imagine applying this lifecycle to a Flow‑style project.  
-- I can avoid treating models as one‑off experiments.
-
-Action item: write a short note in your lab repo describing one model‑lifecycle practice you would like to adopt in your Flow‑style projects.
-
-## Next Steps
-
-- Read `04-evaluation-metrics.md` next to see how to measure model performance and system health together.  
-- Use this lifecycle mindset when you design or critique ML‑backed systems.  
-- Treat the model lifecycle as **first‑class ML infrastructure**, not a side‑effect of training.
-
-## Video
-
-<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%'}}>
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%', marginBottom: '1.5rem'}}>
   <iframe
-    src="https://www.youtube.com/embed/9QBSkiYqPxs"
-    title="Model Lifecycle for Machine Learning Engineers"
+    src="https://www.youtube.com/embed/gkmAnu8DtiM"
+    title="Lifecycle of a machine learning model"
     style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0}}
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     referrerPolicy="strict-origin-when-cross-origin"
@@ -273,6 +30,244 @@ Action item: write a short note in your lab repo describing one model‑lifecycl
   />
 </div>
 
----
+## Lifecycle Map
 
-*This lesson gives Flow Initiative trainees an engineer‑style understanding of the ML model lifecycle, treating it as a structured process from problem definition to deployment, monitoring, and retirement, and how that process fits into Flow‑style AI‑ML systems.*
+```mermaid
+flowchart LR
+  Problem["1. Define problem"] --> Data["2. Prepare data"]
+  Data --> Train["3. Train model"]
+  Train --> Evaluate["4. Evaluate"]
+  Evaluate --> Deploy["5. Deploy"]
+  Deploy --> Monitor["6. Monitor"]
+  Monitor --> Iterate["7. Iterate or retire"]
+  Iterate --> Problem
+```
+
+Training is only one stage of machine learning. A model that looks good in a notebook still has to survive bad data, slow networks, changed user behavior, deployment constraints, and human trust.
+
+The model lifecycle is the engineering workflow that manages all of that.
+
+:::info Launch Mindset
+A model is launch-ready when the team can reproduce it, evaluate it, deploy it, monitor it, and replace it responsibly.
+:::
+
+## Stage 1: Define the Problem
+
+Start by writing the problem in product language before model language.
+
+Weak version:
+
+> Train an ML model for learners.
+
+Better version:
+
+> Predict which learners may need support before the next module, so mentors can intervene early.
+
+That second version tells you:
+
+- who the model serves,
+- what decision it supports,
+- what kind of mistakes matter,
+- what data might be useful.
+
+Good problem definition includes:
+
+- target outcome,
+- user or stakeholder,
+- constraints,
+- success metric,
+- risks and ethical concerns.
+
+## Stage 2: Prepare Data
+
+Data preparation builds on the pipeline lesson. You decide:
+
+- which raw sources matter,
+- which rows are valid,
+- which features represent the problem,
+- how to split training, validation, and test data.
+
+Use separate data splits so the model is tested on examples it did not learn from.
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+)
+```
+
+The test set is not a decoration. It is your best beginner defense against fooling yourself.
+
+## Stage 3: Train the Model
+
+Training is where an algorithm learns parameters from data.
+
+For a supervised model, the training goal is usually:
+
+```math
+\theta^* = \arg\min_{\theta} L(y, f(x; \theta))
+```
+
+Read it as: choose the parameters `theta` that minimize the loss between the real answer `y` and the model prediction `f(x; theta)`.
+
+In practice, training includes:
+
+- selecting an algorithm,
+- fitting it on training data,
+- tracking parameters and metrics,
+- saving the trained artifact.
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+```
+
+## Stage 4: Evaluate
+
+Evaluation asks whether the model is useful, safe, and reliable enough for the job.
+
+Common metrics include:
+
+- accuracy: overall fraction correct,
+- precision: when the model predicts positive, how often it is right,
+- recall: how many real positives the model catches,
+- RMSE or MAE: regression error,
+- latency: how quickly predictions return.
+
+For public-good systems, you should also ask:
+
+- Does performance differ across groups?
+- Are false positives or false negatives harmful?
+- Can a human understand and override the model?
+
+```python
+from sklearn.metrics import accuracy_score, classification_report
+
+y_pred = model.predict(X_test)
+
+print("accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+```
+
+## Stage 5: Deploy
+
+Deployment makes the model available to users or other systems.
+
+Common patterns:
+
+- batch predictions saved to a dashboard,
+- an API that returns predictions on request,
+- an embedded model inside a service,
+- a scheduled job that retrains and republishes artifacts.
+
+Deployment adds software concerns:
+
+- versioning,
+- latency,
+- security,
+- fallbacks,
+- logging,
+- rollback.
+
+For a Flow learning platform, a safe fallback might be a rule-based recommendation if the model API is unavailable.
+
+## Stage 6: Monitor
+
+After launch, the world changes. Monitoring tells you when the model is drifting away from reality.
+
+Track:
+
+- data freshness,
+- missing values,
+- prediction distribution,
+- model accuracy when labels arrive,
+- latency and error rates,
+- drift between training and production features.
+
+```math
+\text{model health} = \text{data quality} + \text{prediction quality} + \text{system reliability}
+```
+
+Monitoring is not only about charts. It is about deciding what should happen when a chart goes bad.
+
+## Stage 7: Iterate or Retire
+
+Models should not live forever by accident. You may need to:
+
+- retrain with newer data,
+- add better features,
+- change the model family,
+- stop using a model that no longer helps.
+
+Retirement is a real lifecycle stage. Archive the model, record why it was replaced, and update documentation so future engineers understand the decision.
+
+## Common Failure Modes
+
+### Notebook-Only Model
+
+The model works on one laptop but nobody can reproduce the environment, data, or result.
+
+### Leaky Evaluation
+
+Training data leaks into the test set, making metrics look better than real-world performance.
+
+### No Monitoring
+
+The model is deployed, then silently degrades as the data changes.
+
+### No Human Path
+
+The model influences users, but there is no escalation, appeal, or override process.
+
+## Flow-Style Example
+
+Use case: predict learners who may need mentor support.
+
+Lifecycle:
+
+1. Define the goal: identify learners who may stall before the next module.
+2. Prepare data: lesson progress, quiz attempts, recent activity, mentor notes.
+3. Train: start with logistic regression or a decision tree.
+4. Evaluate: recall matters because missing a struggling learner is costly.
+5. Deploy: show risk scores in a mentor dashboard.
+6. Monitor: track data freshness and false alarms.
+7. Iterate: retrain monthly or retire if mentor feedback says the model is not useful.
+
+## Practical Exercises
+
+### Exercise 1: Lifecycle Sketch
+
+Pick a beginner ML idea and write one sentence for each lifecycle stage.
+
+### Exercise 2: Choose Metrics
+
+For a learner-support model, decide whether precision or recall matters more. Explain your tradeoff.
+
+### Exercise 3: Add a Monitoring Plan
+
+List three alerts you would create before launching the model.
+
+## Self-Assessment
+
+Rate yourself from 1 to 5:
+
+- I can explain why training is only one lifecycle stage.
+- I can name the artifacts created during a model lifecycle.
+- I can identify at least three launch risks.
+- I can describe when a model should be retrained or retired.
+
+## Further Reading
+
+- [scikit-learn model selection and evaluation](https://scikit-learn.org/stable/model_selection.html)
+- [scikit-learn train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+- [TensorFlow TFX pipelines guide](https://www.tensorflow.org/tfx/guide/understanding_tfx_pipelines)
+
+## Next Steps
+
+Next, move into the tools section. You will use Python, notebooks, and ML libraries to make this lifecycle concrete.
