@@ -11,8 +11,10 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // GitHub Pages URL setup for the Flow-Research organization.
-  url: 'https://flow-research.github.io',
-  baseUrl: '/learn/',
+  // url: 'https://flow-research.github.io',
+  // baseUrl: '/learn/',
+  url: 'https://learn.flowresearch.tech',
+  baseUrl: '/',
   organizationName: 'Flow-Research',
   projectName: 'learn',
   trailingSlash: false,
