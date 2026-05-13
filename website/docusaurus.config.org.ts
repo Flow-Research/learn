@@ -10,8 +10,10 @@ const config: Config = {
   tagline: 'Powering the next generation of African contributors',
   favicon: 'img/favicon.ico',
 
-  url: 'https://flow-research.github.io',
-  baseUrl: '/learn/',
+  // url: 'https://flow-research.github.io',
+  // baseUrl: '/learn/',
+  url: 'https://learn.flowresearch.tech',
+  baseUrl: '/',
   organizationName: 'Flow-Research',
   projectName: 'learn',
   trailingSlash: false,
