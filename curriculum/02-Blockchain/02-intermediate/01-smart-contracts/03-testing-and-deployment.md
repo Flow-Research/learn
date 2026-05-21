@@ -76,7 +76,7 @@ Testing is the **last line of defense** before deployment:
 For Flow trainees, this is especially important because:
 
 - Labs and examples can later evolve into production-like systems.
-- African-centric infrastructure often has **high stakes** and **low forgiveness** for mistakes.
+- Public-good infrastructure often has **high stakes** and **low forgiveness** for mistakes.
 
 Your job is to **build a testing mindset** into how you design and write contracts.
 
@@ -191,7 +191,7 @@ Your goal is to:
 - Use **clear, repeatable deployments**.
 - Learn from mistakes in a safe environment.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - You are building trustless systems for communities.
 - Gas cost and deployment safety directly affect users.

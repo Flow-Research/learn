@@ -55,7 +55,7 @@ $M$ is mastery, $U$ is understanding, $P$ is deliberate practice, and $F$ is fee
 
 In the journey from a mid-level engineer to an active contributor in decentralized infrastructure, understanding how we learn is as crucial as the technical knowledge itself. The **learning hierarchy** provides a structured framework for cognitive development, ensuring that foundational knowledge builds systematically toward advanced application and innovation.
 
-This concept draws from Bloom's Taxonomy, adapted specifically for software engineering and decentralized technologies. It helps African engineers working with limited resources to maximize their learning efficiency in complex domains like blockchain, AI/ML, and protocol engineering.
+This concept draws from Bloom's Taxonomy, adapted specifically for software engineering and decentralized technologies. It helps engineers working with limited resources to maximize their learning efficiency in complex domains like blockchain, AI/ML, and protocol engineering.
 
 ## What is Learning Hierarchy?
 
@@ -76,7 +76,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Memorizing API endpoints, protocol specifications, cryptographic primitives
 - Recalling the basic components of a blockchain transaction or neural network layer
 
-**African Context Example:** An engineer in Nairobi remembering that IPFS uses content-addressing with CID (Content Identifier) hashes, even when offline.
+**Context Example:** An engineer remembering that IPFS uses content-addressing with CID (Content Identifier) hashes, even when offline.
 
 **Practice:** List 5 key terms from decentralized storage protocols and their definitions.
 
@@ -87,7 +87,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Explaining how consensus algorithms work
 - Describing the difference between federated learning and traditional ML training
 
-**African Context Example:** Understanding why mobile money systems like M-Pesa require different consensus mechanisms than traditional banking systems due to intermittent connectivity.
+**Context Example:** Understanding why mobile money systems require different consensus mechanisms than traditional banking systems due to intermittent connectivity.
 
 **Practice:** Explain in simple terms how a smart contract executes on a blockchain.
 
@@ -97,7 +97,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Setting up a local IPFS node
 - Training a simple ML model on edge devices
 
-**African Context Example:** Applying federated learning to optimize mobile network traffic prediction in rural areas with limited data connectivity.
+**Context Example:** Applying federated learning to optimize mobile network traffic prediction in rural areas with limited data connectivity.
 
 **Practice:** Write pseudocode for a simple peer-to-peer file sharing mechanism.
 
@@ -109,7 +109,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Breaking down a complex ML pipeline into data flow, model architecture, and deployment stages
 - Evaluating trade-offs in consensus mechanisms (PoW vs PoS vs PBFT)
 
-**African Context Example:** Analyzing why certain blockchain networks struggle with adoption in regions with high mobile data costs and low bandwidth.
+**Context Example:** Analyzing why certain blockchain networks struggle with adoption in regions with high mobile data costs and low bandwidth.
 
 **Practice:** Analyze a real-world protocol (e.g., Bitcoin's transaction structure) and identify its key components and their interactions.
 
@@ -121,7 +121,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Assessing the privacy implications of different ML approaches
 - Judging the scalability of a protocol design
 
-**African Context Example:** Evaluating whether a centralized AI service or a federated learning approach would be more appropriate for healthcare diagnostics in remote African clinics.
+**Context Example:** Evaluating whether a centralized AI service or a federated learning approach would be more appropriate for healthcare diagnostics in remote clinics.
 
 **Practice:** Compare two different approaches to decentralized storage (IPFS vs Filecoin) and evaluate their strengths and weaknesses for a specific use case.
 
@@ -133,7 +133,7 @@ Unlike traditional linear learning, hierarchical learning recognizes that true m
 - Creating innovative applications that integrate blockchain, AI, and P2P networking
 - Developing governance models for decentralized autonomous organizations
 
-**African Context Example:** Creating a mobile-first dApp that uses local payment systems integrated with global DeFi protocols, optimized for low-bandwidth environments.
+**Context Example:** Creating a mobile-first dApp that uses local payment systems integrated with global DeFi protocols, optimized for low-bandwidth environments.
 
 **Practice:** Design a simple decentralized application that solves a local problem in your community.
 
@@ -190,7 +190,7 @@ evidence:
 
 - Learning hierarchy provides a roadmap for systematic skill development in complex technical domains
 - True engineering mastery requires progression beyond memorization to creation and innovation
-- In decentralized technologies, understanding context (like African infrastructure constraints) enhances evaluation and creation skills
+- In decentralized technologies, understanding context (like resource-constrained infrastructure) enhances evaluation and creation skills
 - Regular self-assessment against the hierarchy helps identify growth opportunities
 - The ultimate goal is to become an active contributor who not only uses technology but shapes its future
 

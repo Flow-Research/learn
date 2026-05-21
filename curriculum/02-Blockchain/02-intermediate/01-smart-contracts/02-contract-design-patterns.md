@@ -217,7 +217,7 @@ Your job is:
 - To tweak them to suit Flow-specific use cases.
 - To document the assumptions and trade-offs clearly.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - You are building trustless systems for communities.
 - Gas cost and upgradeability decisions directly affect users.

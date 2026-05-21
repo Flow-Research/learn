@@ -260,7 +260,7 @@ Understanding protocol architecture helps you:
 - Communicate design decisions to other engineers and stakeholders.
 - Anticipate how changes in one layer affect others.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Designing **public-good protocols** that must be transparent and understandable.
 - Balancing **decentralization**, **accessibility**, and **security**.

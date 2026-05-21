@@ -1,35 +1,14 @@
-# Flow Education Initiative: Building Talent Pipelines for Freedom Tech
+# Flow Education Initiative
 
-Welcome to the **flow-learning**, the central nervous system for the **Flow Initiative**. This repository is a unified monorepo containing our specialized curriculum, research knowledge base, hands-on labs, and the AI-driven engine that keeps our content synchronized with the bleeding edge of Web3 and AI protocols.
+Learning resource for engineers who want to contribute to building Flow's products — Personal Operators for people and enterprises.
 
-## 🎯 Mission
-Flow is a non-profit talent pipeline. We identify mid-level African engineers (1-3 years experience) and move them from "Learners" to "Active Contributors" in decentralized infrastructure. We focus on public goods that distribute control, computation, and value.
+## Repo structure
 
----
-
-## 🏗️ Repository Architecture
-
-```text
-/flow-hub (The Unified Repo)
-├── .github/                  # CI/CD, Issue Templates (Onboarding/Questions)
-├── scripts/                  # THE UNIFIED AI ENGINE
-│   ├── core_ai_logic.py      # LLM wrappers & Scraping utilities
-│   ├── gen_lesson.py         # AI script to generate /curriculum content
-│   └── gen_article.py        # AI script to generate /knowledge-base content
-├── curriculum/               # THE EDUCATION LAYER (Structured Learning)
-│   ├── 01-foundations/       # Cross-pillar basics (Networks, P2P, Crypto)
-│   ├── 02-blockchain/        # Track 1: L1/L2 Infrastructure & Smart Contracts
-│   ├── 03-ai-ml/             # Track 2: Federated Learning & Privacy-Preserving ML
-│   └── 04-protocol-eng/      # Track 3: Libp2p, Storage Markets, & Consensus Research
-├── knowledge-base/           # THE RESEARCH LAYER (Public Insights/Blog)
-│   ├── articles/             # AI-generated + Human-reviewed technical posts
-│   ├── research-papers/      # Summaries of critical ecosystem papers
-│   └── ecosystem-updates/    # Scraped/Synthesized updates from partner protocols
-├── labs/                     # THE WORKSHOP (Hands-on Code)
-│   ├── foundation/           # Boilerplate for Phase 1 exercises
-│   └── specialization/       # Complex projects (e.g., custom Flower workers)
-├── website/                  # Docusaurus SSG Frontend (Docs + Blog)
-└── docusaurus.config.js      # Global site & navigation configuration
+```
+curriculum/       Structured lessons (foundations, blockchain, AI/ML, protocol engineering, agent systems)
+knowledge-base/   Drafted articles (blog content preserved for future use)
+website/          Docusaurus frontend (learn.flowresearch.tech)
+scripts/          AI-assisted content generation tools
 ```
 
 ---
@@ -86,8 +65,13 @@ The `scripts/` directory is designed to:
 ## 📜 Contribution & Policy
 All lessons and research articles go through a **Human-in-the-Loop** review process. AI-generated content is staged in a Pull Request for review by the technical team. 
 
-**Flow Initiative is a Non-Profit. Our goal is to create sustainable income pathways for African engineers through global open-source public goods.**
+```bash
+cd website
+npm install
+npm run start     # local dev server
+npm run build     # production build
+```
 
-***
+## Contributing
 
-*This README is intended for both humans and machines. Please maintain its structure when updating.*
+See [curriculum/00-intro.md](curriculum/00-intro.md) for an overview of the learning path. Pull requests welcome.

@@ -5,7 +5,7 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-const TrackList = [
+const AreaList = [
   {
     label: 'Foundations',
     title: 'Engineering fluency',
@@ -36,11 +36,35 @@ const TrackList = [
   },
 ];
 
+const ProductList = [
+  {
+    label: 'Jarvis',
+    detail: 'Agent runtime that spawns, configures, and secures Personal Operators.',
+    icon: 'J',
+  },
+  {
+    label: 'Garden',
+    detail: 'Human-agent workspace with connected tools, workflows, and approvals.',
+    icon: 'G',
+  },
+  {
+    label: 'WorkStream',
+    detail: 'Task pipeline that distributes work, verifies output, and handles rewards.',
+    icon: 'W',
+  },
+  {
+    label: 'Harnessy',
+    detail: 'Reliability layer for testing, evaluating, and improving agent behavior.',
+    icon: 'H',
+  },
+];
+
 const PracticeList = [
-  'Read technical material like an engineer, not a passive student.',
+  'Read technical material like a builder, not a passive student.',
   'Move from concept notes into reproducible labs and visible artifacts.',
   'Explain tradeoffs clearly across AI, blockchain, and distributed systems.',
   'Build toward open-source contribution instead of isolated coursework.',
+  'Earn points and reputation through verified public contributions.',
 ];
 
 function HeroSection() {
@@ -48,35 +72,32 @@ function HeroSection() {
     <header className={styles.heroBanner}>
       <div className="container">
         <div className={styles.heroContent}>
-          <p className={styles.heroEyebrow}>Flow Education Initiative</p>
+          <div className={styles.heroEyebrow}>Flow Research</div>
           <Heading as="h1" className={styles.heroTitle}>
-            Build public good technology in the open.
+            Learn. <span className={styles.heroTitleAccent}>Build.</span> Contribute.
           </Heading>
           <p className={styles.heroSubtitle}>
-            Structured tracks for developers contributing to AI/ML, blockchain,
-            and protocol infrastructure. Rooted in African talent pipelines;
-            open to builders everywhere.
+            Flow Research builds Personal Operators — capable agents for people and
+            enterprises. This curriculum teaches the skills to contribute to building
+            them across AI/ML, blockchain, and protocol infrastructure.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.mainCta} to="/curriculum/curriculum-intro">
               Start learning
             </Link>
-            <Link className={styles.secondaryCta} to="/blog">
-              Read articles
+            <Link className={styles.secondaryCta} to="https://github.com/Flow-Research">
+              Explore Flow
             </Link>
           </div>
-          <dl className={styles.heroStats} aria-label="Curriculum summary">
+          <dl className={styles.heroStats} aria-label="Key features">
             <div>
-              <dt>64</dt>
-              <dd>lessons</dd>
+              <dt>Open source</dt>
             </div>
             <div>
-              <dt>4</dt>
-              <dd>tracks</dd>
+              <dt>Free</dt>
             </div>
             <div>
-              <dt>3</dt>
-              <dd>skill levels</dd>
+              <dt>Self-paced</dt>
             </div>
           </dl>
         </div>
@@ -85,25 +106,53 @@ function HeroSection() {
   );
 }
 
-function TracksSection() {
+function ProductsSection() {
   return (
-    <section className={styles.tracksSection}>
+    <section className={styles.sectionAlt}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Curriculum</p>
-          <Heading as="h2">A clear path from fundamentals to contribution</Heading>
+          <div className={styles.sectionKicker}>Products</div>
+          <Heading as="h2">A system, not a collection</Heading>
           <p>
-            The curriculum is organized around the capabilities engineers need
-            to join serious open-source and infrastructure work.
+            Flow's products form one system: Jarvis gives the agent life, Garden gives
+            it a workspace, WorkStream gives it valuable work, and Harnessy makes it
+            reliable. Contributors help build every layer.
           </p>
         </div>
-        <div className={styles.trackGrid}>
-          {TrackList.map((track) => (
-            <article className={styles.trackCard} key={track.label}>
-              <div className={styles.trackMeta}>{track.meta}</div>
-              <p className={styles.trackLabel}>{track.label}</p>
-              <h3>{track.title}</h3>
-              <p>{track.detail}</p>
+        <div className={styles.productGrid}>
+          {ProductList.map((product) => (
+            <article className={styles.productCard} key={product.label}>
+              <div className={styles.productIcon}>{product.icon}</div>
+              <p className={styles.productLabel}>{product.label}</p>
+              <p>{product.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AreasSection() {
+  return (
+    <section className={styles.section}>
+      <div className="container">
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionKicker}>Curriculum</div>
+          <Heading as="h2">A clear path from fundamentals to contribution</Heading>
+          <p>
+            The curriculum is organized around the capabilities you need to
+            contribute to building Flow's products — from foundations through
+            production-ready systems.
+          </p>
+        </div>
+        <div className={styles.areaGrid}>
+          {AreaList.map((area) => (
+            <article className={styles.areaCard} key={area.label}>
+              <div className={styles.areaMeta}>{area.meta}</div>
+              <p className={styles.areaLabel}>{area.label}</p>
+              <h3>{area.title}</h3>
+              <p>{area.detail}</p>
             </article>
           ))}
         </div>
@@ -114,14 +163,14 @@ function TracksSection() {
 
 function PracticeSection() {
   return (
-    <section className={styles.practiceSection}>
+    <section className={styles.sectionAlt}>
       <div className="container">
         <div className={styles.practiceLayout}>
           <div>
-            <p className={styles.sectionKicker}>Learning model</p>
-            <Heading as="h2">Built for engineers who learn by making things real</Heading>
+            <div className={styles.sectionKicker}>Learning model</div>
+            <Heading as="h2">Built for builders who learn by making things real</Heading>
             <p className={styles.practiceIntro}>
-              Flow is not a content library for passive reading. Each track is
+              Flow is not a content library for passive reading. Each area is
               designed to help learners turn concepts into notes, code,
               diagrams, experiments, and public contributions.
             </p>
@@ -146,8 +195,8 @@ function CtaSection() {
       <div className="container">
         <div className={styles.ctaBand}>
           <div>
-            <p className={styles.sectionKicker}>Launch-ready learning</p>
-            <Heading as="h2">Start with the curriculum, then build in public.</Heading>
+            <div className={styles.sectionKicker}>Launch-ready learning</div>
+            <Heading as="h2">Start with the curriculum, then contribute in public.</Heading>
           </div>
           <Link className={styles.bandCta} to="/curriculum/curriculum-intro">
             Enter curriculum
@@ -161,11 +210,12 @@ function CtaSection() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Build Public-Good Technology"
-      description="Structured AI/ML, blockchain, and protocol engineering learning paths for contributors building practical public-good technology.">
+      title="Learn. Build. Contribute."
+      description="Flow Research builds Personal Operators — capable agents for people and enterprises. This curriculum teaches the skills to contribute to building them.">
       <HeroSection />
       <main>
-        <TracksSection />
+        <ProductsSection />
+        <AreasSection />
         <PracticeSection />
         <CtaSection />
       </main>

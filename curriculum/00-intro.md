@@ -1,318 +1,110 @@
 ---
 id: curriculum-intro
 title: About this curriculum
-track: overview
-level: none
 ---
 
 # About this curriculum
 
-## Who this is for
+Flow Research is an evolving organization. Our research teams explore distributed systems, AI, and protocol infrastructure, and the work feeds into products still taking shape. This curriculum is the learning layer of that ecosystem — a structured path for engineers who want to build the kind of public-good technology these products depend on.
 
-This curriculum is for **engineers, builders, and learners** who want to design and operate **real‑world stack‑style systems** that combine:
+Things are moving fast, and this will change as we do.
 
-- **distributed and protocol‑style coordination**,  
-- **AI‑driven automation and analytics**,  
-- and **public‑goods‑style governance and infrastructure**.
+## Products
 
-You do not need to be an expert in all three areas yet; you just need:
+The team is building a set of products that work as one system. Here is how they fit together:
 
-- basic programming comfort,  
-- curiosity about how **systems and incentives** shape behavior,  
-- and a desire to build **practical, socially‑visible infrastructure**, not just toy demos.
+- **[Jarvis](products/jarvis)** — the agent runtime. Spawns, configures, and secures Personal Operators so they can connect to the Flow economy.
+- **[Garden](products/garden)** — the human-agent workspace. A persistent space where people and agents collaborate with connected tools, workflows, and approvals.
+- **[WorkStream](products/workstream)** — the task pipeline. Takes work from economic value sources, distributes it to humans and agents, verifies outputs, and handles attribution and rewards.
+- **[Harnessy](products/harnessy)** — the reliability layer. Tests agent behavior, evaluates task output, and closes the feedback loop so agents can be trusted with real work.
+Jarvis gives the agent life. Garden gives the agent a workspace. WorkStream gives the agent and human valuable work. Harnessy makes the agent reliable.
 
-This is a **“build‑with‑principles”** path, not a “tutorial‑chain” that stops at “make a simple app.”  
-By the end, you should be able to:
+## Contributing
 
-- design protocols,  
-- run or integrate with models,  
-- and reason about governance, security, and regulatory‑style constraints in a unified way.
+Flow Research runs a [fellowship program](contributing/joining-fellowship) for engineers who want to help build these products or explore new ideas through the [research track](contributing/research-track). Contributions are tracked in [FlowLedger](products/flowledger) — points, badges, and a public ledger that makes every contribution visible and rewardable.
 
----
+For now, the curriculum covers five areas:
 
-## How this curriculum is structured
+### Foundations
 
-The curriculum is organized into a **hierarchical “stack” of tracks and levels**:
+How to learn, take rigorous notes, write design docs, and build a public portfolio.
 
-- **Tracks** represent **domains of competence** (e.g., Foundations, Blockchain, AI‑ML, Protocol Engineering).  
-- **Levels** under each track move from:
+- [Concepts](foundations/concepts/learning-hierarchy) — learning hierarchy, maieutic thinking, student vs engineer mindset
+- [Practice](foundations/practice/reading-comprehension) — reading comprehension, effective notes, building a portfolio
+- [Tooling](foundations/tooling/markdown-and-documentation) — markdown, version control, collaboration workflows
+- [Specification](foundations/specification/writing-design-docs) — design docs, ADRs, API specs, research notes
 
-  - `01‑beginner` → `02‑intermediate` → `03‑advanced`.
+Start here if you're new.
 
-Within each level you will usually find:
+### Blockchain
 
-- conceptual lessons that frame the domain,  
-- then practice‑style or implementation‑style lessons that get you building.
+From fundamentals through smart contracts and security to protocol engineering and scalability.
 
----
+Beginner — [what is blockchain](Blockchain/beginner/fundamentals/what-is-blockchain), [layer 1 vs layer 2](Blockchain/beginner/ecosystem/layer-1-vs-layer-2), [tokens and incentives](Blockchain/beginner/ecosystem/tokens-and-economic-incentives), [decentralized identity](Blockchain/beginner/ecosystem/decentralized-identity)
 
-### 1. 01 – Foundations
+Intermediate — smart contract design patterns, testing and deployment, common vulnerabilities, code audits, pen-test workflows
 
-Before you dive into protocols or models, this track lays down:
+Advanced — protocol architecture, consensus tuning, governance mechanisms, state channels, rollups and sharding, interoperability
 
-- how to **learn**,  
-- how to **take notes and read rigorously**,  
-- and how to **build a public portfolio** of work.
+### AI/ML
 
-Key folders:
+Understand, use, and govern AI-driven components in production systems.
 
-- `01‑concepts`: framing topics like **learning hierarchy**, **Maieutics and Flow‑style thinking**, and **student‑vs‑engineer mindset**.  
-- `02‑practice`: **reading comprehension**, **effective notes**, and **building a portfolio** (i.e., “how to turn learning into public‑facing work”).  
-- `03‑tooling`: **Markdown and documentation**, **version control (Git‑style)**, **and collaboration workflows** (e.g., pull‑requests, code reviews).
+Beginner — [math for ML](AI-ML/beginner/foundations/math-for-ml), data pipelines, model lifecycle, Python ecosystem, notebooks, ML libraries
 
-This is your **on‑ramp** into the rest of the curriculum.
+Intermediate — supervised learning, feature engineering, hyperparameter tuning, CI/CD for models, monitoring and drift, deployment patterns
 
----
+Advanced — transformers, graph neural networks, reinforcement learning, paper replication, model alignment, ethics and responsibility
 
-### 2. 02 – Blockchain
+### Protocol Engineering
 
-Here you learn how **blockchain‑style systems work**, from high‑level concepts to intermediate‑style smart‑contracts and security, then to advanced‑style protocol‑engineering and scalability topics.
+Design, implement, and evolve reusable protocols that systems communicate over.
 
-#### Beginner tier
+Beginner — [protocol vs application](Protocol%20Engineering/beginner/protocol-concepts/protocol-vs-application), state machines, communication patterns, specification writing, versioning, interoperability
 
-- `01‑fundamentals`:  
-  - `01‑what‑is‑blockchain.md`,  
-  - `02‑key‑terms‑and‑models.md`,  
-  - `03‑consensus‑overview.md`.
-- `02‑ecosystem`:  
-  - `01‑layer‑1‑vs‑layer‑2.md`,  
-  - `02‑tokens‑and‑economic‑incentives.md`,  
-  - `03‑decentralized‑identity.md`.
+Intermediate — compatibility testing, scaling design, resilience patterns, upgrade paths, interchain protocols, community feedback
 
-This tier gives you a **conceptual map** of the blockchain landscape, not a language‑specific deep‑dive.
+Advanced — latency optimization, consensus economics, security modeling, regulatory compliance, performance auditing, enterprise integration
 
-#### Intermediate tier
+### Agent Systems
 
-- `01‑smart‑contracts` (Solidity / Vyper‑style basics, design patterns, testing and deployment).  
-- `02‑security` (common vulnerabilities, code‑audit practices, pen‑test workflows).
+How agents work under the hood — orchestration, tool use, memory, planning, safety, and evaluation.
 
-You emerge knowing how to:
+- [What are agent systems?](agent-systems/what-are-agent-systems) — core components and how they fit Flow
+- [LLM orchestration](agent-systems/llm-orchestration) — prompts, chains, routers, tool loops
+- [Tool calling and integration](agent-systems/tool-calling-and-integration) — tool design, registry, security
+- [Memory and state](agent-systems/memory-and-state) — short-term, long-term, episodic, procedural
+- [Planning and reasoning](agent-systems/planning-and-reasoning) — approaches, failure recovery, reflection
+- [Safety and guardrails](agent-systems/safety-and-guardrails) — input/output guardrails, escalation, kill switches
+- [Evaluating agents](agent-systems/evaluating-agents) — correctness, faithfulness, adversarial testing, human eval
 
-- inspect, write, and secure simple smart‑contracts,  
-- and how to look for red‑flags in on‑chain logic.
-
-#### Advanced tier
-
-- `01‑protocol‑engineering` (protocol‑style architecture, consensus‑tuning, governance‑mechanisms).  
-- `02‑scalability` (state‑channels, rollups and sharding, interoperability‑design).
-
-This is where you step from “I can build a contract” to “I can help design or critique entire *protocol‑layers*” and “how chains can talk to each other.”
+This area maps directly to Jarvis, Garden, WorkStream, and Harnessy — agents are the core of every Flow product.
 
 ---
 
-### 3. 03 – AI‑ML
+## How to use this
 
-This track teaches you to **understand, use, and govern AI‑driven components** in systems, not just “train a model and deploy it.”
+**If you're just starting out** — begin with Foundations, then go deep in whichever area fits your interest.
 
-#### Beginner tier
+**If you're experienced but new to this stack** — skip what you know, fill the gaps.
 
-- `01‑foundations`:
+**If you're building a real project** — map your project across the curriculum. After each lesson, refactor your spec or diagrams.
 
-  - `01‑math‑for‑ml.md`,  
-  - `02‑data‑pipelines‑basics.md`,  
-  - `03‑model‑lifecycle.md`.
-  
-- `02‑tools`:
-
-  - `01‑python‑ecosystem.md`,  
-  - `02‑notebooks‑and‑visualization.md`,  
-  - `03‑ml‑libraries.md`.
-
-You come out knowing how to:
-
-- frame an ML‑style problem,  
-- pull together a basic pipeline,  
-- and use standard libraries without drowning in math.
-
-#### Intermediate tier
-
-- `01‑supervised‑learning`:
-
-  - regression / classification, feature‑engineering, hyperparameter‑tuning.
-- `02‑MLOps`:
-
-  - `01‑ci‑cd‑for‑models.md`,  
-  - `02‑monitoring‑and‑drift.md`,  
-  - `03‑deployment‑patterns.md`.
-
-This is your **“production‑ready ML”** toolkit, including how to keep models healthy in the long run.
-
-#### Advanced tier
-
-- `01‑modern‑architectures`:
-
-  - `01‑transformers.md`,  
-  - `02‑graph‑neural‑networks.md`,  
-  - `03‑reinforcement‑learning.md`.
-- `02‑research‑in‑practice`:
-
-  - `01‑paper‑replication.md`,  
-  - `02‑large‑model‑alignment.md`,  
-  - `03‑ethics‑and‑responsibility.md`.
-
-Here you move from “use existing models” to:
-
-- reproducing published work,  
-- aligning large‑language‑style models to human‑values,  
-- and thinking like an **ethics‑and‑responsibility‑minded ML engineer**.
+Use the exercises at the end of each lesson to build a portfolio you can show others.
 
 ---
 
-### 4. 04 – Protocol Engineering
+## What this assumes
 
-This track is the **“core operating system” layer** of the stack: how to design, implement, and evolve reusable, interoperable protocols that systems can talk over.
-
-#### Beginner tier
-
-- `01‑protocol‑concepts`:
-
-  - `01‑protocol‑vs‑application.md` (what is a protocol vs an app),  
-  - `02‑state‑machines.md` (how to model behavior over time),  
-  - `03‑communication‑patterns.md` (request–response, pub/sub, queues).
-- `02‑standards`:
-
-  - `01‑specification‑writing.md`,  
-  - `02‑versioning‑strategies.md`,  
-  - `03‑interoperable‑design.md`.
-
-You come out able to:
-
-- describe protocols text‑plus‑diagram,  
-- version them cleanly,  
-- and design them so that many implementations and applications can plug into them.
-
-#### Intermediate tier
-
-- `01‑implementation`:
-
-  - `01‑testing‑protocol‑compatibility.md` (interop and conformance‑style tests),  
-  - `02‑scaling‑design.md` (replication, sharding, batching, state‑minimization),  
-  - `03‑resilience‑patterns.md` (timeouts, retries, circuit‑breakers, idempotency, fallbacks).
-
-- `02‑governance‑and‑ecosystem`:
-
-  - `01‑upgrade‑paths.md` (how to move from v1 to v2 without breaking everyone),  
-  - `02‑interchain‑protocols.md` (how chains and ledgers talk to each other),  
-  - `03‑community‑feedback.md` (how to let stakeholders and builders shape the protocol over time).
-
-This is the **“real‑world protocol engineer”** tier: systems that scale, survive failures, and evolve with communities.
-
-#### Advanced tier
-
-- `01‑lead‑architect`:
-
-  - `01‑optimizing‑latency.md` (p95/p99‑style performance, latency‑budgets, tail mitigation),  
-  - `02‑consensus‑economics.md` (how rewards, penalties, and stake‑style incentives shape behavior),  
-  - `03‑security‑modeling.md` (trust boundaries, threat‑style analysis, STRIDE‑style thinking).
-
-- `02‑global‑adoption`:
-
-  - `01‑regulatory‑compliance.md` (GDPR‑style, CCPA‑style, and sector‑style rules mapped to design decisions),  
-  - `02‑performance‑auditing.md` (how to systematically audit latency and throughput and write reports),  
-  - `03‑enterprise‑integration.md` (how to plug protocols into ERPs, CRMs, identity‑providers, and legacy‑style systems safely and cleanly).
-
-Here you step into the **“lead‑architect / systems‑steward”** role: responsible not just for correctness, but for **security, incentives, regulation, and integration** at scale.
-
----
-
-## How to think about the “stack” between tracks
-
-Although these tracks live in different folders, they are **designed to be used together**.
-
-For example, a typical **Flow‑style system** might combine:
-
-- **Blockchain** track ideas (e.g., consensus‑style governance‑mechanisms, tokens, identity)  
-- **AI‑ML** track ideas (e.g., models that score learners, detect risky proposals, or suggest interventions),  
-- **Protocol Engineering** track ideas (e.g., state‑machines, event‑driven communication, upgrade‑paths, community‑feedback, enterprise‑style integration).
-
-In practice, you can:
-
-- follow a **vertical path** through one track (e.g., `04‑Protocol Engineering → beginner → intermediate → advanced`)  
-- while **skimming relevant parts** of the others (e.g., `02‑Blockchain → security` when you care about on‑chain attacks, or `03‑AI‑ML → large‑model‑alignment.md` when you care about governance‑style assistants).
-
-Or you can:
-
-- work on **one concrete project** (e.g., a governance‑style proposal‑and‑reward‑system)  
-- and, for each lesson you read, ask:
-
-  - “How would this idea show up in *my* system?”
-
-This is how the curriculum turns into a **coherent stack‑style mental model**, not just a list of PDFs.
-
----
-
-## How to use this as a learner
-
-### 1. If you’re just starting out
-
-- Begin with **`01‑Foundations`** and do:
-
-  - `01‑concepts/01‑learning‑hierarchy.md` and `02‑maieutics‑and‑flow‑thinking.md`  
-  - and `02‑practice/01‑reading‑comprehension.md` and `02‑effective‑notes.md`.
-
-- Then pick **one track** to go deep in first:
-
-  - if you want **system‑style, “hard‑core” engineering**, start with **`04‑Protocol Engineering`**.  
-  - if you want **algorithm‑style reasoning**, start with **`03‑AI‑ML`**.  
-  - if you want **economic‑style and on‑chain‑style thinking**, start with **`02‑Blockchain`**.
-
-Use the **exercises** at the end of each lesson to build a **lab‑style portfolio** you can show others.
-
-### 2. If you’re experienced but new to this stack
-
-- Feel free to **skip** beginner‑tier content you already know.  
-- Use the curriculum as a **structured way to fill gaps**:
-
-  - for example, if you are a “backend systems engineer,”  
-  - start with:
-
-    - `04‑Protocol Engineering → intermediate` (scalability, resilience)  
-    - and `03‑AI‑ML → MLOps` and `ethics‑and‑responsibility.md`.
-
-### 3. If you’re building a real project
-
-For any project you care about (e.g., governance‑tool, mentor‑matching, reward‑system):
-
-- Open a single lab repo and **map it into the tracks**:
-
-  - which **blockchain‑style patterns** will you use (e.g., governance‑mechanism, identity)?  
-  - which **ML‑style components** will you add (e.g., scoring, ranking, filtering)?  
-  - which **protocol‑style design** decisions (e.g., state‑machines, event‑streams, upgrade‑paths) will you lock in?
-
-Then, walk the curriculum **cross‑wise** rather than front‑to‑back: every time you finish a lesson that feels relevant, go back and **refactor** your spec or diagrams and check in the change.
-
----
-
-## Expectations and norms
-
-This curriculum assumes:
-
-- you are **willing to write, diagram, and code** as you go,  
-- you are comfortable with **iterative, incremental work**,  
-- and you care about **not just “it works,” but also maintainability, understandability, and social‑legibility**.
-
-You do **not** need:
-
-- a PhD,  
-- or a fancy job title.
-
-You do need:
-
-- the habit of **shipping small, explicit artifacts** (specs, tests, diagrams, blog‑style notes) that show what you’ve learned.
+You are willing to write, diagram, and code as you go. You care about maintainability and understandability, not just making things work. You do not need a PhD or a fancy title — you do need the habit of shipping small, explicit artifacts that show what you've learned.
 
 ---
 
 ## Next steps
 
-If you’re ready to dive in, choose your **first ladder**:
+Start with [Foundations](foundations/concepts/learning-hierarchy), or jump straight into an area:
 
-- `01‑Foundations/01‑concepts/01‑learning‑hierarchy.md` if you want to ground your *how* to learn.  
-- or jump straight into a track:
-
-  - `03‑AI‑ML/01‑beginner/01‑foundations/01‑math‑for‑ml.md`  
-  - or `04‑Protocol Engineering/01‑beginner/01‑protocol‑concepts/01‑protocol‑vs‑application.md`  
-  - or `02‑Blockchain/01‑beginner/01‑fundamentals/01‑what‑is‑blockchain.md`.
-
-Then, for each track, move **forward along the numeric ladder** (`01 → 02 → 03`) and **vertically through levels** (`beginner → intermediate → advanced`) while continuously linking ideas back to **your own projects and lab repo**.
-
-This is how the curriculum becomes not just a library, but your **personal stack‑style operating‑system**.
+- [AI/ML: Math for ML](AI-ML/beginner/foundations/math-for-ml)
+- [Protocol Engineering: Protocol vs Application](Protocol%20Engineering/beginner/protocol-concepts/protocol-vs-application)
+- [Blockchain: What is Blockchain](Blockchain/beginner/fundamentals/what-is-blockchain)
+- [Agent Systems: What are agent systems?](agent-systems/what-are-agent-systems)

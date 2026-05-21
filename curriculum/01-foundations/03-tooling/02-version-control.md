@@ -66,7 +66,7 @@ In the Flow Initiative, every lesson, lab, and contribution lives in a version-c
 - Branch and experiment, and
 - Merge improvements back into the shared codebase.
 
-For African-centric engineering, good version-control habits are especially important when working asynchronously and across time zones.
+For engineering, good version-control habits are especially important when working asynchronously and across time zones.
 
 ## What Is Version Control?
 

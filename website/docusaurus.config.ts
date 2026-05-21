@@ -4,10 +4,11 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type {SidebarItem} from '@docusaurus/plugin-content-docs';
 
 const config: Config = {
   title: 'Flow Education Initiative',
-  tagline: 'Powering the next generation of African contributors',
+  tagline: 'Powering the next generation of open-source contributors',
   favicon: 'img/favicon.ico',
 
   // GitHub Pages URL setup for the Flow-Research organization.
@@ -53,15 +54,34 @@ const config: Config = {
           editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
+          sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
+            const items = await defaultSidebarItemsGenerator(args);
+            const capitalize = (s: string) =>
+              s.split(' ').map(w =>
+                w.length > 0 && w !== w.toUpperCase()
+                  ? w.charAt(0).toUpperCase() + w.slice(1)
+                  : w
+              ).join(' ');
+            const processItems = (items: SidebarItem[]): SidebarItem[] =>
+              items.map(item =>
+                item.type === 'category'
+                  ? {...item, label: capitalize(item.label), items: processItems(item.items)}
+                  : item
+              );
+            return processItems(items);
+          },
         },
-        blog: {
-          path: '../knowledge-base/articles',
-          routeBasePath: 'blog',
-          showReadingTime: true,
-          editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
-          remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
-        },
+        // Blog is drafted and preserved for future revival (see knowledge-base/articles/README.md).
+        // Set to `false` to disable until ready. Uncomment the block below to re-enable.
+        blog: false,
+        // blog: {
+        //   path: '../knowledge-base/articles',
+        //   routeBasePath: 'blog',
+        //   showReadingTime: true,
+        //   editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
+        //   remarkPlugins: [remarkMath],
+        //   rehypePlugins: [rehypeKatex],
+        // },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -84,9 +104,9 @@ const config: Config = {
           position: 'left',
           label: 'Curriculum',
         },
-        {to: '/blog', label: 'Articles', position: 'left'},
+        // Blog removed per 2026-05-20 meeting decision; preserved at knowledge-base/articles/
         {
-          href: 'https://github.com/Flow-Research/learn',
+href: 'https://github.com/Flow-Research',
           label: 'GitHub',
           position: 'right',
         },
@@ -104,8 +124,7 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {label: 'Articles', to: '/blog'},
-            {label: 'GitHub', href: 'https://github.com/Flow-Research/learn'},
+            {label: 'GitHub', href: 'https://github.com/Flow-Research'},
           ],
         },
       ],

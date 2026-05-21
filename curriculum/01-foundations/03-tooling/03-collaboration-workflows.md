@@ -73,7 +73,7 @@ Collaboration is not just about being nice. It is about:
 - Surfacing hidden assumptions early.
 - Building shared mental models across the team.
 
-For African-centric engineering, good collaboration workflows matter especially when:
+For engineering, good collaboration workflows matter especially when:
 
 - Team members are in different time zones,
 - Sync time is limited,

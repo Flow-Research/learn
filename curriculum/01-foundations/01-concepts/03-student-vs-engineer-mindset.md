@@ -118,7 +118,7 @@ Flow trainees are being prepared for environments where:
 
 In these settings, the student mindset is too passive. The engineer mindset is what helps you contribute with confidence and discipline.
 
-This is especially important in Africa-centric contexts, where practical systems often need to work with lower bandwidth, intermittent power, and tighter budgets.
+This is especially important in public-good contexts, where practical systems often need to work with lower bandwidth, intermittent power, and tighter budgets.
 
 ## Common Traps to Avoid
 

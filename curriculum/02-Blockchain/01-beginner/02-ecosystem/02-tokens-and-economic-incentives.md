@@ -210,7 +210,7 @@ Understanding tokens and incentives helps you:
 - Design systems that are **secure, fair, and sustainable**.
 - Spot misaligned incentives that could lead to attacks or failure modes.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Token value interacts with local currencies and payment rails.
 - Incentives drive participation in resource-constrained environments.

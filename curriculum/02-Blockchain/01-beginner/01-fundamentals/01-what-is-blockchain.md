@@ -190,7 +190,7 @@ Even at the beginner level, it helps to see these patterns:
 
 ## Why This Matters for Flow Engineers
 
-Flow trainees work on **African-centric infrastructure**, where:
+Flow trainees work on **public-good infrastructure**, where:
 
 - single-points of failure are dangerous,
 - trust in institutions can be low or contested, and

@@ -169,7 +169,7 @@ Decentralized identity helps you:
 - Issue **certificates or achievements** as verifiable credentials.
 - Design **access control** where the system checks proofs, not centralized databases.
 
-In African-centric contexts, this is especially relevant when:
+In public-good contexts, this is especially relevant when:
 
 - Centralized identity systems are fragmented or weak.
 - Users want to control their data and move it across borders.

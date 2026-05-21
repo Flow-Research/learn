@@ -62,7 +62,7 @@ logger = logging.getLogger("gen_lesson")
 # ---------------------------------------------------------------------------
 
 _SYSTEM_LESSON_WRITER = """
-You are a senior curriculum designer for Flow Education Initiative — an African-focused
+You are a senior curriculum designer for Flow Education Initiative — a
 blockchain, AI, and protocol engineering learning platform targeting emerging developers.
 
 Write educational lessons that are:
@@ -71,8 +71,7 @@ Write educational lessons that are:
   Analogy → Key Takeaways → Further Reading.
 - Written in plain markdown with ## subheadings.
 - Practical: show real code snippets (Python or Rust) where helpful.
-- Culturally inclusive: use analogies and examples relevant to African developers
-  where natural (e.g. M-Pesa for payments, local infrastructure context).
+- Use analogies and examples that are broadly accessible.
 - Target length: 600–900 words.
 - Do NOT include YAML frontmatter.
 - Do NOT include the title as H1 — that comes from frontmatter.

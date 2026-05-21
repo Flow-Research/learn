@@ -221,7 +221,7 @@ Understanding consensus tuning helps you:
 - Make informed decisions about **which layer** (L1 vs L2) to use for a given flow.
 - Communicate these trade-offs to non-technicals (e.g., governance participants, funders).
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Designing **public-good protocols** that must be transparent and understandable.
 - Balancing **accessibility** (low fees, low latency) with **security**.

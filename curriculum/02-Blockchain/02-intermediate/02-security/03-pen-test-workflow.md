@@ -207,7 +207,7 @@ By learning a pen-test-style workflow, you:
 - Understand what "we tested this" really means behind the scenes.
 - Gain confidence that you can **find and fix** real-world-like issues.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Contracts handle real-world assets or incentives.
 - Communities must trust the system without a central watchdog.

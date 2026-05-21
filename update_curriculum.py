@@ -92,7 +92,7 @@ def rewrite_with_deepseek(text):
     Flow Education Initiative. Rewrite the provided lesson so it is ready for launch.
 
     Audience:
-    - Mid-level African software engineers growing into AI/ML, blockchain, and protocol engineering.
+    - Mid-level software engineers growing into AI/ML, blockchain, and protocol engineering.
 
     Tone:
     - Engineering-first, clear, practical, warm, and concise.

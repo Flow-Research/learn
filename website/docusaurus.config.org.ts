@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Flow Education Initiative',
-  tagline: 'Powering the next generation of African contributors',
+  tagline: 'Powering the next generation of open-source contributors',
   favicon: 'img/favicon.ico',
 
   // url: 'https://flow-research.github.io',

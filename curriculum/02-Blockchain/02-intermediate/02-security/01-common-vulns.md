@@ -208,7 +208,7 @@ Your job is to:
 - **Write** contracts that explicitly avoid the common traps.
 - **Document** the assumptions and limitations you've accepted.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Contracts handle real-world assets or incentives.
 - Communities must trust the system without a central watchdog.
