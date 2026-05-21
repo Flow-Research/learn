@@ -217,7 +217,7 @@ Your audit-style mindset helps:
 - Improve the **quality and safety** of the codebase.
 - Develop a **shared understanding** of what "safe" means in your context.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Contracts handle real-world assets or incentives.
 - Communities must trust the system without a central authority.

@@ -40,18 +40,22 @@ const ProductList = [
   {
     label: 'Jarvis',
     detail: 'Agent runtime that spawns, configures, and secures Personal Operators.',
+    icon: 'J',
   },
   {
     label: 'Garden',
     detail: 'Human-agent workspace with connected tools, workflows, and approvals.',
+    icon: 'G',
   },
   {
     label: 'WorkStream',
     detail: 'Task pipeline that distributes work, verifies output, and handles rewards.',
+    icon: 'W',
   },
   {
     label: 'Harnessy',
     detail: 'Reliability layer for testing, evaluating, and improving agent behavior.',
+    icon: 'H',
   },
 ];
 
@@ -68,9 +72,9 @@ function HeroSection() {
     <header className={styles.heroBanner}>
       <div className="container">
         <div className={styles.heroContent}>
-          <p className={styles.heroEyebrow}>Flow Research</p>
+          <div className={styles.heroEyebrow}>Flow Research</div>
           <Heading as="h1" className={styles.heroTitle}>
-            Build public good technology in the open.
+            Learn. <span className={styles.heroTitleAccent}>Build.</span> Contribute.
           </Heading>
           <p className={styles.heroSubtitle}>
             Flow Research builds Personal Operators — capable agents for people and
@@ -81,22 +85,19 @@ function HeroSection() {
             <Link className={styles.mainCta} to="/curriculum/curriculum-intro">
               Start learning
             </Link>
-            <Link className={styles.secondaryCta} to="/blog">
-              Read articles
+            <Link className={styles.secondaryCta} to="https://github.com/Flow-Research">
+              Explore Flow
             </Link>
           </div>
-          <dl className={styles.heroStats} aria-label="Curriculum summary">
+          <dl className={styles.heroStats} aria-label="Key features">
             <div>
-              <dt>64</dt>
-              <dd>lessons</dd>
+              <dt>Open source</dt>
             </div>
             <div>
-              <dt>5</dt>
-              <dd>areas</dd>
+              <dt>Free</dt>
             </div>
             <div>
-              <dt>4</dt>
-              <dd>products</dd>
+              <dt>Self-paced</dt>
             </div>
           </dl>
         </div>
@@ -107,10 +108,10 @@ function HeroSection() {
 
 function ProductsSection() {
   return (
-    <section className={styles.productsSection}>
+    <section className={styles.sectionAlt}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Products</p>
+          <div className={styles.sectionKicker}>Products</div>
           <Heading as="h2">A system, not a collection</Heading>
           <p>
             Flow's products form one system: Jarvis gives the agent life, Garden gives
@@ -121,6 +122,7 @@ function ProductsSection() {
         <div className={styles.productGrid}>
           {ProductList.map((product) => (
             <article className={styles.productCard} key={product.label}>
+              <div className={styles.productIcon}>{product.icon}</div>
               <p className={styles.productLabel}>{product.label}</p>
               <p>{product.detail}</p>
             </article>
@@ -133,10 +135,10 @@ function ProductsSection() {
 
 function AreasSection() {
   return (
-    <section className={styles.areasSection}>
+    <section className={styles.section}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <p className={styles.sectionKicker}>Curriculum</p>
+          <div className={styles.sectionKicker}>Curriculum</div>
           <Heading as="h2">A clear path from fundamentals to contribution</Heading>
           <p>
             The curriculum is organized around the capabilities you need to
@@ -161,11 +163,11 @@ function AreasSection() {
 
 function PracticeSection() {
   return (
-    <section className={styles.practiceSection}>
+    <section className={styles.sectionAlt}>
       <div className="container">
         <div className={styles.practiceLayout}>
           <div>
-            <p className={styles.sectionKicker}>Learning model</p>
+            <div className={styles.sectionKicker}>Learning model</div>
             <Heading as="h2">Built for builders who learn by making things real</Heading>
             <p className={styles.practiceIntro}>
               Flow is not a content library for passive reading. Each area is
@@ -193,7 +195,7 @@ function CtaSection() {
       <div className="container">
         <div className={styles.ctaBand}>
           <div>
-            <p className={styles.sectionKicker}>Launch-ready learning</p>
+            <div className={styles.sectionKicker}>Launch-ready learning</div>
             <Heading as="h2">Start with the curriculum, then contribute in public.</Heading>
           </div>
           <Link className={styles.bandCta} to="/curriculum/curriculum-intro">
@@ -208,7 +210,7 @@ function CtaSection() {
 export default function Home(): ReactNode {
   return (
     <Layout
-      title="Build Public-Good Technology"
+      title="Learn. Build. Contribute."
       description="Flow Research builds Personal Operators — capable agents for people and enterprises. This curriculum teaches the skills to contribute to building them.">
       <HeroSection />
       <main>

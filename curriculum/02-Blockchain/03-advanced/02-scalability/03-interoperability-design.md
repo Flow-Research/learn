@@ -208,7 +208,7 @@ Understanding interoperability helps you:
 - **Critique** bridge designs for security and decentralization.
 - **Design** interoperability flows that are **trust-minimal** and **transparent**.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Designing **public-good protocols** that must be **transparent and understandable**.
 - Ensuring that **economic incentives** align with **community interests**.

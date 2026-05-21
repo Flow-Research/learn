@@ -71,14 +71,17 @@ const config: Config = {
             return processItems(items);
           },
         },
-        blog: {
-          path: '../knowledge-base/articles',
-          routeBasePath: 'blog',
-          showReadingTime: true,
-          editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
-          remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex],
-        },
+        // Blog is drafted and preserved for future revival (see knowledge-base/articles/README.md).
+        // Set to `false` to disable until ready. Uncomment the block below to re-enable.
+        blog: false,
+        // blog: {
+        //   path: '../knowledge-base/articles',
+        //   routeBasePath: 'blog',
+        //   showReadingTime: true,
+        //   editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
+        //   remarkPlugins: [remarkMath],
+        //   rehypePlugins: [rehypeKatex],
+        // },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -101,9 +104,9 @@ const config: Config = {
           position: 'left',
           label: 'Curriculum',
         },
-        {to: '/blog', label: 'Articles', position: 'left'},
+        // Blog removed per 2026-05-20 meeting decision; preserved at knowledge-base/articles/
         {
-          href: 'https://github.com/Flow-Research/learn',
+href: 'https://github.com/Flow-Research',
           label: 'GitHub',
           position: 'right',
         },
@@ -121,8 +124,7 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {label: 'Articles', to: '/blog'},
-            {label: 'GitHub', href: 'https://github.com/Flow-Research/learn'},
+            {label: 'GitHub', href: 'https://github.com/Flow-Research'},
           ],
         },
       ],

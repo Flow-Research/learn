@@ -95,7 +95,7 @@ Markdown supports all of these:
 - You can diff and review changes.
 - You can render them in GitHub, Docusaurus, or your portfolio.
 
-This is especially important for African-centric engineering, where clear, searchable docs reduce the need for synchronous explanations.
+This is especially important for engineering, where clear, searchable docs reduce the need for synchronous explanations.
 
 ## Basic Markdown Syntax
 

@@ -1,98 +1,25 @@
-# Flow Education Initiative: Building Talent Pipelines for Freedom Tech
+# Flow Education Initiative
 
-Welcome to the **flow-learning**, the central nervous system for the **Flow Initiative**. This repository is a unified monorepo containing our specialized curriculum, research knowledge base, hands-on labs, and the AI-driven engine that keeps our content synchronized with the bleeding edge of Web3 and AI protocols.
+Learning resource for engineers who want to contribute to building Flow's products — Personal Operators for people and enterprises.
 
-## 🎯 Mission
-Flow is a non-profit talent pipeline. We identify mid-level engineers (1-3 years experience) and move them from "Learners" to "Active Contributors" in decentralized infrastructure. We focus on public goods that distribute control, computation, and value.
+## Repo structure
 
----
-
-## 🏗️ Repository Architecture
-
-```text
-/flow-hub (The Unified Repo)
-├── .github/                  # CI/CD, Issue Templates (Onboarding/Questions)
-├── scripts/                  # THE UNIFIED AI ENGINE
-│   ├── core_ai_logic.py      # LLM wrappers & Scraping utilities
-│   ├── gen_lesson.py         # AI script to generate /curriculum content
-│   └── gen_article.py        # AI script to generate /knowledge-base content
-├── curriculum/               # THE EDUCATION LAYER (Structured Learning)
-│   ├── 01-foundations/       # Cross-pillar basics (Networks, P2P, Crypto)
-│   ├── 02-blockchain/        # Track 1: L1/L2 Infrastructure & Smart Contracts
-│   ├── 03-ai-ml/             # Track 2: Federated Learning & Privacy-Preserving ML
-│   └── 04-protocol-eng/      # Track 3: Libp2p, Storage Markets, & Consensus Research
-├── knowledge-base/           # THE RESEARCH LAYER (Public Insights/Blog)
-│   ├── articles/             # AI-generated + Human-reviewed technical posts
-│   ├── research-papers/      # Summaries of critical ecosystem papers
-│   └── ecosystem-updates/    # Scraped/Synthesized updates from partner protocols
-├── labs/                     # THE WORKSHOP (Hands-on Code)
-│   ├── foundation/           # Boilerplate for Phase 1 exercises
-│   └── specialization/       # Complex projects (e.g., custom Flower workers)
-├── website/                  # Docusaurus SSG Frontend (Docs + Blog)
-└── docusaurus.config.js      # Global site & navigation configuration
+```
+curriculum/       Structured lessons (foundations, blockchain, AI/ML, protocol engineering, agent systems)
+knowledge-base/   Drafted articles (blog content preserved for future use)
+website/          Docusaurus frontend (learn.flowresearch.tech)
+scripts/          AI-assisted content generation tools
 ```
 
----
+## Quick start
 
-## 🤖 AI Agent Instructions (System Context)
+```bash
+cd website
+npm install
+npm run start     # local dev server
+npm run build     # production build
+```
 
-**If you are an AI Agent interacting with this repository, adhere to these constraints:**
+## Contributing
 
-### 1. The Three Technical Pillars
-Every piece of content must align with one or more of these pillars:
-*   **AI/ML:** Federated Learning (Flower, PySyft), Decentralized Training, Model Privacy.
-*   **Blockchain:** Infrastructure (Ethereum, Filecoin, Bittensor), Incentive Design.
-*   **Protocol Engineering:** P2P Networking (libp2p), Distributed Storage (IPFS), Compute (Akash/Gensyn).
-
-### 2. The Learning Hierarchy
-Our curriculum uses precise track-tier-section-lesson organization for clarity.
-
-- `01-foundations/`
-  - sections directly at root: `01-concepts`, `02-practice`, `03-tooling`
-  - lessons like `01-learning-hierarchy.md`, `02-effective-notes.md`, `03-collaboration-workflows.md`
-
-- `02-blockchain/`, `03-ai-ml/`, `04-protocol-eng/`
-  - tier folders: `beginner`, `intermediate`, `advanced`
-  - each tier has domain sections (e.g., blockchain advanced has `01-protocol-engineering`, `02-scalability`)
-  - each section contains lesson markdown files named by topic (e.g., `01-protocol-architecture.md`)
-
-- This structure is intended to map directly to competency progression:
-  - **beginner**: concepts and fundamentals
-  - **intermediate**: applied building and safety
-  - **advanced**: architecture, deployment, ecosystem leadership
-
-### 3. Voice & Tone
-*   **Audience:** Mid-level Software Engineers.
-*   **Tone:** Engineering-first, technical, concise. Avoid marketing fluff.
-*   **Context:** Use globally relevant technical examples where possible (e.g., low-bandwidth optimization, local payment gateways).
-
-### 4. Content Automation Loop
-The `scripts/` directory is designed to:
-1.  Scrape external protocol documentation (e.g., Protocol Labs, Flower Labs).
-2.  Generate new lessons or blog articles based on documentation updates.
-3.  Rewrite outdated `labs/` code snippets when a protocol updates its API.
-4.  **Requirement:** All generated Markdown MUST include YAML frontmatter with `id`, `title`, `track`, `level`, and `version`.
-
----
-
-## 🛠️ Tech Stack
-*   **Content:** Markdown (MDX)
-*   **Frontend:** Docusaurus (React-based SSG)
-*   **Automation:** Python (OpenAI/Anthropic APIs, BeautifulSoup for scraping)
-*   **Infrastructure:** GitHub Actions, GitHub Pages/Vercel
-
----
-
-<<<<<<< HEAD
-=======
----
-
->>>>>>> fc5827135f9a8c2f3e5abf68b3528ed5748435f6
-## 📜 Contribution & Policy
-All lessons and research articles go through a **Human-in-the-Loop** review process. AI-generated content is staged in a Pull Request for review by the technical team. 
-
-**Flow Initiative is a Non-Profit. Our goal is to create sustainable income pathways for engineers through global open-source public goods.**
-
-***
-
-*This README is intended for both humans and machines. Please maintain its structure when updating.*
+See [curriculum/00-intro.md](curriculum/00-intro.md) for an overview of the learning path. Pull requests welcome.

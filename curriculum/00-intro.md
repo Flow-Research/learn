@@ -13,15 +13,15 @@ Things are moving fast, and this will change as we do.
 
 The team is building a set of products that work as one system. Here is how they fit together:
 
-- **[Jarvis](05-products/jarvis)** — the agent runtime. Spawns, configures, and secures Personal Operators so they can connect to the Flow economy.
-- **[Garden](05-products/garden)** — the human-agent workspace. A persistent space where people and agents collaborate with connected tools, workflows, and approvals.
-- **[WorkStream](05-products/workstream)** — the task pipeline. Takes work from economic value sources, distributes it to humans and agents, verifies outputs, and handles attribution and rewards.
-- **[Harnessy](05-products/harnessy)** — the reliability layer. Tests agent behavior, evaluates task output, and closes the feedback loop so agents can be trusted with real work.
+- **[Jarvis](products/jarvis)** — the agent runtime. Spawns, configures, and secures Personal Operators so they can connect to the Flow economy.
+- **[Garden](products/garden)** — the human-agent workspace. A persistent space where people and agents collaborate with connected tools, workflows, and approvals.
+- **[WorkStream](products/workstream)** — the task pipeline. Takes work from economic value sources, distributes it to humans and agents, verifies outputs, and handles attribution and rewards.
+- **[Harnessy](products/harnessy)** — the reliability layer. Tests agent behavior, evaluates task output, and closes the feedback loop so agents can be trusted with real work.
 Jarvis gives the agent life. Garden gives the agent a workspace. WorkStream gives the agent and human valuable work. Harnessy makes the agent reliable.
 
 ## Contributing
 
-Flow Research runs a [fellowship program](08-contributing/joining-fellowship) for engineers who want to help build these products or explore new ideas through the [research track](08-contributing/research-track). Contributions are tracked in [FlowLedger](05-products/flowledger) — points, badges, and a public ledger that makes every contribution visible and rewardable.
+Flow Research runs a [fellowship program](contributing/joining-fellowship) for engineers who want to help build these products or explore new ideas through the [research track](contributing/research-track). Contributions are tracked in [FlowLedger](products/flowledger) — points, badges, and a public ledger that makes every contribution visible and rewardable.
 
 For now, the curriculum covers five areas:
 
@@ -70,13 +70,13 @@ Advanced — latency optimization, consensus economics, security modeling, regul
 
 How agents work under the hood — orchestration, tool use, memory, planning, safety, and evaluation.
 
-- [What are agent systems?](Agent%20Systems/what-are-agent-systems) — core components and how they fit Flow
-- [LLM orchestration](Agent%20Systems/llm-orchestration) — prompts, chains, routers, tool loops
-- [Tool calling and integration](Agent%20Systems/tool-calling-and-integration) — tool design, registry, security
-- [Memory and state](Agent%20Systems/memory-and-state) — short-term, long-term, episodic, procedural
-- [Planning and reasoning](Agent%20Systems/planning-and-reasoning) — approaches, failure recovery, reflection
-- [Safety and guardrails](Agent%20Systems/safety-and-guardrails) — input/output guardrails, escalation, kill switches
-- [Evaluating agents](Agent%20Systems/evaluating-agents) — correctness, faithfulness, adversarial testing, human eval
+- [What are agent systems?](agent-systems/what-are-agent-systems) — core components and how they fit Flow
+- [LLM orchestration](agent-systems/llm-orchestration) — prompts, chains, routers, tool loops
+- [Tool calling and integration](agent-systems/tool-calling-and-integration) — tool design, registry, security
+- [Memory and state](agent-systems/memory-and-state) — short-term, long-term, episodic, procedural
+- [Planning and reasoning](agent-systems/planning-and-reasoning) — approaches, failure recovery, reflection
+- [Safety and guardrails](agent-systems/safety-and-guardrails) — input/output guardrails, escalation, kill switches
+- [Evaluating agents](agent-systems/evaluating-agents) — correctness, faithfulness, adversarial testing, human eval
 
 This area maps directly to Jarvis, Garden, WorkStream, and Harnessy — agents are the core of every Flow product.
 
@@ -107,4 +107,4 @@ Start with [Foundations](foundations/concepts/learning-hierarchy), or jump strai
 - [AI/ML: Math for ML](AI-ML/beginner/foundations/math-for-ml)
 - [Protocol Engineering: Protocol vs Application](Protocol%20Engineering/beginner/protocol-concepts/protocol-vs-application)
 - [Blockchain: What is Blockchain](Blockchain/beginner/fundamentals/what-is-blockchain)
-- [Agent Systems: What are agent systems?](Agent%20Systems/what-are-agent-systems)
+- [Agent Systems: What are agent systems?](agent-systems/what-are-agent-systems)

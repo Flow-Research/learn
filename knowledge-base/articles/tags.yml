@@ -15,15 +15,10 @@ open-source:
   permalink: /open-source
   description: Articles focused on contributing to the global open-source ecosystem and best practices.
 
-africa:
-  label: Africa
-  permalink: /africa
-  description: Articles focused on African developer communities, context, and opportunities.
-
 community:
   label: Community
   permalink: /community
-  description: Stories, highlights, and spotlights on African contributors and our local chapters.
+  description: Stories, highlights, and spotlights on our contributors and local chapters.
 
 mentorship:
   label: Mentorship

@@ -191,7 +191,7 @@ Understanding L1 vs L2 helps you:
 - Reason about when data is "final" and when it is "pending."
 - Build systems that gracefully handle L2 failures or upgrades.
 
-In African-centric contexts, this is especially relevant when:
+In public-good contexts, this is especially relevant when:
 
 - Users have limited bandwidth and patience.
 - Compute and L1-tx costs are high.

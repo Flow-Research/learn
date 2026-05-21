@@ -223,7 +223,7 @@ Your job is to **analyze governance design against the application's threat mode
 
 ## Why Governance Matters for Flow Engineers
 
-In African-centric and public-goods contexts:
+In public-good contexts:
 
 - Governance is not abstract; it is **power and trust**.
 - Communities must believe that no small group can silently hijack the protocol.
@@ -270,7 +270,7 @@ Imagine a Flow-style protocol that:
 
 - Needs to be **decentralized**.
 - Must still be **responsive** to emergencies.
-- Should be **understandable** to African-centric communities.
+- Should be **understandable** to diverse communities.
 
 Design a **governance mix**:
 

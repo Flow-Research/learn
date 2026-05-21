@@ -1,6 +1,6 @@
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow Education logo">
-  <rect x="0" y="0" width="100" height="100" rx="14" fill="#22c55e"/>
-  <rect x="15" y="15" width="70" height="12" rx="6" fill="#ffffff"/>
-  <rect x="15" y="36" width="50" height="12" rx="6" fill="#ffffff"/>
-  <rect x="15" y="57" width="30" height="12" rx="6" fill="#ffffff"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Flow Research Icon</title>
+  <desc id="desc">A minimal double-wave icon inspired by the Flow Research logo, suitable for website logo marks and favicons.</desc>
+  <path d="M123 275C153 205 202 170 270 175C316 179 341 215 381 218C405 220 424 211 441 192C433 226 410 254 374 259C331 265 305 235 267 222C210 202 163 225 123 275Z" fill="#1D9BD1"/>
+  <path d="M123 349C152 291 197 263 256 267C300 270 322 302 359 305C384 307 403 297 418 276C411 309 390 334 357 339C318 345 292 320 257 309C204 292 160 309 123 349Z" fill="#CFE7F7"/>
 </svg>

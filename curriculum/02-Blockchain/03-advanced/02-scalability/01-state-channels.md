@@ -194,7 +194,7 @@ Flow-style engineers can then choose:
 
 ## Why This Matters for Flow Engineers
 
-In African-centric and public-goods contexts:
+In public-good contexts:
 
 - Many valuable interactions are **high-frequency and low-value** (e.g., small payments, micro-tasks, continuous data streams).
 - On-chain transaction costs can be a **serious UX and accessibility barrier**.

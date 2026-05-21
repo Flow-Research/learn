@@ -205,7 +205,7 @@ Understanding rollups and sharding helps you:
 - **Communicate** trade-offs to stakeholders (e.g., "this is a ZK-rollup because we want trustless verification").
 - **Evaluate** when a new protocol or tool is appropriate for a given context.
 
-In African-centric contexts, this is especially important when:
+In public-good contexts, this is especially important when:
 
 - Designing **public-good protocols** that must be transparent and understandable.
 - Balancing **accessibility** (low fees, high throughput) with **security**.

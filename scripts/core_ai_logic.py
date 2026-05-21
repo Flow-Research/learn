@@ -86,7 +86,7 @@ def _chat(system_prompt: str, user_prompt: str, temperature: float = 0.7) -> str
 # ---------------------------------------------------------------------------
 
 _SYSTEM_ARTICLE_WRITER = """
-You are a senior technical writer for Flow Education Initiative — an African-focused
+You are a senior technical writer for Flow Education Initiative — a
 blockchain, AI, and protocol engineering learning platform.
 
 Your job is to turn raw source material (arXiv abstracts, GitHub release notes, etc.)
@@ -119,7 +119,7 @@ Tag guidelines:
 - Use lowercase, hyphen-separated values.
 - Choose from: blockchain, ethereum, bitcoin, solana, ai-ml, deep-learning,
   llm, protocol-engineering, cryptography, defi, layer2, zero-knowledge,
-  consensus, networking, rust, python, security, research, tooling, africa.
+  consensus, networking, rust, python, security, research, tooling, community.
 - Pick 2–4 most relevant tags.
 
 Credibility score rubric:

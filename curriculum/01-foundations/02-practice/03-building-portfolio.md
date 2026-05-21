@@ -62,7 +62,7 @@ In the Flow Initiative, your portfolio is built from:
 - open-source or public-goods projects, and
 - technical narratives that explain your reasoning.
 
-For African engineers, a strong portfolio helps you demonstrate impact, independence, and learning velocity even when formal credentials are limited.
+For engineers, a strong portfolio helps you demonstrate impact, independence, and learning velocity even when formal credentials are limited.
 
 ## What Is a Portfolio, Really?
 
@@ -93,7 +93,7 @@ A portfolio gives reviewers:
 - Documentation to read, and
 - Context about your constraints and decisions.
 
-In African-centric environments, portfolios matter even more when networks are smaller and online proof of work is scarce.
+In under-resourced environments, portfolios matter even more when networks are smaller and online proof of work is scarce.
 
 ## Engineering vs Student Portfolios
 
@@ -204,9 +204,9 @@ You can implement this in:
 
 Focus on clarity and narrative, not on fancy design.
 
-## African-Context Considerations
+## Contextual Considerations
 
-For African engineers, your portfolio can foreground:
+For engineers, your portfolio can foreground:
 
 - Performance and resilience under weak connectivity.
 - Cost-effective or low-resource alternatives to heavy-compute solutions.
