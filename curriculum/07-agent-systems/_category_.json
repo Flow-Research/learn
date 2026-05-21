@@ -1,0 +1,7 @@
+{
+  "label": "Agent Systems",
+  "link": {
+    "type": "generated-index",
+    "description": "How agents work under the hood — orchestration, tool use, memory, planning, safety, and evaluation."
+  }
+}

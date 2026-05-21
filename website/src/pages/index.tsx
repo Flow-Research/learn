@@ -56,10 +56,11 @@ const ProductList = [
 ];
 
 const PracticeList = [
-  'Read technical material like an engineer, not a passive student.',
+  'Read technical material like a builder, not a passive student.',
   'Move from concept notes into reproducible labs and visible artifacts.',
   'Explain tradeoffs clearly across AI, blockchain, and distributed systems.',
   'Build toward open-source contribution instead of isolated coursework.',
+  'Earn points and reputation through verified public contributions.',
 ];
 
 function HeroSection() {
@@ -72,8 +73,9 @@ function HeroSection() {
             Build public good technology in the open.
           </Heading>
           <p className={styles.heroSubtitle}>
-            Flow Research builds products and curriculum for engineers contributing to AI/ML, blockchain,
-            and protocol infrastructure. Open to builders everywhere.
+            Flow Research builds Personal Operators — capable agents for people and
+            enterprises. This curriculum teaches the skills to contribute to building
+            them across AI/ML, blockchain, and protocol infrastructure.
           </p>
           <div className={styles.heroActions}>
             <Link className={styles.mainCta} to="/curriculum/curriculum-intro">
@@ -89,7 +91,7 @@ function HeroSection() {
               <dd>lessons</dd>
             </div>
             <div>
-              <dt>4</dt>
+              <dt>5</dt>
               <dd>areas</dd>
             </div>
             <div>
@@ -111,9 +113,9 @@ function ProductsSection() {
           <p className={styles.sectionKicker}>Products</p>
           <Heading as="h2">A system, not a collection</Heading>
           <p>
-            The products work together as one value engine: Jarvis gives the agent life,
-            Garden gives it a workspace, WorkStream gives it valuable work, Harnessy makes it
-            reliable, and FlowLedger makes contribution visible.
+            Flow's products form one system: Jarvis gives the agent life, Garden gives
+            it a workspace, WorkStream gives it valuable work, and Harnessy makes it
+            reliable. Contributors help build every layer.
           </p>
         </div>
         <div className={styles.productGrid}>
@@ -137,8 +139,9 @@ function AreasSection() {
           <p className={styles.sectionKicker}>Curriculum</p>
           <Heading as="h2">A clear path from fundamentals to contribution</Heading>
           <p>
-            The curriculum is organized around the capabilities engineers need
-            to join serious open-source and infrastructure work.
+            The curriculum is organized around the capabilities you need to
+            contribute to building Flow's products — from foundations through
+            production-ready systems.
           </p>
         </div>
         <div className={styles.areaGrid}>
@@ -163,7 +166,7 @@ function PracticeSection() {
         <div className={styles.practiceLayout}>
           <div>
             <p className={styles.sectionKicker}>Learning model</p>
-            <Heading as="h2">Built for engineers who learn by making things real</Heading>
+            <Heading as="h2">Built for builders who learn by making things real</Heading>
             <p className={styles.practiceIntro}>
               Flow is not a content library for passive reading. Each area is
               designed to help learners turn concepts into notes, code,
@@ -191,7 +194,7 @@ function CtaSection() {
         <div className={styles.ctaBand}>
           <div>
             <p className={styles.sectionKicker}>Launch-ready learning</p>
-            <Heading as="h2">Start with the curriculum, then build in public.</Heading>
+            <Heading as="h2">Start with the curriculum, then contribute in public.</Heading>
           </div>
           <Link className={styles.bandCta} to="/curriculum/curriculum-intro">
             Enter curriculum
@@ -206,7 +209,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Build Public-Good Technology"
-      description="Flow Research builds products and curriculum for engineers contributing to AI/ML, blockchain, and protocol infrastructure.">
+      description="Flow Research builds Personal Operators — capable agents for people and enterprises. This curriculum teaches the skills to contribute to building them.">
       <HeroSection />
       <main>
         <ProductsSection />
