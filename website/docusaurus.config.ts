@@ -4,7 +4,6 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import type {SidebarItem} from '@docusaurus/plugin-content-docs';
 
 const config: Config = {
   title: 'Flow Education Initiative',
@@ -56,14 +55,15 @@ const config: Config = {
           rehypePlugins: [rehypeKatex],
           sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
             const items = await defaultSidebarItemsGenerator(args);
+            type GeneratedSidebarItems = Awaited<ReturnType<typeof defaultSidebarItemsGenerator>>;
             const capitalize = (s: string) =>
               s.split(' ').map(w =>
                 w.length > 0 && w !== w.toUpperCase()
                   ? w.charAt(0).toUpperCase() + w.slice(1)
                   : w
               ).join(' ');
-            const processItems = (items: SidebarItem[]): SidebarItem[] =>
-              items.map(item =>
+            const processItems = (sidebarItems: GeneratedSidebarItems): GeneratedSidebarItems =>
+              sidebarItems.map(item =>
                 item.type === 'category'
                   ? {...item, label: capitalize(item.label), items: processItems(item.items)}
                   : item
