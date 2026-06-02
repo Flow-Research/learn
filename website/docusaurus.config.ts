@@ -1,72 +1,86 @@
 // docusaurus.config.ts
-import {themes as prismThemes} from 'prism-react-renderer';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'Flow Education Initiative',
-  tagline: 'Powering the next generation of open-source contributors',
-  favicon: 'img/favicon.ico',
+  title: "Flow Education Initiative",
+  tagline: "Powering the next generation of open-source contributors",
+  favicon: "img/favicon.ico",
 
   // GitHub Pages URL setup for the Flow-Research organization.
   // url: 'https://flow-research.github.io',
   // baseUrl: '/learn/',
-  url: 'https://learn.flowresearch.tech',
-  baseUrl: '/',
-  organizationName: 'Flow-Research',
-  projectName: 'learn',
+  url: "https://learn.flowresearch.tech",
+  baseUrl: "/",
+  organizationName: "Flow-Research",
+  projectName: "learn",
   trailingSlash: false,
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: "warn",
 
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownLinks: "warn",
     },
   },
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
 
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css',
-      type: 'text/css',
+      href: "https://cdn.jsdelivr.net/npm/katex@0.16.45/dist/katex.min.css",
+      type: "text/css",
     },
   ],
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          path: '../curriculum', 
-          routeBasePath: 'curriculum',
-          sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/Flow-Research/learn/tree/main/',
+          path: "../curriculum",
+          routeBasePath: "curriculum",
+          sidebarPath: "./sidebars.ts",
+          editUrl: "https://github.com/Flow-Research/learn/tree/main/",
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
-          sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
+          sidebarItemsGenerator: async ({
+            defaultSidebarItemsGenerator,
+            ...args
+          }) => {
             const items = await defaultSidebarItemsGenerator(args);
-            type GeneratedSidebarItems = Awaited<ReturnType<typeof defaultSidebarItemsGenerator>>;
+            type GeneratedSidebarItems = Awaited<
+              ReturnType<typeof defaultSidebarItemsGenerator>
+            >;
             const capitalize = (s: string) =>
-              s.split(' ').map(w =>
-                w.length > 0 && w !== w.toUpperCase()
-                  ? w.charAt(0).toUpperCase() + w.slice(1)
-                  : w
-              ).join(' ');
-            const processItems = (sidebarItems: GeneratedSidebarItems): GeneratedSidebarItems =>
-              sidebarItems.map(item =>
-                item.type === 'category'
-                  ? {...item, label: capitalize(item.label), items: processItems(item.items)}
-                  : item
+              s
+                .split(" ")
+                .map((w) =>
+                  w.length > 0 && w !== w.toUpperCase()
+                    ? w.charAt(0).toUpperCase() + w.slice(1)
+                    : w,
+                )
+                .join(" ");
+            const processItems = (
+              sidebarItems: GeneratedSidebarItems,
+            ): GeneratedSidebarItems =>
+              sidebarItems.map((item) =>
+                item.type === "category"
+                  ? {
+                      ...item,
+                      label: capitalize(item.label),
+                      items: processItems(item.items),
+                    }
+                  : item,
               );
             return processItems(items);
           },
@@ -83,48 +97,46 @@ const config: Config = {
         //   rehypePlugins: [rehypeKatex],
         // },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
-    image: 'img/flow_education_social_card.jpg',
+    image: "img/flow_education_social_card.jpg",
     navbar: {
-      title: 'Flow Education',
+      title: "Flow Learn",
       logo: {
-        alt: 'Flow Logo',
-        src: 'img/logo.svg',
+        alt: "Flow Logo",
+        src: "img/logo.svg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Curriculum',
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "Curriculum",
         },
         // Blog removed per 2026-05-20 meeting decision; preserved at knowledge-base/articles/
         {
-href: 'https://github.com/Flow-Research',
-          label: 'GitHub',
-          position: 'right',
+          href: "https://github.com/Flow-Research",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Learning',
-          items: [
-            {label: 'Curriculum', to: '/curriculum/curriculum-intro'},
-          ],
+          title: "Learning",
+          items: [{ label: "Curriculum", to: "/curriculum/curriculum-intro" }],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
-            {label: 'GitHub', href: 'https://github.com/Flow-Research'},
+            { label: "GitHub", href: "https://github.com/Flow-Research" },
           ],
         },
       ],
@@ -133,10 +145,10 @@ href: 'https://github.com/Flow-Research',
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash', 'json', 'python', 'powershell', 'yaml'],
+      additionalLanguages: ["bash", "json", "python", "powershell", "yaml"],
     },
     mermaid: {
-      theme: {light: 'neutral', dark: 'dark'},
+      theme: { light: "neutral", dark: "dark" },
     },
   } satisfies Preset.ThemeConfig,
 };
