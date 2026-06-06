@@ -29,6 +29,8 @@ In New and Advanced Cameras, They come with lenses, and advanced sensors that ma
 
 $$
 x = PX \\
+\\
+\\
 x = K[R|T] \ X
 $$
 
