@@ -104,7 +104,7 @@ As the Kernel slides across the image, it performs an element-wise multiplicatio
 -  **Activation Layer:** This Layer adds a non-linear activation function to the feature maps, This replaces all negative  pixel values with 0, allowing the network to learn complex and non-linear patterns
 -  **Pooling Layer :** This layers reduces the spatial size  of the feature maps, to cut-down computation costs of high-dimensional spatial features. *There are two methods of pooling*: **Average pooling & Max Pooling**,  What pooling does is that it moves a sliding window over the feature maps and perform either the average or maximum of the values within that window(pool).
 
-*Imagine a small patch of an Image **I** represented as 3 x 3 matrix  and a 3 x 3 kernel **K**:*
+*Imagine a small patch of an Image **I** represented as 3 x 3 matrix  and a 3 x 3 kernel **K** :*
 
 $$
  I = 
@@ -124,12 +124,13 @@ $$
 
 
 therefore, the element-wise multiplication would be computed as :
+
 $$
 products = 
 \begin{bmatrix}
-4*1 & 1*0 & 0*-1 \\
-1*1 & 3*0 & 1*-1 \\
-6*1 & 2*0 & 5*-1 \\
+4\cdot 1 & 1\cdot0 & 0\cdot-1 \\
+1\cdot1 & 3\cdot0 & 1\cdot-1 \\
+6\cdot1 & 2\cdot0 & 5\cdot-1 \\
 \end{bmatrix}
 =
 \begin{bmatrix}
