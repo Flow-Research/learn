@@ -109,7 +109,7 @@ As the Kernel slides across the image, it performs an element-wise multiplicatio
 *Imagine a small patch of an Image **I** represented as 3 x 3 matrix, and a 3 x 3 kernel **K** :*
 
 $$
- I = 
+I = 
 \begin{bmatrix}
 4 & 1 & 0 \\
 1 & 3 & 1 \\
