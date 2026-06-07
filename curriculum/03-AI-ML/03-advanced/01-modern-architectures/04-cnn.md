@@ -80,7 +80,7 @@ where (u, v) represents 2d coordinates of a single pixel(RGB or grey scale) on a
 ## Linear Transformations & Neural networks
 
 A linear Transformation is a function that maps **one vector space** to another, while preserving the operations of vector addition & scalar multiplication. 
-Geometrically, it only alters the lenght and rotation, but never alters the origin and linearity of the line.
+Geometrically, it only alters the length and rotation, but never alters the origin and linearity of the line.
 
 *A transformation **T** can only be called linear if:*
 
@@ -96,7 +96,7 @@ $$
 
 
 
-**Neural Networks** are essentially built by stacking and combining multiple linear transformations , but they add **non-linear** activation functions when modelling non-linear problems to complex real world problems.
+**Neural Networks** are essentially built by stacking and combining multiple linear transformations , but they add **non-linear** activation functions when modelling non-linear problems to complex real-world problems.
 
 While Linear Transformations can only solve direct linear problems i.e when the data points just evolve on one straight line, Neural Networks can solve non-linear problems because it can bend, curve and adapt a line to the data points.
 
@@ -143,7 +143,7 @@ $$
 *value of this position, on the feature map would be computed as :*
 
 $$
-value = 4 +0 + 0 + 1 + 0 +(-1) + 0 + (-1) + 6 + 0 + (-5) = 4
+value = 4 + 0 + 0 + 1 + 0 + (-1) + 6 + 0 + (-5) = 5
 $$
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YGILT182T6w?si=5Hn9AtjiWSKjt7PA" title="CNN explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -152,6 +152,7 @@ $$
 
 ## Mini Implementation of a Conv Classifier  in Pytorch
 ```python
+import torch
 from torch import nn
 
 class ConvNetwork(nn.Module):
