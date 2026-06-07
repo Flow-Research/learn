@@ -79,9 +79,9 @@ v \\
 \end{bmatrix}
 = 
 \begin{bmatrix}
-(s\cdot u) /s \\
-(s\cdot v) /s \\
-(s\cdot s) /s \\
+s\cdot u /s \\
+s\cdot v /s \\
+s\cdot s /s \\
 \end{bmatrix}
 $$
 
