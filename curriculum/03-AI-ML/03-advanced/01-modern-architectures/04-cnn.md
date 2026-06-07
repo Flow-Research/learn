@@ -129,12 +129,6 @@ $$
 $$
 products = 
 \begin{bmatrix}
-4\cdot 1 & 1\cdot0 & 0\cdot-1 \\
-1\cdot1 & 3\cdot0 & 1\cdot-1 \\
-6\cdot1 & 2\cdot0 & 5\cdot-1 \\
-\end{bmatrix}
-=
-\begin{bmatrix}
 4 & 0 &  0 \\
 1 & 0 & -1 \\
 6 & 0 & -5
