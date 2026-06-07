@@ -51,8 +51,9 @@ $$
 \begin{bmatrix}
 u\\
 v\\
-s
-\end{bmatrix} =
+s\\
+\end{bmatrix}
+=
 \begin{bmatrix}
 f_x & 0 & c_x \\
 0 & f_y & c_y \\
@@ -61,23 +62,25 @@ f_x & 0 & c_x \\
 \begin{bmatrix}
 r_{1,1} & r_{1,2} & r_{1,3} & t_1 \\
 r_{2,1} & r_{2,2} & r_{2,3} & t_2 \\
-r_{3,1} & r_{3,2} & r_{3,3} & t_3
+r_{3,1} & r_{3,2} & r_{3,3} & t_3\\
 \end{bmatrix}
 \begin{bmatrix}
 X \\
 Y \\
 Z \\
-1
+1\\
 \end{bmatrix} 
 =
 \begin{bmatrix}
 u \\
 v \\
 \end{bmatrix}
+
 \begin{bmatrix}
-(s\cdot u) /s
-(s\cdot v) /s
-(s\cdot s) /s
+(s\cdot u) /s \\
+(s\cdot v) /s \\
+(s\cdot s) /s \\
+\end{bmatrix}
 $$
 
 where (u, v) represents 2d coordinates of a single pixel(RGB or grey scale) on a 2d image.
