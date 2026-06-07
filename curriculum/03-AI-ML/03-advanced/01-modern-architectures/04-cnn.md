@@ -49,40 +49,30 @@ X = 3D world coordinates (3 x 1)
 
 $$
 \begin{bmatrix}
-u\\
-v\\
-s\\
+u \\
+v \\
+s
 \end{bmatrix}
 =
+K
 \begin{bmatrix}
-f_x & 0 & c_x \\
-0 & f_y & c_y \\
-0 & 0 & 1 \\
-\end{bmatrix}
-\begin{bmatrix}
-r_{1,1} & r_{1,2} & r_{1,3} & t_1 \\
-r_{2,1} & r_{2,2} & r_{2,3} & t_2 \\
-r_{3,1} & r_{3,2} & r_{3,3} & t_3\\
+R & t
 \end{bmatrix}
 \begin{bmatrix}
 X \\
 Y \\
 Z \\
-1\\
-\end{bmatrix} 
-
-\\
-
-\begin{bmatrix}
-u \\
-v \\
+1
 \end{bmatrix}
-= 
-\begin{bmatrix}
-s\cdot u /s \\
-s\cdot v /s \\
-s\cdot s /s \\
-\end{bmatrix}
+$$
+
+$$
+(u, v)
+=
+\left(
+\frac{u}{s},
+\frac{v}{s}
+\right)
 $$
 
 where (u, v) represents 2d coordinates of a single pixel(RGB or grey scale) on a 2d image.
