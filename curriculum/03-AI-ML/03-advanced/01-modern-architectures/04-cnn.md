@@ -52,7 +52,7 @@ s
 \begin{bmatrix}
 u\\
 v\\
-1
+s
 \end{bmatrix} =
 \begin{bmatrix}
 f_x & 0 & c_x \\
@@ -69,7 +69,16 @@ X \\
 Y \\
 Z \\
 1
+\end{bmatrix} 
+=
+\begin{bmatrix}
+u \\
+v \\
 \end{bmatrix}
+\begin{bmatrix}
+(s\cdot u) /s
+(s\cdot v) /s
+(s\cdot s) /s
 $$
 
 where (u, v) represents 2d coordinates of a single pixel(RGB or grey scale) on a 2d image.
