@@ -70,12 +70,14 @@ Y \\
 Z \\
 1\\
 \end{bmatrix} 
-=
+
+\\
+
 \begin{bmatrix}
 u \\
 v \\
 \end{bmatrix}
-
+= 
 \begin{bmatrix}
 (s\cdot u) /s \\
 (s\cdot v) /s \\
