@@ -23,7 +23,7 @@ A pin-hole camera is a lensless camera, that consists of a light-proof box and a
 
 ​                                                                              **A pin-hole camera**
 
-In New and Advanced Cameras, They come with lenses, and advanced sensors that make image projected and colour mapping as close as possible to real-world scenarios, but they are all built upon the same core operating principles of a pin-hole camera.
+In New and Advanced Cameras They come with lenses, and advanced sensors that make image projected and colour mapping as close as possible to real-world scenarios, but they are all built upon the same core operating principles of a pin-hole camera.
 
 *A camera maps 3D world coordinates to 2D Planes, using the given mathematical relationship:*
 
@@ -42,15 +42,17 @@ K = Intrinsic parameters of camera
 
 R = Rotation matrices of camera (3 x 3)
 
-T = Translation matrice of camera (3 x 1)
+T = Translation matrices of camera (3 x 1)
 
 X = 3D world coordinates (3 x 1)
 
 
 $$
+s
 \begin{bmatrix}
 u\\
-v
+v\\
+1
 \end{bmatrix} =
 \begin{bmatrix}
 f_x & 0 & c_x \\
@@ -58,9 +60,9 @@ f_x & 0 & c_x \\
 0 & 0 & 1 \\
 \end{bmatrix}
 \begin{bmatrix}
-r_1{_1} & r_1{_2} & r_1{_3} & t_1 \\
-r_2{_1} & r_2{_2} & r_2{_3} & t_2 \\
-r_3{_1} & r_3{_2} & r_3{_3} & t_3
+r_{1,1} & r_{1,2} & r_{1,3} & t_1 \\
+r_{2,1} & r_{2,2} & r_{2,3} & t_2 \\
+r_{3,1} & r_{3,2} & r_{3,3} & t_3
 \end{bmatrix}
 \begin{bmatrix}
 X \\
@@ -74,7 +76,7 @@ where (u, v) represents 2d coordinates of a single pixel(RGB or grey scale) on a
 
 ## Linear Transformations & Neural networks
 
-A linear Transformation is a function that maps **one vector space** to another, while preserving the operations of vector addition & scalary multiplication. 
+A linear Transformation is a function that maps **one vector space** to another, while preserving the operations of vector addition & scalar multiplication. 
 Geometrically, it only alters the lenght and rotation, but never alters the origin and linearity of the line.
 
 *A transformation **T** can only be called linear if:*
@@ -154,10 +156,11 @@ class ConvNetwork(nn.Module):
                  kernel_size: int ,stride : int  = 1, 
                  hidden_dim: int = 256):
         super().__init__()
-        self.dim_in = dim_in,
+        self.dim_in = dim_in
         self.dim_out = dim_out
         self.kernel_size = kernel_size
         self.stride = stride
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((1, 1))
         self.hidden_dim = hidden_dim
 
         self.conv1 =  nn.Conv2d(in_channels =  dim_in , 
@@ -168,7 +171,7 @@ class ConvNetwork(nn.Module):
                                out_channels = hidden_dim,
                                kernel_size =  kernel_size,
                                stride = stride)
-        self.linear =  nn.Linear(hidden_dim*256*512 , dim_out)
+        self.linear =  nn.Linear(hidden_dim, dim_out)
       
       
       
@@ -176,7 +179,8 @@ class ConvNetwork(nn.Module):
           
           y =  self.conv1(x)
           y = self.conv2(y)
-          y =  self.linear(y.flatten())
+          y = self.adaptive_pool(y)
+          y =  self.linear(y.flatten(1))
           y = torch.argmax(y , dim=-1)
           
           return y
@@ -192,7 +196,7 @@ In this Mini implementation, We see that network takes in some parameters which 
 ##Try yourself
 
 conv_net = ConvNetwork(dim_in =  3 , dim_out =  7 , kernel_size = 1)
-test_image =  torch.rand([3,256,512])
+test_image =  torch.rand([1,3,256,512])
 output_class =  conv_net(test_image)
 
 ```
@@ -200,6 +204,6 @@ output_class =  conv_net(test_image)
 
 ## Next Steps
 This video from computerphile might give you a more clearer picture of this tutorial and what we would cover in the future.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/py5byOOHZM8?si=hk4dbcI3JY-uEyEB" title="Computerphile CNNsr" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/py5byOOHZM8?si=hk4dbcI3JY-uEyEB" title="Computerphile CNNs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 In this Tutorial, we covered how images are formed from the camera, how world coordinates are mapped to pixel-level coordinates and how to classifier images using CNNs. In our Next Tutorials we would cover more into videos, 3D computer vision and scene reconstruction from pixel coordinates.
 
