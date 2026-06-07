@@ -48,7 +48,6 @@ X = 3D world coordinates (3 x 1)
 
 
 $$
-s
 \begin{bmatrix}
 u\\
 v\\
