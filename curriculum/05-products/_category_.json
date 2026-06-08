@@ -1,7 +1,3 @@
 {
-  "label": "Products",
-  "link": {
-    "type": "generated-index",
-    "description": "Flow Research products: the user-facing systems that implement the value engine."
-  }
+  "label": "Products"
 }
