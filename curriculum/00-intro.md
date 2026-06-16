@@ -23,7 +23,7 @@ The team is building a set of products that work as one system. Here is how they
 
 Flow Research runs a [fellowship program](contributing/joining-fellowship) for engineers who want to help build these products or explore new ideas through the [research track](contributing/research-track). Contributions are tracked in [FlowLedger](products/flowledger) — points, badges, and a public ledger that makes every contribution visible and rewardable.
 
-For now, the curriculum covers five areas:
+For now, the curriculum covers these areas:
 
 ### Foundations
 
@@ -66,6 +66,20 @@ Intermediate — compatibility testing, scaling design, resilience patterns, upg
 
 Advanced — latency optimization, consensus economics, security modeling, regulatory compliance, performance auditing, enterprise integration
 
+### Rust Engineering
+
+Design, ship, and operate reliable Rust systems.
+
+- [Rust mindset, toolchain, and engineering loop](rust-engineering/rust-mindset-toolchain-engineering-loop) — compiler feedback, project loop, and a first CLI artifact
+- [Ownership, borrowing, lifetimes, and memory thinking](rust-engineering/ownership-borrowing-lifetimes-memory-thinking) — ownership as system design
+- [Data modeling, errors, and control flow](rust-engineering/data-modeling-errors-control-flow) — structs, enums, state machines, and typed errors
+- [Reuse without OOP](rust-engineering/reuse-without-oop) — traits, generics, newtypes, and composition
+- [Axum-first web engineering](rust-engineering/axum-first-web-engineering) — typed handlers, extractors, state, responses, and middleware
+- [Persistence and reusable CRUD with SQLx](rust-engineering/persistence-reusable-crud-sqlx) — explicit SQL, repositories, services, transactions, pagination, and scoped resources
+- [Production service capstone](rust-engineering/production-service-capstone) — build and review a portfolio-grade Rust service
+
+This path is general-purpose: it is useful for backend services, CLIs, workers, protocol tooling, data systems, and infrastructure projects.
+
 ### Agent Systems
 
 How agents work under the hood — orchestration, tool use, memory, planning, safety, and evaluation.
@@ -106,5 +120,6 @@ Start with [Foundations](foundations/concepts/learning-hierarchy), or jump strai
 
 - [AI/ML: Math for ML](AI-ML/beginner/foundations/math-for-ml)
 - [Protocol Engineering: Protocol vs Application](Protocol%20Engineering/beginner/protocol-concepts/protocol-vs-application)
+- [Rust Engineering: Rust Mindset, Toolchain, and Engineering Loop](rust-engineering/rust-mindset-toolchain-engineering-loop)
 - [Blockchain: What is Blockchain](Blockchain/beginner/fundamentals/what-is-blockchain)
 - [Agent Systems: What are agent systems?](agent-systems/what-are-agent-systems)
