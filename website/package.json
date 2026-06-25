@@ -47,5 +47,9 @@
   },
   "engines": {
     "node": ">=20.0"
+  },
+  "overrides": {
+    "uuid": "^11.0.0",
+    "serialize-javascript": "^7.0.6"
   }
 }
