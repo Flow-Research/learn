@@ -5,7 +5,8 @@ Learning resource for engineers who want to contribute to building Flow Research
 ## Repo structure
 
 ```
-curriculum/       Structured lessons (foundations, blockchain, AI/ML, protocol engineering, Rust engineering, agent systems)
+curriculum/       Structured lessons, product docs, contributing guides, and team resource pages
+  09-team-resources/  Team-owned resource pages for fellow onboarding
 knowledge-base/   Drafted articles (blog content preserved for future use)
 website/          Docusaurus frontend (learn.flowresearch.tech)
 scripts/          AI-assisted content generation tools

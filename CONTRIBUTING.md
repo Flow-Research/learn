@@ -99,6 +99,26 @@ section/
   ...
 ```
 
+**Team resources** — team-owned resource pages for fellow onboarding and reference material:
+```
+09-team-resources/
+  _category_.json
+  index.md
+  01-team-name.md
+  02-team-name.md
+  ...
+```
+
+Each team resource page should keep this structure:
+
+1. `# Team Name` — overview of the team's focus.
+2. `## Getting Started` — public, free, link-checked onboarding resources maintained by the curriculum team.
+3. `## Key Resources` — reserved for guides and references submitted by the team lead.
+4. `## Tools & Repositories` — reserved for tools, repositories, datasets, workspaces, and operational references submitted by the team lead.
+5. `## Related Curriculum` — links to relevant lessons in this curriculum.
+
+Team leads own the `Key Resources` and `Tools & Repositories` sections. Do not pre-fill these sections on behalf of a team unless the team lead provided the resources.
+
 **File naming rules:**
 - Prefix every file with a two-digit number for ordering: `NN-descriptive-kebab-slug.md`
 - Use kebab-case for all names: `my-file-name.md`, not `myFileName.md` or `my_file_name.md`
