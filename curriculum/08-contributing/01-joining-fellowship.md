@@ -5,7 +5,7 @@ title: Joining the Fellowship
 
 # Joining the Fellowship
 
-Flow Research runs a fellowship program for engineers who want to contribute to building public-good infrastructure. Fellows work alongside the core team on real products — Jarvis, Garden, WorkStream, and Harnessy — and earn points and reputation through verified contributions.
+Flow Research runs a fellowship program for engineers who want to contribute to building public-good infrastructure. Fellows work alongside the core team on Jarvis and the products — Garden, WorkStream, and Harnessy — and earn points and reputation through verified contributions.
 
 ## Who should join
 

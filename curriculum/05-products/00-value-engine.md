@@ -5,17 +5,16 @@ title: The Value Engine
 
 # The Value Engine
 
-Flow Research's four products are not standalone tools. They form one system — the value engine — that takes a Personal Operator from creation to reliable, rewarded work.
+Flow Research's products form a value engine that takes a Personal Operator from creation to reliable, rewarded work.
 
 ## How they connect
 
 ```
-Jarvis → Garden → WorkStream → Harnessy
-   │          │          │           │
-   └── life ──┘── work ──┘── trust ──┘
+Garden → WorkStream → Harnessy
+   │          │           │
+   └── work ──┘── trust ──┘
 ```
 
-- **Jarvis** spawns and secures the Personal Operator.
 - **Garden** gives the operator a persistent workspace alongside the human.
 - **WorkStream** feeds the operator valuable tasks — decomposed, distributed, verified, and attributed.
 - **Harnessy** closes the loop: testing, evaluating, and improving operator behavior so it can be trusted with more responsibility.

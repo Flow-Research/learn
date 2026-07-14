@@ -17,7 +17,7 @@ Personal Operators run with access to tools, data, and compute. Securing them re
 
 ## Flow Research context
 
-Jarvis includes the security and sentinel systems that enforce these boundaries. The Jarvis Gateway controls agent access, the sandboxed VM isolates compute, and the control layer manages lifecycle permissions. WorkStream verification and Harnessy evaluation depend on these guarantees — you cannot trust an operator's output if you cannot trust its runtime.
+Jarvis defines the security model and control flow that enforce these boundaries. The protocol's Mutation Gate checks authority, integrity, and policy for every state change. The Gateway controls agent access, the sandboxed VM isolates compute, and the control layer manages lifecycle permissions. WorkStream verification and Harnessy evaluation depend on these guarantees — you cannot trust an operator's output if you cannot trust the governance of its runtime.
 
 ## Exercises
 

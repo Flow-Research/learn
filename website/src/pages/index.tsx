@@ -39,7 +39,7 @@ const AreaList = [
 const ProductList = [
   {
     label: 'Jarvis',
-    detail: 'Agent runtime that spawns, configures, and secures Personal Operators.',
+    detail: 'Governed human-agent collaboration and shared learning protocol.',
     icon: 'J',
   },
   {
@@ -114,8 +114,9 @@ function ProductsSection() {
           <div className={styles.sectionKicker}>Products</div>
           <Heading as="h2">A system, not a collection</Heading>
           <p>
-            Flow Research's products form one system: Jarvis gives the agent life, Garden gives
-            it a workspace, WorkStream gives it valuable work, and Harnessy makes it
+            Flow Research's products form one system: Jarvis defines the protocol
+            for collaboration, Garden gives the agent a workspace,
+            WorkStream gives it valuable work, and Harnessy makes it
             reliable. Contributors help build every layer.
           </p>
         </div>

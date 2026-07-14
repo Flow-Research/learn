@@ -300,7 +300,7 @@ For high-risk actions, the target unsafe action rate is zero. A model that is "u
 
 In Flow Research:
 
-- Jarvis should enforce runtime and tool boundaries.
+- Jarvis should enforce policy and tool boundaries.
 - Garden should isolate workspace data and permissions.
 - WorkStream should require approval gates for high-risk delegated tasks.
 - Harnessy should run adversarial suites and monitor policy regressions.

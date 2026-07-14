@@ -319,7 +319,7 @@ Without traces, you will debug by guessing. That is not engineering.
 
 In Flow Research products, orchestration appears in several places:
 
-- Jarvis needs a runtime loop that can pause, resume, and recover.
+- Jarvis needs orchestration loops that can pause, resume, and recover.
 - Garden needs routers that understand workspace context and user intent.
 - WorkStream needs orchestration that decomposes tasks without losing accountability.
 - Harnessy needs traces and eval hooks to judge both the answer and the action path.

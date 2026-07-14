@@ -22,7 +22,7 @@ FlowLedger supports the full contribution loop:
 
 ## How it fits
 
-FlowLedger is not a product in the same sense as Jarvis or Garden. It is the operational layer that makes participation in Flow Research measurable. Every contributor — whether writing code, reviewing PRs, creating curriculum content, or testing products — builds a record of work visible to the community.
+FlowLedger is not a product in the same sense as Garden, WorkStream, or Harnessy. It is the operational layer that makes participation in Flow Research measurable. Every contributor — whether writing code, reviewing PRs, creating curriculum content, or testing products — builds a record of work visible to the community.
 
 ## Why it matters
 
