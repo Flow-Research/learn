@@ -50,7 +50,7 @@ const config: Config = {
           path: "../curriculum",
           routeBasePath: "curriculum",
           sidebarPath: "./sidebars.ts",
-          editUrl: "https://github.com/Flow-Research/learn/tree/main/",
+          editUrl:({ docPath }) => `https://github.com/Flow-Research/learn/edit/main/curriculum/${docPath}`,
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
           sidebarItemsGenerator: async ({
