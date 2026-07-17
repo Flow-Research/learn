@@ -4,6 +4,14 @@ title: Paper Replication
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "03-ml-libraries, 01-transformers, PyTorch, Git basics"
+Duration: "~60-90 minutes (with optional multi-day replication project)"
+Format: "Watch First video + reading + replication spec + mini-replication exercise + replication-report template"
+Future_Topics: "Large Model Alignment, Ethics and Responsibility, Ablations, ML Reproducibility Challenge Submissions"
+Related_docs:
+  - 01-beginner/02-tools/03-ml-libraries
+  - 03-advanced/01-modern-architectures/01-transformers
+  - 01-foundations/03-tooling/02-version-control
 ---
 
 # Paper Replication

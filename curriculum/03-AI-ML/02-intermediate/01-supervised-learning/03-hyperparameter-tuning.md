@@ -4,6 +4,14 @@ title: Hyperparameter Tuning
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "01-regression-classification, 02-feature-engineering"
+Duration: "~60 minutes"
+Format: "Watch First video + reading + GridSearchCV/RandomizedSearchCV exercises + tuning-budget exercise"
+Future_Topics: "CI/CD for Models, Monitoring and Drift, Deployment Patterns, Advanced Architectures"
+Related_docs:
+  - 02-intermediate/01-supervised-learning/02-feature-engineering
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
+  - 03-advanced/01-modern-architectures/01-transformers
 ---
 
 # Hyperparameter Tuning

@@ -4,6 +4,14 @@ title: Graph Neural Networks
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "01-transformers (helpful), linear algebra, PyTorch helpful"
+Duration: "~75-90 minutes"
+Format: "Watch First video + reading + NumPy mean-aggregator on a learning-path graph + GCN/GAT/GraphSAGE comparison"
+Future_Topics: "Reinforcement Learning, CNN, Knowledge Graphs, PyTorch Geometric"
+Related_docs:
+  - 03-advanced/01-modern-architectures/01-transformers
+  - 04-Protocol Engineering/01-beginner/01-protocol-concepts/02-state-machines
+  - 07-agent-systems/05-planning-and-reasoning
 ---
 
 # Graph Neural Networks

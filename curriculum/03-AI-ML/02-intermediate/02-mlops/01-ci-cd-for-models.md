@@ -4,6 +4,14 @@ title: CI/CD for Models
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "03-model-lifecycle, 02-feature-engineering, 03-hyperparameter-tuning, basic Git/GitHub Actions"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + local CI script + GitHub Actions YAML exercise"
+Future_Topics: "Monitoring and Drift, Deployment Patterns, Model Cards, Model Registry Tooling (MLflow)"
+Related_docs:
+  - 02-intermediate/02-mlops/02-monitoring-and-drift
+  - 02-intermediate/02-mlops/03-deployment-patterns
+  - 01-foundations/03-tooling/02-version-control
 ---
 
 # CI/CD for Models

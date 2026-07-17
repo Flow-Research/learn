@@ -4,6 +4,14 @@ title: Model Lifecycle
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "01-math-for-ml, 02-data-pipelines-basics"
+Duration: "~45-60 minutes"
+Format: "Watch First video + reading + 7-stage lifecycle sketch exercises"
+Future_Topics: "Python Ecosystem, Notebooks and Visualization, ML Libraries, Supervised Learning, MLOps, CI/CD for Models"
+Related_docs:
+  - 01-beginner/01-foundations/02-data-pipelines-basics
+  - 01-beginner/02-tools/01-python-ecosystem
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
 ---
 
 # Model Lifecycle

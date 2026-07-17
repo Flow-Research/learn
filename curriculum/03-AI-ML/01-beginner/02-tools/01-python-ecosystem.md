@@ -4,6 +4,14 @@ title: The Python Ecosystem
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "Basic Python and CLI familiarity; 03-model-lifecycle recommended"
+Duration: "~45-60 minutes"
+Format: "Reading + hands-on setup (venv, pip install, first scikit-learn model)"
+Future_Topics: "Notebooks and Visualization, ML Libraries, Supervised Learning, Feature Engineering"
+Related_docs:
+  - 01-beginner/01-foundations/03-model-lifecycle
+  - 01-beginner/02-tools/02-notebooks-and-visualization
+  - 01-beginner/02-tools/03-ml-libraries
 ---
 
 # The Python Ecosystem

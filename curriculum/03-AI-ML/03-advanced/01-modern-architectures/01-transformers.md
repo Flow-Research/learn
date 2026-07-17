@@ -4,6 +4,14 @@ title: Transformers
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "01-math-for-ml, deep learning basics, PyTorch helpful"
+Duration: "~75-90 minutes"
+Format: "Watch First video + reading + NumPy attention from scratch + Hugging Face DistilBERT example"
+Future_Topics: "Graph Neural Networks, Reinforcement Learning, CNN, Large Model Alignment, 07-agent-systems Memory and State"
+Related_docs:
+  - 01-beginner/01-foundations/01-math-for-ml
+  - 03-advanced/01-modern-architectures/02-graph-neural-networks
+  - 07-agent-systems/04-memory-and-state
 ---
 
 # Transformers

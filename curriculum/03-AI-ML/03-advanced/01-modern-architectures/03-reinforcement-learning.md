@@ -4,6 +4,14 @@ title: Reinforcement Learning
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "01-math-for-ml, probability; 01-transformers / 02-graph-neural-networks familiarity"
+Duration: "~75-90 minutes"
+Format: "Watch First video + reading + Q-learning from scratch in NumPy + reward-audit exercise + safety checklist"
+Future_Topics: "Paper Replication, Large Model Alignment (RLHF/DPO), Ethics and Responsibility, Offline RL, Gymnasium"
+Related_docs:
+  - 01-beginner/01-foundations/01-math-for-ml
+  - 03-advanced/02-research-in-practice/02-large-model-alignment
+  - 07-agent-systems/06-safety-and-guardrails
 ---
 
 # Reinforcement Learning
