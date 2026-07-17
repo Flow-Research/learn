@@ -4,6 +4,14 @@ title: Layer-1 vs Layer-2
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "01-what-is-blockchain, 02-key-terms-and-models, 03-consensus-overview (Beginner Fundamentals trio)"
+Duration: "~30-45 minutes"
+Format: "Reading + concept diagrams + classification exercise + YAML decision sketch"
+Future_Topics: "Tokens and Economic Incentives, Decentralized Identity, State Channels, Rollups and Sharding, Interoperability Design"
+Related_docs:
+  - 01-beginner/01-fundamentals/03-consensus-overview
+  - 03-advanced/02-scalability/01-state-channels
+  - 03-advanced/02-scalability/02-rollups-and-sharding
 ---
 
 # Layer-1 vs Layer-2

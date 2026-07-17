@@ -4,6 +4,14 @@ title: Tokens and Economic Incentives
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "01-layer-1-vs-layer-2"
+Duration: "~30-45 minutes"
+Format: "Reading + incentive-flaw sketch exercise + comparison table"
+Future_Topics: "Decentralized Identity, Advanced Protocol Engineering, Economic Design, Governance Mechanisms, 05-products/06-economic-incentive-design"
+Related_docs:
+  - 01-beginner/02-ecosystem/01-layer-1-vs-layer-2
+  - 05-products/06-economic-incentive-design
+  - 03-advanced/01-protocol-engineering/03-governance-mechanisms
 ---
 
 # Tokens and Economic Incentives

@@ -4,6 +4,14 @@ title: Interoperability Design
 track: blockchain
 level: advanced
 version: 1.1
+Prerequisites: "02-rollups-and-sharding"
+Duration: "~45-60 minutes"
+Format: "Trust/latency comparison + simple-bridge diagram + interoperability analysis + TypeScript CrossDomainMessage sketch"
+Future_Topics: "Economic Design, IBC-Style Protocols, MEV-Resistant Cross-Chain Messaging, Public-Good Interoperability"
+Related_docs:
+  - 03-advanced/02-scalability/02-rollups-and-sharding
+  - 04-Protocol Engineering/02-intermediate/02-governance-and-ecosystem/02-interchain-protocols
+  - 01-beginner/02-ecosystem/03-decentralized-identity
 ---
 
 # Interoperability Design

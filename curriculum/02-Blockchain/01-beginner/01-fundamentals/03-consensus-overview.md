@@ -4,6 +4,15 @@ title: Consensus Overview
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "01-what-is-blockchain, 02-key-terms-and-models"
+Duration: "~30 minutes"
+Format: "Watch First video + reading + diagrams + chain-classification exercise"
+Future_Topics: "Layer-1 vs Layer-2, Tokens and Economic Incentives, Protocol Architecture, Consensus Tuning, Governance Mechanisms"
+Related_docs:
+  - 01-beginner/01-fundamentals/02-key-terms-and-models
+  - 01-beginner/02-ecosystem/01-layer-1-vs-layer-2
+  - 03-advanced/01-protocol-engineering/01-protocol-architecture
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/02-consensus-economics
 ---
 
 # Consensus Overview

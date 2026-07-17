@@ -4,6 +4,14 @@ title: Rollups and Sharding
 track: blockchain
 level: advanced
 version: 1.1
+Prerequisites: "01-state-channels, 01-layer-1-vs-layer-2"
+Duration: "~60 minutes"
+Format: "Rollup-architecture diagram + sharded-L1 analysis + JSON batch-state sketch"
+Future_Topics: "Interoperability Design, Cross-Chain Messaging, Data Availability Layers, State Channels and LN-Style Systems"
+Related_docs:
+  - 03-advanced/02-scalability/01-state-channels
+  - 03-advanced/02-scalability/03-interoperability-design
+  - 04-Protocol Engineering/02-intermediate/02-governance-and-ecosystem/02-interchain-protocols
 ---
 
 # Rollups and Sharding

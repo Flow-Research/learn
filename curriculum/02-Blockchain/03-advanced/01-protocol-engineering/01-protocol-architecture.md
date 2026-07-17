@@ -4,6 +4,14 @@ title: Protocol Architecture
 track: blockchain
 level: advanced
 version: 1.1
+Prerequisites: "Intermediate track completion (Smart Contracts + Security)"
+Duration: "~60 minutes"
+Format: "Layer-decomposition reading + role-mapping exercise + TypeScript-style Transition sketch"
+Future_Topics: "Consensus Mechanism Design, Governance Mechanisms, State Channels, Advanced Scalability"
+Related_docs:
+  - 04-Protocol Engineering/01-beginner/01-protocol-concepts/01-protocol-vs-application
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/01-optimizing-latency
+  - 03-advanced/02-scalability/01-state-channels
 ---
 
 # Protocol Architecture

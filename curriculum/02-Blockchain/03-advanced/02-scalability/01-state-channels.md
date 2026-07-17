@@ -4,6 +4,14 @@ title: State Channels
 track: blockchain
 level: advanced
 version: 1.1
+Prerequisites: "01-protocol-architecture, 01-layer-1-vs-layer-2 (Beginner)"
+Duration: "~45 minutes"
+Format: "Timeline sketch + use-case identification + JSON state-channel message sketch"
+Future_Topics: "Rollups and Sharding, Payment-Channel Networks, Lightning-Style Systems, Interoperability Design"
+Related_docs:
+  - 03-advanced/01-protocol-engineering/01-protocol-architecture
+  - 01-beginner/02-ecosystem/01-layer-1-vs-layer-2
+  - 03-advanced/02-scalability/02-rollups-and-sharding
 ---
 
 # State Channels
