@@ -4,6 +4,14 @@ title: Testing Protocol Compatibility
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "All beginner lessons (specification-writing, versioning-strategies, interoperable-design)"
+Duration: "~45-60 minutes"
+Format: "Watch First video + reading + hands-on test-writing (CI-friendly setup/action/assert/teardown template)"
+Future_Topics: "Equivalence and Refinement, Contract Testing Deep Dive, Fuzzing, Chaos Engineering, 02-Blockchain Common Vulnerabilities"
+Related_docs:
+  - 01-beginner/02-standards/03-interoperable-design
+  - 02-intermediate/01-implementation/02-scaling-design
+  - 02-Blockchain/02-intermediate/02-security/01-common-vulns
 ---
 
 # Testing Protocol Compatibility

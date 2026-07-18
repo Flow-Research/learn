@@ -4,6 +4,14 @@ title: Performance Auditing
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "optimizing-latency, scaling-design"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + report-writing exercise (mini-audit, bottleneck-to-recommendation, quarterly audit calendar)"
+Future_Topics: "Audit Compliance and Traceability, Observability Stack, Capacity Planning, 06-rust-engineering Observability Performance Deployment"
+Related_docs:
+  - 03-advanced/01-lead-architect/01-optimizing-latency
+  - 03-advanced/02-global-adoption/01-regulatory-compliance
+  - 06-rust-engineering/15-observability-performance-deployment
 ---
 
 # Performance Auditing
