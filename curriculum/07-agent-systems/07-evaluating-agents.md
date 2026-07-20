@@ -2,6 +2,18 @@
 id: evaluating-agents
 title: Evaluating Agents
 version: 1.1
+track: agent-systems
+level: advanced
+Prerequisites: "01-what-are-agent-systems through 06-safety-and-guardrails, basic Python, comfort with metrics and CI"
+Duration: "~55-70 minutes"
+Format: "Watch First video + reading + Mermaid flowcharts (evaluation map) + Python eval harness + exercises + self-assessment + further reading"
+Future_Topics: "Online/continuous evals, A/B testing of prompts and models, observability stack deep-dive (OpenTelemetry, LangSmith, Arize), judge-model calibration, Harnessy case studies, 05-products Harnessy"
+Related_docs:
+  - 06-safety-and-guardrails
+  - 05-planning-and-reasoning
+  - 05-products/04-harnessy
+  - 03-AI-ML/02-intermediate/02-mlops/01-ci-cd-for-models
+  - 03-AI-ML/02-intermediate/02-mlops/02-monitoring-and-drift
 ---
 
 # Evaluating Agents

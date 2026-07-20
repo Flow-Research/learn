@@ -2,6 +2,17 @@
 id: what-are-agent-systems
 title: What Are Agent Systems?
 version: 1.1
+track: agent-systems
+level: beginner
+Prerequisites: "Basic Python and familiarity with LLM concepts helpful (covered in 03-AI-ML and 01-foundations)"
+Duration: "~35-45 minutes (video + reading + runnable example)"
+Format: "Watch First video + reading + Mermaid concept map + Python agent loop (stdlib only) + exercises + self-assessment + further reading"
+Future_Topics: "LLM Orchestration, Tool Calling and Integration, Memory and State, Planning and Reasoning, Safety and Guardrails, Evaluating Agents"
+Related_docs:
+  - 05-products/00-personal-operator
+  - 05-products/00-value-engine
+  - 03-AI-ML/01-beginner/01-foundations/01-math-for-ml
+  - 06-rust-engineering/02-rust-syntax-fast-start
 ---
 
 # What Are Agent Systems?

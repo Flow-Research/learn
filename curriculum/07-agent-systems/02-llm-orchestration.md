@@ -2,6 +2,17 @@
 id: llm-orchestration
 title: LLM Orchestration
 version: 1.1
+track: agent-systems
+level: beginner
+Prerequisites: "01-what-are-agent-systems, basic Python and LLM API exposure"
+Duration: "~45-60 minutes"
+Format: "Watch First video + reading + Mermaid flowcharts (6 orchestration patterns) + Python router example + exercises + self-assessment + further reading"
+Future_Topics: "Tool Calling and Integration (tool loop), Safety and Guardrails (validators, escalation), Evaluating Agents (trace scoring, judge models), 06-rust-engineering Async Rust and Tokio"
+Related_docs:
+  - 01-what-are-agent-systems
+  - 03-tool-calling-and-integration
+  - 06-rust-engineering/08-async-rust-and-tokio
+  - 06-rust-engineering/18-ai-assisted-rust-engineering
 ---
 
 # LLM Orchestration
