@@ -4,6 +4,14 @@ title: Rust Mindset, Toolchain, and Engineering Loop
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "Comfort with a programming language; basic command-line use; no prior Rust required"
+Duration: "~2-3 hours (install + first artifact)"
+Format: "Setup + small CLI build (task-normalize) + reflection on compiler error layers + Watch First video"
+Future_Topics: "Rust Syntax Fast Start, Ownership Borrowing Lifetimes, Data Modeling Errors"
+Related_docs:
+  - 01-foundations/03-tooling/02-version-control
+  - 02-rust-syntax-fast-start
+  - 07-agent-systems/02-llm-orchestration
 ---
 
 # Rust Mindset, Toolchain, and Engineering Loop

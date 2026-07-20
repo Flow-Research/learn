@@ -4,6 +4,15 @@ title: Macros, Unsafe Rust, and Advanced Escape Hatches
 track: rust-engineering
 level: advanced
 version: 1.0
+Prerequisites: "03-ownership-borrowing-lifetimes-memory-thinking, 04-data-modeling-errors-control-flow, 05-reuse-without-oop; comfort with intermediate Rust"
+Duration: "~3 hours"
+Format: "Reading + small macro (test-setup) + review-note decision (justify or delete) + Watch First video"
+Future_Topics: "AI-Assisted Rust Engineering, Production Service Capstone, Macros in AI-generated code review"
+Related_docs:
+  - 05-reuse-without-oop
+  - 16-beyond-backend-cli-data-protocols-wasm-embedded
+  - 18-ai-assisted-rust-engineering
+  - 19-production-service-capstone
 ---
 
 # Macros, Unsafe Rust, and Advanced Escape Hatches

@@ -4,6 +4,15 @@ title: Production Service Capstone
 track: rust-engineering
 level: advanced
 version: 1.0
+Prerequisites: "01-rust-mindset-toolchain-engineering-loop through 18-ai-assisted-rust-engineering"
+Duration: "~15-25 hours (capstone-level effort)"
+Format: "Solo project + public repo or reviewable bundle + architecture-first build (brief - ERD - route list - ADR - vertical slice) + Final Engineering Review"
+Future_Topics: "Real-world extensions, Flow Research integration, custom domain adaptations, post-capstone improvement"
+Related_docs:
+  - 18-ai-assisted-rust-engineering
+  - 15-observability-performance-deployment
+  - 14-security-authentication-api-safety
+  - 04-Protocol Engineering/03-advanced/02-global-adoption/03-enterprise-integration
 ---
 
 # Production Service Capstone

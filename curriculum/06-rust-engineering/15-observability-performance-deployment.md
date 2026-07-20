@@ -4,6 +4,15 @@ title: Observability, Performance, and Deployment
 track: rust-engineering
 level: advanced
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 11-service-layer-architecture-domain-boundaries, 14-security-authentication-api-safety"
+Duration: "~4-5 hours"
+Format: "Reading + tracing setup (/health, /ready) + structured error logs + multi-stage Dockerfile + CI workflow + Watch First video"
+Future_Topics: "Beyond Backend, Production Service Capstone, 04-Protocol Engineering Performance Auditing"
+Related_docs:
+  - 14-security-authentication-api-safety
+  - 16-beyond-backend-cli-data-protocols-wasm-embedded
+  - 19-production-service-capstone
+  - 04-Protocol Engineering/03-advanced/02-global-adoption/02-performance-auditing
 ---
 
 # Observability, Performance, and Deployment

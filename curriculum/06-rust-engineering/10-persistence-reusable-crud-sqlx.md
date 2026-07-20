@@ -4,6 +4,15 @@ title: Persistence and Reusable CRUD With SQLx
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "06-modules-crates-workspaces-project-shape, 09-axum-first-web-engineering"
+Duration: "~5 hours"
+Format: "Reading + repository build (Task/Artifact/JobRun CRUD) + typed-query task listing + pagination refactor + AI generic-CRUD review + Watch First video"
+Future_Topics: "Service-Layer Architecture, Testing Fixtures and Code Review Culture, Persistence Deep Dive"
+Related_docs:
+  - 09-axum-first-web-engineering
+  - 11-service-layer-architecture-domain-boundaries
+  - 13-testing-fixtures-code-review-culture
+  - 04-Protocol Engineering/01-beginner/02-standards/03-interoperable-design
 ---
 
 # Persistence and Reusable CRUD With SQLx

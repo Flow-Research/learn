@@ -4,6 +4,14 @@ title: Service-Layer Architecture and Domain Boundaries
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 10-persistence-reusable-crud-sqlx"
+Duration: "~3-4 hours"
+Format: "Reading + vertical-slice refactor (DTO/command/service/repo/response/tests) + Mermaid dependency diagram + Watch First video"
+Future_Topics: "Scaffolding Lab, Security and API Safety, Testing Fixtures and Code Review Culture"
+Related_docs:
+  - 10-persistence-reusable-crud-sqlx
+  - 12-application-framework-scaffolding-lab
+  - 14-security-authentication-api-safety
 ---
 
 # Service-Layer Architecture and Domain Boundaries

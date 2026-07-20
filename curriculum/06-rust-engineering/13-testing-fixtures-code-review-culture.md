@@ -4,6 +4,15 @@ title: Testing, Fixtures, and Code Review Culture
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 10-persistence-reusable-crud-sqlx, 11-service-layer-architecture-domain-boundaries"
+Duration: "~3-4 hours"
+Format: "Reading + test suite build (unit/integration/HTTP/DB/smoke) + AI test-patch review + Watch First video"
+Future_Topics: "Security and API Safety, Production Service Capstone, AI-Assisted Rust Engineering"
+Related_docs:
+  - 11-service-layer-architecture-domain-boundaries
+  - 14-security-authentication-api-safety
+  - 18-ai-assisted-rust-engineering
+  - 02-Blockchain/02-intermediate/01-smart-contracts/03-testing-and-deployment
 ---
 
 # Testing, Fixtures, and Code Review Culture

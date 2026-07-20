@@ -4,6 +4,15 @@ title: Axum-First Web Engineering
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "06-modules-crates-workspaces-project-shape, 07-smart-pointers-shared-state-concurrency, 08-async-rust-and-tokio"
+Duration: "~4-5 hours"
+Format: "Reading + Axum endpoint build (/health, /tasks, /artifacts, /jobs) + handler refactor + OpenAPI generation + Watch First video"
+Future_Topics: "Persistence Reusable CRUD, Service-Layer Architecture, Scaffolding Lab, Security and API Safety"
+Related_docs:
+  - 08-async-rust-and-tokio
+  - 10-persistence-reusable-crud-sqlx
+  - 11-service-layer-architecture-domain-boundaries
+  - 12-application-framework-scaffolding-lab
 ---
 
 # Axum-First Web Engineering
