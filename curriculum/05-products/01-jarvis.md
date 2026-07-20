@@ -1,6 +1,18 @@
 ---
 id: jarvis
 title: Jarvis
+track: products
+level: foundation
+version: 1.0
+Prerequisites: "00-value-engine, 00-personal-operator"
+Duration: "~10-15 minutes"
+Format: "Product overview reading (text + bulleted component list)"
+Future_Topics: "Security and Trust Engineering, Harnessy, 07-agent-systems Tool Calling and Integration, 07-agent-systems Safety and Guardrails"
+Related_docs:
+  - 00-value-engine
+  - 00-personal-operator
+  - 07-security-trust-engineering
+  - 07-agent-systems/01-what-are-agent-systems
 ---
 
 # Jarvis

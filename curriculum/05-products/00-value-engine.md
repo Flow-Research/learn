@@ -1,6 +1,17 @@
 ---
 id: value-engine
 title: The Value Engine
+track: products
+level: foundation
+version: 1.0
+Prerequisites: "None"
+Duration: "~10 minutes"
+Format: "Conceptual overview reading (text + ASCII diagram)"
+Future_Topics: "What is a Personal Operator, Jarvis, Garden, WorkStream, Harnessy, FlowLedger, Economic and Incentive Design, Security and Trust Engineering"
+Related_docs:
+  - 00-intro
+  - 00-personal-operator
+  - 07-agent-systems/01-what-are-agent-systems
 ---
 
 # The Value Engine
