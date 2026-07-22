@@ -333,7 +333,7 @@ Practical defenses:
 In Flow Research:
 
 - Garden can act as a workspace-level tool registry.
-- Jarvis can enforce tool execution boundaries.
+- Jarvis can enforce tool execution boundaries through its protocol.
 - WorkStream can grant task-scoped temporary tools.
 - Harnessy can evaluate whether the right tool was chosen with the right arguments.
 

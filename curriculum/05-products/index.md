@@ -9,9 +9,9 @@ sidebar_position: 0
 
 The user-facing systems that implement the Flow Research value engine.
 
-- [The Value Engine](00-value-engine.md) — how the four products form one system
+- [The Value Engine](00-value-engine.md) — how the products form one system
 - [Personal Operator](00-personal-operator.md) — your agent in the system
-- [Jarvis](01-jarvis.md) — agent runtime
+- **[Jarvis](01-jarvis.md)** — governed human-agent collaboration protocol
 - [Garden](02-garden.md) — human-agent workspace
 - [WorkStream](03-workstream.md) — task pipeline
 - [Harnessy](04-harnessy.md) — reliability layer

@@ -7,11 +7,11 @@ title: How to Contribute
 
 Contributions to Flow Research fall into several categories. You do not need to be an expert in every area — pick one that matches your skills and interest.
 
-## Product contributions
+## Protocol & Product contributions
 
-Each product has its own repository and contribution workflow:
+Jarvis and each product have their own repository and contribution workflow:
 
-- **Jarvis** — agent runtime, gateway, security systems, sandboxed VM. Contributions include protocol improvements, security hardening, and runtime optimizations.
+- **Jarvis** — governed collaboration and shared learning protocol. Contributions include protocol specification improvements, security hardening, OpenAPI schema design, and governance mechanisms.
 - **Garden** — human-agent workspace, tool connectors, approval workflows, skills system. Contributions include UI/UX, integration work, and workflow design.
 - **WorkStream** — task pipeline, decomposition, verification, attribution. Contributions include pipeline logic, verification heuristics, and reward mechanisms.
 - **Harnessy** — reliability testing, evaluation frameworks, feedback loops. Contributions include test suites, evaluation metrics, and safety boundary tooling.

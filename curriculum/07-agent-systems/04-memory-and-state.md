@@ -342,7 +342,7 @@ The second metric matters most. A memory system that retrieves plausible notes b
 
 In Flow Research:
 
-- Jarvis needs working state to pause and resume agent runs.
+- Jarvis needs defined working state to pause and resume agent runs.
 - Garden needs workspace memory with clear ownership and access controls.
 - WorkStream needs episodic memory for task attempts, failures, and approvals.
 - Harnessy needs memory-aware evals that catch stale, cross-user, and hallucinated memory use.

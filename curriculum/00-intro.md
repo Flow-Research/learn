@@ -11,13 +11,13 @@ Things are moving fast, and this will change as we do.
 
 ## Products
 
-The team is building a set of products that work as one system. Here is how they fit together:
+The team is building a set of products and a protocol for human-agent collaboration. Here is how they fit together:
 
-- **[Jarvis](products/jarvis)** — the agent runtime. Spawns, configures, and secures Personal Operators so they can connect to the Flow Research economy.
+- **[Jarvis](products/jarvis)** — governed human-agent collaboration and shared learning protocol. Defines the records, operations, and boundaries for humans and agents to work together with accountability.
 - **[Garden](products/garden)** — the human-agent workspace. A persistent space where people and agents collaborate with connected tools, workflows, and approvals.
 - **[WorkStream](products/workstream)** — the task pipeline. Takes work from economic value sources, distributes it to humans and agents, verifies outputs, and handles attribution and rewards.
 - **[Harnessy](products/harnessy)** — the reliability layer. Tests agent behavior, evaluates task output, and closes the feedback loop so agents can be trusted with real work.
-  Jarvis gives the agent life. Garden gives the agent a workspace. WorkStream gives the agent and human valuable work. Harnessy makes the agent reliable.
+  Jarvis defines the collaboration protocol. Garden gives the agent a workspace. WorkStream gives the agent and human valuable work. Harnessy makes the agent reliable.
 
 ## Contributing
 
