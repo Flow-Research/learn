@@ -4,6 +4,15 @@ title: AI-Assisted Rust Engineering
 track: rust-engineering
 level: advanced
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 10-persistence-reusable-crud-sqlx, 11-service-layer-architecture-domain-boundaries, 12-application-framework-scaffolding-lab, 13-testing-fixtures-code-review-culture, 14-security-authentication-api-safety"
+Duration: "~3-4 hours"
+Format: "Reading + AI-generated patch (Artifact CRUD) + human review transcript + ADR + Watch First video"
+Future_Topics: "Production Service Capstone, ongoing model/tooling evolution, AI smell list refinement"
+Related_docs:
+  - 17-macros-unsafe-advanced-escape-hatches
+  - 19-production-service-capstone
+  - 07-agent-systems/02-llm-orchestration
+  - 07-agent-systems/07-evaluating-agents
 ---
 
 # AI-Assisted Rust Engineering

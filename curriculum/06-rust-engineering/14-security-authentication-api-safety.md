@@ -4,6 +4,15 @@ title: Security, Authentication, and API Safety
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 11-service-layer-architecture-domain-boundaries, 13-testing-fixtures-code-review-culture"
+Duration: "~4 hours"
+Format: "Reading + auth-aware route build (POST /tasks, GET /tasks/mine, admin DELETE) + policy function + supply-chain audit + Watch First video"
+Future_Topics: "Observability Performance Deployment, Production Service Capstone, 05-products Security and Trust Engineering"
+Related_docs:
+  - 13-testing-fixtures-code-review-culture
+  - 15-observability-performance-deployment
+  - 05-products/07-security-trust-engineering
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/03-security-modeling
 ---
 
 # Security, Authentication, and API Safety

@@ -4,6 +4,14 @@ title: Reuse Without OOP
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "02-rust-syntax-fast-start, 03-ownership-borrowing-lifetimes-memory-thinking, 04-data-modeling-errors-control-flow"
+Duration: "~3-4 hours"
+Format: "Reading + small domain crate + newtype refactor (String IDs to TaskId/UserId) + AI output critique + Watch First video"
+Future_Topics: "Modules Crates Workspaces, Persistence Reusable CRUD, Service-Layer Architecture"
+Related_docs:
+  - 04-data-modeling-errors-control-flow
+  - 06-modules-crates-workspaces-project-shape
+  - 10-persistence-reusable-crud-sqlx
 ---
 
 # Reuse Without OOP

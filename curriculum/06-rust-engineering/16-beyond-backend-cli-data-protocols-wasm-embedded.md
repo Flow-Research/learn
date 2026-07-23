@@ -4,6 +4,15 @@ title: Beyond Backend
 track: rust-engineering
 level: advanced
 version: 1.0
+Prerequisites: "02-rust-syntax-fast-start, 03-ownership-borrowing-lifetimes-memory-thinking, 04-data-modeling-errors-control-flow, 05-reuse-without-oop"
+Duration: "~3-4 hours"
+Format: "Reading + CLI build (taskctl summarize events.jsonl streaming JSONL) + parser tradeoff note + Watch First video"
+Future_Topics: "Macros Unsafe Escape Hatches, AI-Assisted Rust Engineering, 04-Protocol Engineering Beyond Backend"
+Related_docs:
+  - 05-reuse-without-oop
+  - 17-macros-unsafe-advanced-escape-hatches
+  - 18-ai-assisted-rust-engineering
+  - 04-Protocol Engineering/01-beginner/01-protocol-concepts/01-protocol-vs-application
 ---
 
 # Beyond Backend
