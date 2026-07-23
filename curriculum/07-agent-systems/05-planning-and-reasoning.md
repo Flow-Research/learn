@@ -2,6 +2,17 @@
 id: planning-and-reasoning
 title: Planning and Reasoning
 version: 1.1
+track: agent-systems
+level: intermediate
+Prerequisites: "01-what-are-agent-systems through 04-memory-and-state, basic Python"
+Duration: "~50-65 minutes"
+Format: "Watch First video + reading + Mermaid flowcharts + Python planner/executor with replanning + exercises + self-assessment + further reading"
+Future_Topics: "Safety and Guardrails (planning budgets as runtime guardrails), Evaluating Agents (plan/trajectory evals), multi-agent orchestration deep-dive, Tree of Thoughts, Reflexion, 05-products WorkStream"
+Related_docs:
+  - 04-memory-and-state
+  - 06-safety-and-guardrails
+  - 05-products/03-workstream
+  - 03-AI-ML/03-advanced/01-modern-architectures/02-graph-neural-networks
 ---
 
 # Planning and Reasoning

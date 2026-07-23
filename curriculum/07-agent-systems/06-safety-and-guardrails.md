@@ -2,6 +2,18 @@
 id: safety-and-guardrails
 title: Safety and Guardrails
 version: 1.1
+track: agent-systems
+level: advanced
+Prerequisites: "01-what-are-agent-systems through 05-planning-and-reasoning, basic Python, security mindset recommended"
+Duration: "~55-70 minutes"
+Format: "Watch First video + reading + Mermaid flowcharts (8 guardrail layers) + Python tool policy gate + exercises + self-assessment + further reading"
+Future_Topics: "Red-teaming playbooks, sandboxing and OS-level isolation, memory poisoning defenses, Evaluating Agents (adversarial eval suites), SOC 2 / EU AI Act compliance, 05-products Security and Trust Engineering"
+Related_docs:
+  - 05-planning-and-reasoning
+  - 03-tool-calling-and-integration
+  - 05-products/07-security-trust-engineering
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/03-security-modeling
+  - 03-AI-ML/03-advanced/02-research-in-practice/02-large-model-alignment
 ---
 
 # Safety and Guardrails
