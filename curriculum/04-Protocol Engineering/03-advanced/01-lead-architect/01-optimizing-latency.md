@@ -4,6 +4,14 @@ title: Optimizing Latency
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "scaling-design, resilience-patterns"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + SLO/profiling exercises (profile a flow, design tail-latency-tolerant variant, sketch latency-budget SLO)"
+Future_Topics: "Optimizing Throughput and Cost, Observability, SLO Design Deep Dive, 02-performance-auditing"
+Related_docs:
+  - 02-intermediate/01-implementation/02-scaling-design
+  - 02-intermediate/01-implementation/03-resilience-patterns
+  - 03-advanced/02-global-adoption/02-performance-auditing
 ---
 
 # Optimizing Latency

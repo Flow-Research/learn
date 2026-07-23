@@ -4,6 +4,15 @@ title: Security Modeling
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "interchain-protocols, resilience-patterns; helpful: consensus-economics"
+Duration: "~55-70 minutes"
+Format: "Watch First video + reading + STRIDE analysis exercise + sketch a security model"
+Future_Topics: "Formal Modeling and Verification, Penetration Testing, Secure Protocol Review, 02-Blockchain Pen Test Workflow, 01-regulatory-compliance"
+Related_docs:
+  - 02-intermediate/01-implementation/03-resilience-patterns
+  - 03-advanced/01-lead-architect/02-consensus-economics
+  - 02-Blockchain/02-intermediate/02-security/03-pen-test-workflow
+  - 05-products/07-security-trust-engineering
 ---
 
 # Security Modeling

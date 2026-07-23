@@ -4,6 +4,14 @@ title: Interchain Protocols
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "communication-patterns, testing-protocol-compatibility, upgrade-paths"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + comparison exercise (Cosmos IBC vs Polkadot XCM vs bridge frameworks) + light-client authenticator design"
+Future_Topics: "Governance Models for Evolution, Light-Client Implementation, Bridge Security, 02-Blockchain Interoperability Design"
+Related_docs:
+  - 01-beginner/01-protocol-concepts/03-communication-patterns
+  - 02-intermediate/02-governance-and-ecosystem/01-upgrade-paths
+  - 02-Blockchain/03-advanced/02-scalability/03-interoperability-design
 ---
 
 # Interchain Protocols

@@ -4,6 +4,14 @@ title: Enterprise Integration
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "interoperable-design, regulatory-compliance; helpful: communication-patterns"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + integration-blueprint exercise (ERP/CRM/HR/IdP adapters) + event-bridge design + identity-mapping plan"
+Future_Topics: "Audit Compliance and Traceability, CDC and Event Sourcing, Identity and SSO Deep Dive, 06-rust-engineering Security"
+Related_docs:
+  - 01-beginner/02-standards/03-interoperable-design
+  - 03-advanced/02-global-adoption/01-regulatory-compliance
+  - 06-rust-engineering/14-security-authentication-api-safety
 ---
 
 # Enterprise Integration

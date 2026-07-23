@@ -4,6 +4,14 @@ title: Communication Patterns
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "01-protocol-vs-application, 02-state-machines"
+Duration: "~30-40 minutes"
+Format: "Watch First video + reading + Mermaid sequence diagram + pattern-selection exercise"
+Future_Topics: "Specification Writing, Versioning Strategies, Interoperable Design, Message Queue Implementation, 02-interchain-protocols"
+Related_docs:
+  - 01-beginner/01-protocol-concepts/02-state-machines
+  - 01-beginner/02-standards/01-specification-writing
+  - 02-intermediate/02-governance-and-ecosystem/02-interchain-protocols
 ---
 
 # Communication Patterns

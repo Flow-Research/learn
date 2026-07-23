@@ -4,6 +4,14 @@ title: Protocol vs Application
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "None"
+Duration: "~25-35 minutes (video + 3 short exercises)"
+Format: "Watch First video + reading + hands-on exercises (3 short tasks)"
+Future_Topics: "State Machines, Communication Patterns, Specification Writing, Versioning Strategies"
+Related_docs:
+  - 01-foundations/01-concepts/01-learning-hierarchy
+  - 01-beginner/01-protocol-concepts/02-state-machines
+  - 02-Blockchain/01-beginner/01-fundamentals/01-what-is-blockchain
 ---
 
 # Protocol vs Application

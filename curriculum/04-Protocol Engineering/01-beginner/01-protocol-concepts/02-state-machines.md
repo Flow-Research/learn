@@ -4,6 +4,14 @@ title: State Machines
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "01-protocol-vs-application"
+Duration: "~30-40 minutes"
+Format: "Watch First video + reading + Mermaid state diagram + small TypeScript FSM coding exercise"
+Future_Topics: "Communication Patterns, Specification Writing, Formal Notation, State Machine Implementation"
+Related_docs:
+  - 01-beginner/01-protocol-concepts/01-protocol-vs-application
+  - 01-beginner/01-protocol-concepts/03-communication-patterns
+  - 03-AI-ML/03-advanced/01-modern-architectures/02-graph-neural-networks
 ---
 
 # State Machines

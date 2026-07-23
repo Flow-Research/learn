@@ -4,6 +4,14 @@ title: Scaling Design
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "01-testing-protocol-compatibility (or beginner track as a whole)"
+Duration: "~40-50 minutes"
+Format: "Watch First video + reading + architecture sketch exercises (replication, partitioning, batching, state-minimization)"
+Future_Topics: "Load and Stress Testing, Sharding Deep Dive, Capacity Planning, 03-advanced/01-lead-architect/01-optimizing-latency"
+Related_docs:
+  - 02-intermediate/01-implementation/01-testing-protocol-compatibility
+  - 02-intermediate/01-implementation/03-resilience-patterns
+  - 03-advanced/01-lead-architect/01-optimizing-latency
 ---
 
 # Scaling Design
