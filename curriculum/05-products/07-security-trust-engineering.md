@@ -1,6 +1,18 @@
 ---
 id: security-trust-engineering
 title: Security and Trust Engineering
+track: products
+level: intermediate
+version: 1.0
+Prerequisites: "00-value-engine, 00-personal-operator, 01-jarvis, 02-garden"
+Duration: "~45-60 minutes (reading + 3 exercises)"
+Format: "Concept lesson with 3 hands-on exercises (threat modeling, access-control policy design, least-privilege audit)"
+Future_Topics: "Prompt-Injection Defenses, Secure Tool-Integration Patterns, Red-Teaming Personal Operators, Audit-Trail Schema and Review Workflows, 07-agent-systems Safety and Guardrails, 04-Protocol Engineering Security Modeling"
+Related_docs:
+  - 01-jarvis
+  - 02-garden
+  - 07-agent-systems/06-safety-and-guardrails
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/03-security-modeling
 ---
 
 # Security and Trust Engineering

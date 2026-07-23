@@ -1,6 +1,18 @@
 ---
 id: workstream
 title: WorkStream
+track: products
+level: foundation
+version: 1.0
+Prerequisites: "00-value-engine, 00-personal-operator"
+Duration: "~10-15 minutes"
+Format: "Product overview reading (text + 5-stage pipeline list)"
+Future_Topics: "Economic and Incentive Design, Harnessy, FlowLedger, 07-agent-systems Planning and Reasoning"
+Related_docs:
+  - 00-value-engine
+  - 00-personal-operator
+  - 05-flowledger
+  - 07-agent-systems/05-planning-and-reasoning
 ---
 
 # WorkStream

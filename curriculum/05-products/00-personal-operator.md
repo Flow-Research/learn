@@ -1,6 +1,17 @@
 ---
 id: personal-operator
 title: What is a Personal Operator?
+track: products
+level: foundation
+version: 1.0
+Prerequisites: "00-value-engine"
+Duration: "~10 minutes"
+Format: "Conceptual overview reading"
+Future_Topics: "Jarvis, Garden, WorkStream, Harnessy, FlowLedger, Economic and Incentive Design, Security and Trust Engineering"
+Related_docs:
+  - 00-value-engine
+  - 01-jarvis
+  - 07-agent-systems/01-what-are-agent-systems
 ---
 
 # What is a Personal Operator?

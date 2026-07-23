@@ -1,6 +1,18 @@
 ---
 id: economic-incentive-design
 title: Economic and Incentive Design
+track: products
+level: intermediate
+version: 1.0
+Prerequisites: "00-value-engine, 03-workstream, 05-flowledger"
+Duration: "~30-45 minutes (reading + 3 exercises)"
+Format: "Concept lesson with 3 hands-on exercises (gameability mitigation, reward function design, comparative analysis)"
+Future_Topics: "Deeper mechanism-design case studies, Governance of Incentive Parameters, Anti-Sybil Primitives (proof-of-personhood, staking), 02-Blockchain Tokens and Economic Incentives"
+Related_docs:
+  - 03-workstream
+  - 05-flowledger
+  - 02-Blockchain/01-beginner/02-ecosystem/02-tokens-and-economic-incentives
+  - 02-Blockchain/03-advanced/01-protocol-engineering/03-governance-mechanisms
 ---
 
 # Economic and Incentive Design

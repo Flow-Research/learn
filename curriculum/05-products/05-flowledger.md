@@ -1,6 +1,18 @@
 ---
 id: flowledger
 title: FlowLedger
+track: products
+level: foundation
+version: 1.0
+Prerequisites: "00-value-engine"
+Duration: "~10-15 minutes"
+Format: "System overview reading (8-mechanism breakdown)"
+Future_Topics: "Economic and Incentive Design, 08-contributing Points Badges, 08-contributing Submitting Proof"
+Related_docs:
+  - 00-value-engine
+  - 06-economic-incentive-design
+  - 08-contributing/03-submitting-proof
+  - 08-contributing/05-points-badges
 ---
 
 # FlowLedger
