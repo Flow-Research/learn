@@ -4,6 +4,14 @@ title: Feature Engineering
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "01-regression-classification, pandas fluency"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + scikit-learn ColumnTransformer + Pipeline exercise + leakage-check mental model"
+Future_Topics: "Hyperparameter Tuning, CI/CD for Models, Drift Monitoring, Deployment Patterns"
+Related_docs:
+  - 02-intermediate/01-supervised-learning/01-regression-classification
+  - 02-intermediate/01-supervised-learning/03-hyperparameter-tuning
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
 ---
 
 # Feature Engineering

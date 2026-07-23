@@ -4,6 +4,14 @@ title: Data Pipelines Basics
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "01-math-for-ml, basic pandas"
+Duration: "~50-70 minutes"
+Format: "Watch First video + reading + pandas examples + six-stage pipeline exercise"
+Future_Topics: "Model Lifecycle, MLOps, Monitoring and Drift, Feature Engineering, Deployment Patterns"
+Related_docs:
+  - 01-beginner/01-foundations/01-math-for-ml
+  - 01-beginner/01-foundations/03-model-lifecycle
+  - 02-intermediate/02-mlops/02-monitoring-and-drift
 ---
 
 # Data Pipelines Basics

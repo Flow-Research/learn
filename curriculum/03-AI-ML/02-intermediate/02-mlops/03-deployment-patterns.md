@@ -4,6 +4,14 @@ title: Deployment Patterns
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "01-ci-cd-for-models, 02-monitoring-and-drift; basic FastAPI/Docker helpful"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + code-along (joblib batch, FastAPI /predict, streaming diagram, rollout plan)"
+Future_Topics: "Modern Architectures (Transformers, GNN, RL, CNN), Large Model Alignment, Ethics and Responsibility"
+Related_docs:
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
+  - 03-advanced/01-modern-architectures/01-transformers
+  - 06-rust-engineering/15-observability-performance-deployment
 ---
 
 # Deployment Patterns

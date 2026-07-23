@@ -4,6 +4,14 @@ title: Notebooks and Visualization
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "01-python-ecosystem"
+Duration: "~45-60 minutes"
+Format: "Watch First video + reading + interactive Jupyter exercises (histograms, scatter, missing-value visualization)"
+Future_Topics: "ML Libraries, Supervised Learning, Model Lifecycle (production handoff)"
+Related_docs:
+  - 01-beginner/02-tools/01-python-ecosystem
+  - 01-beginner/02-tools/03-ml-libraries
+  - 06-rust-engineering/13-testing-fixtures-code-review-culture
 ---
 
 # Notebooks and Visualization
