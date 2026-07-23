@@ -4,6 +4,14 @@ title: Key Terms and Models in Blockchain
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "01-what-is-blockchain"
+Duration: "~30-45 minutes"
+Format: "Glossary + classification exercises + reading"
+Future_Topics: "Consensus Overview, Layer-1 vs Layer-2, Tokens and Economic Incentives, Decentralized Identity"
+Related_docs:
+  - 01-beginner/01-fundamentals/01-what-is-blockchain
+  - 01-beginner/01-fundamentals/03-consensus-overview
+  - 01-beginner/02-ecosystem/01-layer-1-vs-layer-2
 ---
 
 # Key Terms and Models in Blockchain

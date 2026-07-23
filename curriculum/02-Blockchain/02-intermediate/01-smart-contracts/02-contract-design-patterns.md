@@ -4,6 +4,14 @@ title: Contract Design Patterns
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "01-solidity-and-vyper-basics"
+Duration: "~45-60 minutes"
+Format: "Pattern catalog reading + pattern-recognition exercises"
+Future_Topics: "Testing and Deployment, Common Vulnerabilities, Code Audit Practices, Governance Mechanisms"
+Related_docs:
+  - 02-intermediate/01-smart-contracts/01-solidity-and-vyper-basics
+  - 02-intermediate/01-smart-contracts/03-testing-and-deployment
+  - 04-Protocol Engineering/01-beginner/02-standards/01-specification-writing
 ---
 
 # Contract Design Patterns

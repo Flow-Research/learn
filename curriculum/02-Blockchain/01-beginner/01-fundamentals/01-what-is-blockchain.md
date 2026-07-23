@@ -4,6 +4,14 @@ title: What Is Blockchain?
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "None"
+Duration: "~30-45 minutes (video + reading + exercises)"
+Format: "Watch First video + reading + concept diagrams + lab sketch exercises"
+Future_Topics: "Key Terms and Models, Consensus Overview, Layer-1 vs Layer-2, Tokens and Economic Incentives, Decentralized Identity, Solidity and Vyper Basics"
+Related_docs:
+  - 01-foundations/01-concepts/01-learning-hierarchy
+  - 01-foundations/02-practice/01-reading-comprehension
+  - 04-Protocol Engineering/01-beginner/01-protocol-concepts/01-protocol-vs-application
 ---
 
 # What Is Blockchain?

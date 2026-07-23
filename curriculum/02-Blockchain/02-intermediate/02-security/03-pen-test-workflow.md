@@ -4,6 +4,14 @@ title: Penetration Testing Workflow
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "02-code-audit-practices"
+Duration: "~45-60 minutes"
+Format: "6-phase walkthrough reading + pen-test plan + simulated attack exercise"
+Future_Topics: "Security Best Practices Synthesis, Advanced Protocol Security, Governance Attack Analysis"
+Related_docs:
+  - 02-intermediate/02-security/02-code-audit-practices
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/03-security-modeling
+  - 05-products/07-security-trust-engineering
 ---
 
 # Penetration Testing Workflow

@@ -4,6 +4,14 @@ title: Decentralized Identity
 track: blockchain
 level: beginner
 version: 1.1
+Prerequisites: "01-layer-1-vs-layer-2, 02-tokens-and-economic-incentives"
+Duration: "~30 minutes"
+Format: "Reading + 3-role flow sketch exercise (issuer/holder/verifier)"
+Future_Topics: "Smart Contracts (Solidity and Vyper Basics), Protocol Engineering, Governance Mechanisms, Advanced Interoperability"
+Related_docs:
+  - 01-beginner/02-ecosystem/02-tokens-and-economic-incentives
+  - 04-Protocol Engineering/02-intermediate/02-governance-and-ecosystem/02-interchain-protocols
+  - 03-advanced/02-scalability/03-interoperability-design
 ---
 
 # Decentralized Identity
