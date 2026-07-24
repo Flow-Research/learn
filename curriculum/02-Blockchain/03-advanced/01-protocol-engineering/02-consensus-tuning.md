@@ -7,7 +7,7 @@ version: 1.1
 Prerequisites: "01-protocol-architecture"
 Duration: "~45-60 minutes"
 Format: "Real-chain parameter analysis reading + tuned-config sketch + L1 vs L2 comparison"
-Future_Topics: "Economic Design and Incentives, Governance Mechanisms, MEV-Aware Tuning, 04-Protocol Engineering Consensus Economics"
+Future_Topics: "Economic Design and Incentives, Governance Mechanisms, MEV-Aware Tuning, Consensus Economics"
 Related_docs:
   - 03-advanced/01-protocol-engineering/01-protocol-architecture
   - 03-advanced/01-protocol-engineering/03-governance-mechanisms
