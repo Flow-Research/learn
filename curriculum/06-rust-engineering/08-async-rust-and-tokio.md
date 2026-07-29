@@ -4,6 +4,14 @@ title: Async Rust and Tokio
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "07-smart-pointers-shared-state-concurrency"
+Duration: "~4 hours"
+Format: "Reading + bounded worker pool build (max 4 jobs) + per-job timeouts + shutdown signal tests + Watch First video"
+Future_Topics: "Axum Web Engineering, Security and API Safety, Observability Performance Deployment"
+Related_docs:
+  - 07-smart-pointers-shared-state-concurrency
+  - 09-axum-first-web-engineering
+  - 14-security-authentication-api-safety
 ---
 
 # Async Rust and Tokio

@@ -4,6 +4,14 @@ title: Community Feedback
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "upgrade-paths; helpful: specification-writing"
+Duration: "~40-50 minutes"
+Format: "Watch First video + reading + process-design exercise (5-stage feedback loop) + small RFC writing exercise"
+Future_Topics: "Governance Models for Evolution, RFC-Style Templates, On-Chain Governance, 02-Blockchain Governance Mechanisms"
+Related_docs:
+  - 02-intermediate/02-governance-and-ecosystem/01-upgrade-paths
+  - 03-advanced/01-lead-architect/02-consensus-economics
+  - 02-Blockchain/03-advanced/01-protocol-engineering/03-governance-mechanisms
 ---
 
 # Community Feedback

@@ -4,6 +4,14 @@ title: Rust Syntax Fast Start
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "01-rust-mindset-toolchain-engineering-loop (or equivalent toolchain familiarity); programming experience in any language"
+Duration: "~2-3 hours"
+Format: "Reading + build task_summary program + 3 small tests + Watch First video"
+Future_Topics: "Ownership Borrowing Lifetimes Memory Thinking, Data Modeling Errors Control Flow"
+Related_docs:
+  - 01-rust-mindset-toolchain-engineering-loop
+  - 03-ownership-borrowing-lifetimes-memory-thinking
+  - 04-data-modeling-errors-control-flow
 ---
 
 # Rust Syntax Fast Start

@@ -4,6 +4,14 @@ title: Convolutional Neural Networks
 track: ai-ml
 level: advanced
 version: 1.0
+Prerequisites: "01-math-for-ml, linear algebra, PyTorch basics"
+Duration: "~60-75 minutes"
+Format: "Watch First video (bare iframe) + reading + PyTorch mini ConvNetwork exercise (Conv2d + AdaptiveAvgPool2d + Linear)"
+Future_Topics: "3D Computer Vision, Video Understanding, Scene Reconstruction, Advanced Vision Transformers"
+Related_docs:
+  - 01-beginner/01-foundations/01-math-for-ml
+  - 03-advanced/01-modern-architectures/01-transformers
+  - 06-rust-engineering/16-beyond-backend-cli-data-protocols-wasm-embedded
 ---
 
 # WHAT IS CNN?  (CONVOLUTIONAL NEURAL NETWORKS)

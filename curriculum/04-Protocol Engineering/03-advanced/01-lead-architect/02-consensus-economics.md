@@ -4,6 +4,14 @@ title: Consensus Economics
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "interchain-protocols, community-feedback; helpful: basic game theory"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + incentive-scheme design exercises + payoff-table drawing + reputation-layer design"
+Future_Topics: "Incentive Alignment and Governance Design, MEV and Mechanism Design, Tokenomics Foundations, 02-Blockchain Consensus Tuning"
+Related_docs:
+  - 02-intermediate/02-governance-and-ecosystem/02-interchain-protocols
+  - 02-intermediate/02-governance-and-ecosystem/03-community-feedback
+  - 02-Blockchain/03-advanced/01-protocol-engineering/02-consensus-tuning
 ---
 
 # Consensus Economics

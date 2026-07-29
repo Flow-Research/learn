@@ -4,6 +4,14 @@ title: Solidity and Vyper Basics
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "Beginner track completion (especially Layer-1 vs Layer-2 and Tokens and Economic Incentives)"
+Duration: "~45 minutes"
+Format: "Reading + comparison table + small contract sketches (Solidity vs Vyper)"
+Future_Topics: "Contract Design Patterns, Testing and Deployment, Common Vulnerabilities, Code Audit Practices"
+Related_docs:
+  - 01-beginner/02-ecosystem/01-layer-1-vs-layer-2
+  - 02-intermediate/01-smart-contracts/02-contract-design-patterns
+  - 06-rust-engineering/04-data-modeling-errors-control-flow
 ---
 
 # Solidity and Vyper Basics

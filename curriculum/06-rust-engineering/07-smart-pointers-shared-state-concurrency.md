@@ -4,6 +4,14 @@ title: Smart Pointers, Shared State, and Concurrency Basics
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "03-ownership-borrowing-lifetimes-memory-thinking, 04-data-modeling-errors-control-flow, 05-reuse-without-oop"
+Duration: "~3-4 hours"
+Format: "Reading + event counter build (Arc<Mutex<Vec<Event>>> to producer-channel + worker-owning-counter) + concurrent-send tests + Watch First video"
+Future_Topics: "Async Rust and Tokio, Observability Performance Deployment, Service-Layer Architecture"
+Related_docs:
+  - 06-modules-crates-workspaces-project-shape
+  - 08-async-rust-and-tokio
+  - 15-observability-performance-deployment
 ---
 
 # Smart Pointers, Shared State, and Concurrency Basics

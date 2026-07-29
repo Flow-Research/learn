@@ -4,6 +4,14 @@ title: Upgrade Paths
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "versioning-strategies; helpful: resilience-patterns"
+Duration: "~40-50 minutes"
+Format: "Watch First video + reading + upgrade-plan design exercise + migration-script design exercise + rollback planning"
+Future_Topics: "Governance Models for Evolution, Deprecation Schedules, Migration Tooling, 02-Blockchain Governance Mechanisms"
+Related_docs:
+  - 01-beginner/02-standards/02-versioning-strategies
+  - 02-intermediate/02-governance-and-ecosystem/03-community-feedback
+  - 02-Blockchain/03-advanced/01-protocol-engineering/03-governance-mechanisms
 ---
 
 # Upgrade Paths

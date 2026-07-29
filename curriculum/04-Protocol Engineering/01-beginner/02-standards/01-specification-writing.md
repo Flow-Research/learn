@@ -4,6 +4,14 @@ title: Specification Writing
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "protocol-vs-application, state-machines, communication-patterns"
+Duration: "~40-50 minutes (longest beginner lesson because of full spec writing exercise)"
+Format: "Watch First video + reading + Mermaid concept map + spec-writing exercise (draft a tiny protocol spec)"
+Future_Topics: "Formal and Semi-Formal Notation, Versioning Strategies, Template Library"
+Related_docs:
+  - 01-beginner/01-protocol-concepts/03-communication-patterns
+  - 01-beginner/02-standards/02-versioning-strategies
+  - 01-foundations/04-specification/01-writing-design-docs
 ---
 
 # Specification Writing

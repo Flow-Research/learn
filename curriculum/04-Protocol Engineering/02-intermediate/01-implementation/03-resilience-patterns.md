@@ -4,6 +4,14 @@ title: Resilience Patterns
 track: protocol-engineering
 level: intermediate
 version: 1.1
+Prerequisites: "02-scaling-design and beginner track"
+Duration: "~45-55 minutes"
+Format: "Watch First video + reading + FSM-style circuit-breaker diagram + design exercises (idempotency, fallback, degraded mode)"
+Future_Topics: "Chaos and Failure Testing, SRE Handbook, Observability Deep Dive, 02-Blockchain Pen Test Workflow"
+Related_docs:
+  - 02-intermediate/01-implementation/02-scaling-design
+  - 03-advanced/01-lead-architect/03-security-modeling
+  - 02-Blockchain/02-intermediate/02-security/03-pen-test-workflow
 ---
 
 # Resilience Patterns

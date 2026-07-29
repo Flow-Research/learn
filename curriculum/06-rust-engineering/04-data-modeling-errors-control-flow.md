@@ -4,6 +4,15 @@ title: Data Modeling, Errors, and Control Flow
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "02-rust-syntax-fast-start, 03-ownership-borrowing-lifetimes-memory-thinking"
+Duration: "~3 hours"
+Format: "Reading + state-machine build (TaskStatus enum) + transition test suite + AI prompt review + Watch First video"
+Future_Topics: "Reuse Without OOP, Service-Layer Architecture, Macros and Unsafe"
+Related_docs:
+  - 03-ownership-borrowing-lifetimes-memory-thinking
+  - 05-reuse-without-oop
+  - 11-service-layer-architecture-domain-boundaries
+  - 04-Protocol Engineering/01-beginner/01-protocol-concepts/02-state-machines
 ---
 
 # Data Modeling, Errors, and Control Flow

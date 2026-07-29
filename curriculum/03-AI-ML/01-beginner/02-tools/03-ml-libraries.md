@@ -4,6 +4,14 @@ title: ML Libraries
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "01-python-ecosystem, 02-notebooks-and-visualization"
+Duration: "~45-60 minutes"
+Format: "Reading + runnable scikit-learn example (LinearRegression, MAE/MSE, train_test_split) + selection table"
+Future_Topics: "Supervised Learning (Regression and Classification), Feature Engineering, Hyperparameter Tuning"
+Related_docs:
+  - 01-beginner/02-tools/02-notebooks-and-visualization
+  - 02-intermediate/01-supervised-learning/01-regression-classification
+  - 02-intermediate/01-supervised-learning/02-feature-engineering
 ---
 
 # ML Libraries

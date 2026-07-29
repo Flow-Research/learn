@@ -4,6 +4,15 @@ title: Ethics and Responsibility
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "02-large-model-alignment, 02-monitoring-and-drift, 01-ci-cd-for-models"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + demographic-parity / equal-opportunity checks in pandas + model card + stakeholder map"
+Future_Topics: "NIST AI RMF Application, Regulatory Compliance, Model Cards in Registries, Ongoing Audit Programs"
+Related_docs:
+  - 03-advanced/02-research-in-practice/02-large-model-alignment
+  - 02-intermediate/02-mlops/02-monitoring-and-drift
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
+  - 07-agent-systems/06-safety-and-guardrails
 ---
 
 # Ethics and Responsibility

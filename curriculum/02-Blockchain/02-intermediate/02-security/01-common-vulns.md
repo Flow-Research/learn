@@ -4,6 +4,14 @@ title: Common Vulnerabilities
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "03-testing-and-deployment"
+Duration: "~45-60 minutes"
+Format: "Vulnerability catalog reading + checklist-mindset + vulnerability-labeling exercise"
+Future_Topics: "Code Audit Practices, Pen Test Workflow, Formal Verification, Secure Upgrade Patterns"
+Related_docs:
+  - 02-intermediate/01-smart-contracts/03-testing-and-deployment
+  - 02-intermediate/02-security/02-code-audit-practices
+  - 04-Protocol Engineering/03-advanced/01-lead-architect/03-security-modeling
 ---
 
 # Common Vulnerabilities

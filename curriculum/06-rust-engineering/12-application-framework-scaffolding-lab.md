@@ -4,6 +4,14 @@ title: Application Framework and Scaffolding Lab
 track: rust-engineering
 level: intermediate
 version: 1.0
+Prerequisites: "09-axum-first-web-engineering, 10-persistence-reusable-crud-sqlx, 11-service-layer-architecture-domain-boundaries"
+Duration: "~3 hours"
+Format: "Optional lab - install scaffold CLI + generate resource + write comparison report (manual slice vs generated slice) + Watch First video"
+Future_Topics: "Testing Fixtures and Code Review Culture, AI-Assisted Rust Engineering, Production Service Capstone"
+Related_docs:
+  - 11-service-layer-architecture-domain-boundaries
+  - 13-testing-fixtures-code-review-culture
+  - 18-ai-assisted-rust-engineering
 ---
 
 # Application Framework and Scaffolding Lab

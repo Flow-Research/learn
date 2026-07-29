@@ -4,6 +4,14 @@ title: Regulatory Compliance
 track: protocol-engineering
 level: advanced
 version: 1.1
+Prerequisites: "security-modeling; helpful: community-feedback"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + matrix-design exercise (build mini-compliance matrix, redesign for minimization)"
+Future_Topics: "Governance Formal Models, GDPR Deep Dive, Audit-Trail Architectures, 03-advanced/02-research-in-practice/03-ethics-and-responsibility"
+Related_docs:
+  - 03-advanced/01-lead-architect/03-security-modeling
+  - 03-advanced/02-global-adoption/02-performance-auditing
+  - 03-AI-ML/03-advanced/02-research-in-practice/03-ethics-and-responsibility
 ---
 
 # Regulatory Compliance

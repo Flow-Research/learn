@@ -4,6 +4,14 @@ title: Large Model Alignment
 track: ai-ml
 level: advanced
 version: 1.1
+Prerequisites: "01-paper-replication, 01-transformers, 03-reinforcement-learning"
+Duration: "~75-90 minutes"
+Format: "Watch First video + reading + preference-pair design + rubric + red-team exercise + tiny DPO loss function"
+Future_Topics: "Ethics and Responsibility, Reward Hacking, Scalable Oversight, Evaluation Harnesses, 07-agent-systems Safety and Guardrails"
+Related_docs:
+  - 03-advanced/02-research-in-practice/01-paper-replication
+  - 03-advanced/01-modern-architectures/03-reinforcement-learning
+  - 07-agent-systems/06-safety-and-guardrails
 ---
 
 # Large Model Alignment

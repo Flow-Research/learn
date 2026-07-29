@@ -4,6 +4,14 @@ title: Monitoring and Drift
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "01-ci-cd-for-models, 01-regression-classification metrics"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + PSI from-scratch + daily prediction aggregation + triage/rollback/retrain playbook"
+Future_Topics: "Deployment Patterns, Advanced Monitoring Tooling (Evidently, Prometheus), Retraining Triggers, Model Retirement"
+Related_docs:
+  - 02-intermediate/02-mlops/01-ci-cd-for-models
+  - 02-intermediate/02-mlops/03-deployment-patterns
+  - 03-advanced/02-research-in-practice/03-ethics-and-responsibility
 ---
 
 # Monitoring and Drift

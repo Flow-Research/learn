@@ -2,6 +2,17 @@
 id: tool-calling-and-integration
 title: Tool Calling and Integration
 version: 1.1
+track: agent-systems
+level: intermediate
+Prerequisites: "01-what-are-agent-systems, 02-llm-orchestration, basic Python, familiarity with REST APIs and JSON schema"
+Duration: "~50-60 minutes"
+Format: "Watch First video + reading + Mermaid sequence/flow diagrams + Python tool registry with policy gate + exercises + self-assessment + further reading"
+Future_Topics: "Safety and Guardrails (tool-call policy gate, approval), Evaluating Agents (Harnessy tool-choice evals), Memory and State (idempotency keys), MCP deep-dive, OAuth/scope management"
+Related_docs:
+  - 02-llm-orchestration
+  - 04-memory-and-state
+  - 05-products/01-jarvis
+  - 06-safety-and-guardrails
 ---
 
 # Tool Calling and Integration

@@ -4,6 +4,14 @@ title: Regression and Classification
 track: ai-ml
 level: intermediate
 version: 1.1
+Prerequisites: "03-ml-libraries; basic linear algebra and probability helpful (covered in 01-math-for-ml)"
+Duration: "~60-75 minutes"
+Format: "Watch First video + reading + scikit-learn baseline + threshold-tuning exercise"
+Future_Topics: "Feature Engineering, Hyperparameter Tuning, MLOps Evaluation, Monitoring and Drift"
+Related_docs:
+  - 01-beginner/02-tools/03-ml-libraries
+  - 02-intermediate/01-supervised-learning/02-feature-engineering
+  - 02-intermediate/02-mlops/02-monitoring-and-drift
 ---
 
 # Regression and Classification

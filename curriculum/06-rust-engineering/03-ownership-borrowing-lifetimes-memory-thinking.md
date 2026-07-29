@@ -4,6 +4,14 @@ title: Ownership, Borrowing, Lifetimes, and Memory Thinking
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "02-rust-syntax-fast-start (or equivalent syntax familiarity)"
+Duration: "~3-4 hours (heavier cognitive load)"
+Format: "Reading + memory-responsibility sketch + refactor exercise (Vec<Task> to borrowed/mutably-borrowed/consuming) + AI code review pass + Watch First video"
+Future_Topics: "Data Modeling Errors, Reuse Without OOP, Smart Pointers Concurrency, Macros and Unsafe"
+Related_docs:
+  - 02-rust-syntax-fast-start
+  - 04-data-modeling-errors-control-flow
+  - 07-smart-pointers-shared-state-concurrency
 ---
 
 # Ownership, Borrowing, Lifetimes, and Memory Thinking

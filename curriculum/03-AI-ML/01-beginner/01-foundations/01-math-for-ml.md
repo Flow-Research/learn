@@ -4,6 +4,14 @@ title: Math for Machine Learning
 track: ai-ml
 level: beginner
 version: 1.1
+Prerequisites: "Basic Python familiarity (NumPy introduced in this lesson)"
+Duration: "~45-60 minutes (including exercises)"
+Format: "Reading + hands-on NumPy exercises + end-to-end toy example"
+Future_Topics: "Data Pipelines Basics, Python Ecosystem, Model Lifecycle, Regression and Classification, Transformers"
+Related_docs:
+  - 01-foundations/01-concepts/01-learning-hierarchy
+  - 01-beginner/01-foundations/02-data-pipelines-basics
+  - 03-advanced/01-modern-architectures/01-transformers
 ---
 
 # Math for Machine Learning

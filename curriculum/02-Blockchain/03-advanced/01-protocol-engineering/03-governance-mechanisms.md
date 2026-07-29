@@ -4,6 +4,14 @@ title: Governance Mechanisms
 track: blockchain
 level: advanced
 version: 1.1
+Prerequisites: "02-consensus-tuning"
+Duration: "~45-60 minutes"
+Format: "Comparison-table reading + real-protocol analysis + governance-mix design exercise"
+Future_Topics: "Economic Design and Incentives, Treasury Management, Public-Good Governance Patterns, Governance Models for Evolution (04-Protocol Engineering)"
+Related_docs:
+  - 03-advanced/01-protocol-engineering/02-consensus-tuning
+  - 04-Protocol Engineering/02-intermediate/02-governance-and-ecosystem/03-community-feedback
+  - 05-products/06-economic-incentive-design
 ---
 
 # Governance Mechanisms

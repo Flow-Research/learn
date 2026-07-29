@@ -2,6 +2,17 @@
 id: memory-and-state
 title: Memory and State
 version: 1.1
+track: agent-systems
+level: intermediate
+Prerequisites: "01-what-are-agent-systems, 02-llm-orchestration, 03-tool-calling-and-integration, basic Python, vector search concepts helpful"
+Duration: "~50-65 minutes"
+Format: "Watch First video + reading + Mermaid flowcharts + Python memory store using token overlap + exercises + self-assessment + further reading"
+Future_Topics: "Vector DBs / embeddings deep-dive, RAG patterns, memory poisoning defenses (links to safety), Evaluating Agents (memory-aware evals), 05-products Harnessy"
+Related_docs:
+  - 03-tool-calling-and-integration
+  - 05-planning-and-reasoning
+  - 05-products/02-garden
+  - 03-AI-ML/03-advanced/01-modern-architectures/01-transformers
 ---
 
 # Memory and State

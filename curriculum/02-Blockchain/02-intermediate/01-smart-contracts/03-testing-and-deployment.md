@@ -4,6 +4,14 @@ title: Testing and Deployment
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "02-contract-design-patterns"
+Duration: "~45 minutes"
+Format: "Test plan + deployment-flow sketch + local-testnet-mainnet checklist"
+Future_Topics: "Common Vulnerabilities, Code Audit Practices, Pen Test Workflow, Security Best Practices"
+Related_docs:
+  - 02-intermediate/01-smart-contracts/02-contract-design-patterns
+  - 02-intermediate/02-security/01-common-vulns
+  - 06-rust-engineering/13-testing-fixtures-code-review-culture
 ---
 
 # Testing and Deployment

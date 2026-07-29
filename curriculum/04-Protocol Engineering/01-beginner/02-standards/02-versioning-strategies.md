@@ -4,6 +4,14 @@ title: Versioning Strategies
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "specification-writing"
+Duration: "~30-40 minutes"
+Format: "Watch First video + reading + SemVer classification exercise + v1-to-v2 migration plan exercise"
+Future_Topics: "Protocol Lifecycle and Governance, Upgrade Paths, Deprecation Policies"
+Related_docs:
+  - 01-beginner/02-standards/01-specification-writing
+  - 02-intermediate/02-governance-and-ecosystem/01-upgrade-paths
+  - 06-rust-engineering/06-modules-crates-workspaces-project-shape
 ---
 
 # Versioning Strategies

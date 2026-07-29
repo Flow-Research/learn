@@ -4,6 +4,14 @@ title: Interoperable Design
 track: protocol-engineering
 level: beginner
 version: 1.1
+Prerequisites: "specification-writing, versioning-strategies"
+Duration: "~30-40 minutes"
+Format: "Watch First video + reading + retrofitting exercise + SpecSurface vs ImplementationSurface heuristic"
+Future_Topics: "Protocol Testing and Simulation, Conformance Suites, OpenAPI Tooling, 02-intermediate/01-implementation/01-testing-protocol-compatibility"
+Related_docs:
+  - 01-beginner/02-standards/02-versioning-strategies
+  - 02-intermediate/01-implementation/01-testing-protocol-compatibility
+  - 06-rust-engineering/09-axum-first-web-engineering
 ---
 
 # Interoperable Design

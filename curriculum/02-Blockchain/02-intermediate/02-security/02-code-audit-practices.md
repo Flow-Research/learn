@@ -4,6 +4,14 @@ title: Code Audit Practices
 track: blockchain
 level: intermediate
 version: 1.1
+Prerequisites: "01-common-vulns"
+Duration: "~45 minutes"
+Format: "5-step audit workflow reading + mini-audit exercise + personal checklist"
+Future_Topics: "Pen Test Workflow, Formal Verification and Tools, Automated Security Tooling"
+Related_docs:
+  - 02-intermediate/02-security/01-common-vulns
+  - 02-intermediate/02-security/03-pen-test-workflow
+  - 06-rust-engineering/13-testing-fixtures-code-review-culture
 ---
 
 # Code Audit Practices

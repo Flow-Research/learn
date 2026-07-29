@@ -4,6 +4,15 @@ title: Modules, Crates, Workspaces, and Project Shape
 track: rust-engineering
 level: foundation
 version: 1.0
+Prerequisites: "01-rust-mindset-toolchain-engineering-loop through 05-reuse-without-oop"
+Duration: "~2-3 hours"
+Format: "Reading + workspace migration (rust-lab layout: api/domain/application/infrastructure/workers/shared) + ADR 0001 write-up + Watch First video"
+Future_Topics: "Smart Pointers Concurrency, Service-Layer Architecture, Scaffolding Lab"
+Related_docs:
+  - 05-reuse-without-oop
+  - 07-smart-pointers-shared-state-concurrency
+  - 11-service-layer-architecture-domain-boundaries
+  - 12-application-framework-scaffolding-lab
 ---
 
 # Modules, Crates, Workspaces, and Project Shape
